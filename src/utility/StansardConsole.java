@@ -1,4 +1,4 @@
-package utility;
+/*package utility;
 import java.util.Scanner;
 public class StansardConsole implements Console {
     private static final String P1 = ">>> ";
@@ -21,3 +21,4 @@ public class StansardConsole implements Console {
     //    return keyboardScanner;
     //}
 }
+**/
