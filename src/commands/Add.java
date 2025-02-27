@@ -26,13 +26,16 @@ public class Add implements Command {
     }
 
     public void execute(){
-
-        collectionManager.createCity1();
+        City city = createCity1();
+        collectionManager.addToSet(city);
+        System.out.println("Город добавлен в коллекцию");
     }
 
 
-    public static City createCity2(Scanner scanner){
+    public static City createCity1(){
+        Scanner scanner = new Scanner(System.in);
         // name
+
         System.out.println("Введите название города...");
         String name = scanner.nextLine();
         while(name.isEmpty()){
