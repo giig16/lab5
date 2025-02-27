@@ -105,17 +105,19 @@ public class City  implements Comparable<City>  {
 
     @Override
     public String toString(){
-        return "city{\"id\": " + id + ", " +
-                "\"name\": \"" + name + "\", " +
-                "\"coordinates\": \"" + coordinates + "\", " +
-                "\"creationDate\" = \"" + creationDate.format(DateTimeFormatter.ISO_DATE_TIME) + "\", " +
-                "\"area\": " + area  + ", " +
-                "\"population\" = \"" + population + "\", " +
-                "\"metersAboveSeaLevel\": \"" + metersAboveSeaLevel + "\", " +
-                "\"establishmentDate\": \"" + establishmentDate + "\", "+
-                "\"government\": \"" + government + "\", " +
-                "\"standardOfLiving\": \""  + standardOfLiving + "\", " +
-                "\"governor\": \"" + governor + "\", "  ;
+        return "City{" +
+                "id=" + id.toString() +
+                ", name='" + name.toString() + '\'' +
+                ", coordinates=" + coordinates.toString() +
+                ", creationDate=" + creationDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) +
+                ", area=" + area +
+                ", population=" + population +
+                ", metersAboveSeaLevel=" + metersAboveSeaLevel +
+                ", establishmentDate=" + (establishmentDate != null ? establishmentDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).toString() : "N/A") +
+                ", government=" + government.toString() +
+                ", standardOfLiving=" + standardOfLiving.toString() +
+                ", governor=" + governor.toString() +
+                '}';
     }
 
 }

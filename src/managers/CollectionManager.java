@@ -23,4 +23,9 @@ public class CollectionManager {
         addToSet(city);
         System.out.println("Город добавлен в коллекцию");
     }
+    public void printCities(){
+        for(City c: cities){
+            System.out.println(c.toString());
+        }
+    }
 }

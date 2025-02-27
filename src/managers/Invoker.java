@@ -13,6 +13,7 @@ public class Invoker {
     commands.put("help", new Help());
     commands.put("add", new Add(cm));
     commands.put("exit", new Exit());
+    commands.put("show", new Show(cm));
     }
 
     Scanner sc = new Scanner(System.in);
