@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main{
        //public static LinkedHashSet<City> cities = new LinkedHashSet<>();
     public static void main(String[] args) {
-        //cities.add(new City());
         CollectionManager cm = new CollectionManager();
         Invoker invoker = new Invoker(cm);
         Scanner sc = new Scanner(System.in);

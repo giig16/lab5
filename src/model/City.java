@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class City  implements Comparable<City>  {
+    private static int globalIDCounter = 0;
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -22,8 +23,8 @@ public class City  implements Comparable<City>  {
     private Human governor; //Поле не может быть null
 
 
-    public City(Integer id, String name, Coordinates coordinates, ZonedDateTime creationDate, Double area, long population, Long metersAboveSeaLevel, ZonedDateTime establishmentDate, Government government, StandardOfLiving standardOfLiving, Human governor) {
-        this.id = id;
+    public City(String name, Coordinates coordinates, ZonedDateTime creationDate, Double area, long population, Long metersAboveSeaLevel, ZonedDateTime establishmentDate, Government government, StandardOfLiving standardOfLiving, Human governor) {
+        this.id = globalIDCounter++;
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
