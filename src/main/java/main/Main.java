@@ -1,5 +1,6 @@
 package main;
 
+import commands.Add;
 import managers.CollectionManager;
 import managers.Invoker;
 import model.City;

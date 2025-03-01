@@ -23,4 +23,14 @@ public class CollectionManager {
             System.out.println(c.toString());
         }
     }
+
+
+    public int isEmpty() {
+        return cities.size();
+    }
+
+    public void clearCollection(){
+        cities.clear();
+        }
 }
+

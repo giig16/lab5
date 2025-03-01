@@ -6,6 +6,6 @@ public class Exit implements Command{
         System.exit(0);
     }
     public String descr(){
-        return "завершить программу (без сохранения в файл)";
+        return "exit – завершить программу (без сохранения в файл) \n";
     }
 }
