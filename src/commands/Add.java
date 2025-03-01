@@ -19,8 +19,10 @@ public class Add implements Command {
     private CollectionManager collectionManager;
     public Add(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
-
     }
+
+    public Add(){};
+
     public String descr(){
         return "add {element} - добавить новый элемент в коллекцию";
     }

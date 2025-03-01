@@ -13,4 +13,5 @@ public class Show implements Command{
     public void execute(){
         collectionManager.printCities();
     }
+    public Show(){};
 }

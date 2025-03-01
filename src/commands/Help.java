@@ -17,22 +17,20 @@ public class Help implements Command{
     private ArrayList<Command> command= new ArrayList<>();
 
 
-    Command help = new Help();
-    Command exit = new Exit();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-    Command =new ();
-
-
+    Command averageOfMetersAboveSeaLevel = new AverageOfMetersAboveSeaLevel();
+    Command clear = new Clear();
+    Command add=new Add();
+    Command addIfMin=new AddIfMin();
+    Command executeScriptFileName=new ExecuteScriptFileName();
+    Command exit=new Exit();
+    Command groupCountingByArea=new GroupCountingByArea();
+    Command help=new Help();
+    Command info=new Info();
+    Command printUniqueMetersAboveSeaLevel=new PrintUniqueMetersAboveSeaLevel();
+    Command removeById=new RemoveByID();
+    Command removeGreater=new RemoveGreater();
+    Command removeLower=new RemoveLower();
+    Command save=new Save();
+    Command show=new Show();
+    Command updateID=new UpdateID();
 }
