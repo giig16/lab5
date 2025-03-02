@@ -45,9 +45,9 @@ public class Invoker {
 
         if (command != null) {
             if (argument != null) {
-                command.execute(argument); // Передаём аргумент в команду
+                command.execute(argument);
             } else {
-                command.execute(argument); // Вызываем команду без аргументов
+                command.execute(argument);
             }
         } else {
             System.out.println("Ошибка: неизвестная команда '" + commandName + "'.");

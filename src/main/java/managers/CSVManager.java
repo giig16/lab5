@@ -10,13 +10,10 @@ import java.util.List;
 
 public class CSVManager {
     private String filePath;
-    //private File file;
     public CSVManager(String filePath){
         this.filePath = filePath;
     }
-    /*public CSVManager(File file){
-        this.file = file;
-    }*/
+
     public LinkedHashSet<City> readCollectionFromFile(){
             LinkedHashSet<City> cities = new LinkedHashSet<>();
             long maxId = 0;

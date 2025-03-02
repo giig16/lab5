@@ -2,7 +2,7 @@ package model;
 
 import utility.Validatable;
 
-public class Coordinates  {
+public class Coordinates implements Validatable  {
     private long x;
     private double y; //Максимальное значение поля: 19
     public Coordinates(long x,double y){
@@ -25,6 +25,11 @@ public class Coordinates  {
         long thisDistanceFromStart = this.getX()*this.getX()+(long)(this.y*this.y);
         long coordinatesDistanceFromStart = coordinates.getX()* coordinates.getX()+(long)(coordinates.getY()* coordinates.getY());
         return Long.compare(thisDistanceFromStart,coordinatesDistanceFromStart);
+    }
+    @Override
+    public boolean validate(){
+        if(this.getX()>=19){return false;}
+        else{return true;}
     }
 
 

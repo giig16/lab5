@@ -114,16 +114,16 @@ public class City extends Element implements Comparable<City>,Validatable {
 
     @Override
     public boolean validate() {
-        // Твоя логика проверки полей
+
         if (this.getId() == null || this.getId() <= 0) return false;
         if (name == null || name.isEmpty()) return false;
-        if (coordinates == null) return false;
+        if (coordinates == null|| !coordinates.validate()) return false;
         if (creationDate == null) return false;
         if (area == null || area <= 0) return false;
         if (population <= 0) return false;
         if (government == null) return false;
         if (standardOfLiving == null) return false;
-        if (governor == null) return false;
+        if (governor == null||governor.getAge()<=0) return false;
         return true;
     }
 

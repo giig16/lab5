@@ -7,15 +7,15 @@ import managers.CollectionManager;
 import managers.Invoker;
 import model.City;
 
-import java.io.File;
+
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class Main {
-    //public static LinkedHashSet<City> cities = new LinkedHashSet<>();
+
     public static void main(String[] args) {
         String filePath = "src/main/resources/cities.csv";
-        //File csvFile = new File("/Users/marknorkin/Desktop/java/lab5/cities.csv");
+
         CSVManager csvManager = new CSVManager(filePath);
         CollectionManager cm = new CollectionManager(csvManager);
 
