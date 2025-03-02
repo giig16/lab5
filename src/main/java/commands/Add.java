@@ -38,7 +38,7 @@ public class Add implements Command {
             City city = createCity1();
             if (city.validate()) {
                 collectionManager.addToSet(city);
-                csvManager.writeInCollection(collectionManager.getCities());
+                //csvManager.writeInCollection(collectionManager.getCities());
                 System.out.println("Город добавлен в коллекцию");
                 break;
             } else {

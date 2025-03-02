@@ -23,7 +23,7 @@ public class Main{
         Scanner sc = new Scanner(System.in);
         LinkedHashSet<City> initialSet = csvManager.readCollectionFromFile();
         cm.setCities(initialSet);
-        System.out.println(new File(filePath).getAbsolutePath());
+
         System.out.println("Введите комманду");
 
         while(sc.hasNextLine()){
