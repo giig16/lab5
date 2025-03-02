@@ -13,7 +13,11 @@ public class RemoveLower implements Command{
 
 
     public void execute(City city) {
-        collectionManager.compareTo(city);
+
+    }
+
+    public void execute() {
+
     }
 
     public String descr() {
