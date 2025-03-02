@@ -55,6 +55,7 @@ public class Add implements Command {
     }
 
 
+
     public static City createCity1() {
         Scanner scanner = new Scanner(System.in);
         // name

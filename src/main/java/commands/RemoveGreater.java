@@ -22,7 +22,6 @@ public class RemoveGreater implements Command{
 
 
 
-
     public void execute(String argument) {
         collectionManager.clearCollectionGreater(argument);
         City.setGlobalIDCounter(City.getGlobalIDCounter()-1);

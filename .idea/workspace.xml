@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="0ff71223-9951-4e6b-870f-346db953cb4d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptFileName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptFileName.java" afterDir="false" />
@@ -16,16 +17,46 @@
       <change beforePath="$PROJECT_DIR$/target/classes/commands/RemoveGreater.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/RemoveGreater.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/commands/RemoveLower.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/RemoveLower.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/managers/Invoker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/Invoker.class" afterDir="false" />
+=======
+    <list default="true" id="c96378a8-bc9d-47d3-846b-fbc043be3b02" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AverageOfMetersAboveSeaLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AverageOfMetersAboveSeaLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/GroupCountingByArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/GroupCountingByArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueMetersAboveSeaLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueMetersAboveSeaLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/AddIfMin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/AddIfMin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/AverageOfMetersAboveSeaLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/AverageOfMetersAboveSeaLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/GroupCountingByArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/GroupCountingByArea.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/PrintUniqueMetersAboveSeaLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/PrintUniqueMetersAboveSeaLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/Invoker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/Invoker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/resources/cities.csv" afterDir="false" />
+>>>>>>> CompletingCommands
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
     "git-widget-placeholder": "feature__Mark4"
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "git-widget-placeholder": "CompletingCommands"
+>>>>>>> CompletingCommands
   }
 }]]></component>
   <component name="TaskManager">

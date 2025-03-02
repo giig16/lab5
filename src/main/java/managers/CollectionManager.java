@@ -148,9 +148,95 @@ public class CollectionManager {
     }
 
     public void clearById(String deletedCity){
+        if (deletedCity == null){
+            System.out.println("Ошибка: введите название города");
+        }else{
         int intDeletedCity = Integer.parseInt(deletedCity);
         City city =findCityById(intDeletedCity);
+
+            if (city == null) {
+                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
+                return;
+            }
         cities.remove(city);
+        System.out.println("Удален город - "+deletedCity);}
+
+
+    }
+
+    public void clearForUpdateById(String deletedCity){
+        if (deletedCity == null){
+            System.out.println("Ошибка: введите название города");
+        }else{
+            int intDeletedCity = Integer.parseInt(deletedCity);
+            City city =findCityById(intDeletedCity);
+
+            if (city == null) {
+                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
+                return;
+            }
+            cities.remove(city);
+            System.out.println("Можете обновить город '"+deletedCity+"'");}
+
+
+    }
+
+
+
+    public boolean toCompare(City refCity){
+        boolean smallerExist = false;
+        for (City city:cities){
+            if(refCity.compareTo(city)<0){
+                smallerExist=true;
+            }
+        }
+        return smallerExist;
+    }
+
+
+    public void groupCitiesByArea() {
+        Map<Double, Integer> groupsByArea = new HashMap<>();
+
+
+        for (City city : cities) {
+            double area = city.getArea();
+            groupsByArea.put(area, groupsByArea.getOrDefault(area, 0) + 1);
+        }
+
+        for (Map.Entry<Double, Integer> group : groupsByArea.entrySet()) {
+            System.out.println("Площадь: " + group.getKey() + "\nКоличество городов – " + group.getValue());
+        }
+    }
+
+
+    public void getUniqueMetersAboveSeaLevel(){
+
+        /*Set<Long> uniqueMeters = new HashSet<>();
+
+        for (City city : cities) {
+            uniqueMeters.add(city.getMetersAboveSeaLevel()); // Добавляем высоту в Set
+        }
+
+        System.out.println("Уникальные значения metersAboveSeaLevel:");
+        for (Long height : uniqueMeters) {
+            System.out.println(height);
+        }*/
+
+
+        cities.stream()
+                .map(City::getMetersAboveSeaLevel)
+                .distinct()
+                .forEach(System.out::println);
+
+    }
+
+    public void getAverageMetersSeaLvl(){
+        double average =cities.stream()
+                .mapToLong(City::getMetersAboveSeaLevel)
+                .average()
+                .orElse(0);
+        System.out.println(average);
+
     }
 }
 
