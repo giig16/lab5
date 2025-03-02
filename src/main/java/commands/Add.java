@@ -203,19 +203,31 @@ public class Add implements Command {
         }
         // governor
         System.out.println("Введите возраст губернатора города...");
-        String input9 = scanner.nextLine();
-        while(input9.isEmpty()){
-            System.out.println("Введите число, возраст не может быть пустым");
-            input9 = scanner.nextLine().trim();
-        }
         Long age = null;
         Human governor = null;
 
-        try{ age = Long.parseLong(input9);
-            governor = new Human(age);
-        }
-        catch(NumberFormatException e){
-            System.out.println("Введите число");
+        while (true) {
+            String input9 = scanner.nextLine().trim();
+
+            if (input9.isEmpty()) {
+                System.out.println("Ошибка: возраст не может быть пустым. Введите число.");
+                continue; // Повторяем ввод
+            }
+
+            try {
+                age = Long.parseLong(input9);
+
+                if (age <= 0) {
+                    System.out.println("Ошибка: Введите корректное число.");
+                    continue;
+                }
+
+                governor = new Human(age);
+                break; // Выход из цикла, если ввод корректен
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Введите корректное целое число.");
+            }
         }
 
 

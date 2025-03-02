@@ -21,7 +21,7 @@ public class Invoker {
     commands.put("save", new Save());
     commands.put("execute_script file_name", new ExecuteScriptFileName());
     commands.put("add_if_min", new AddIfMin());
-    commands.put("remove_greater", new RemoveGreater());
+    commands.put("remove_greater", new RemoveGreater(cm));
     commands.put("remove_lower", new RemoveLower(cm));
     commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel());
     commands.put("group_counting_by_area", new GroupCountingByArea());
@@ -37,6 +37,9 @@ public class Invoker {
         }
     }
     public void processRunner(String input){
+
+
+
 
         Command command = commands.get(input);
         if(command!=null){

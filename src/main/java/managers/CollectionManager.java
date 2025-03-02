@@ -1,6 +1,8 @@
 package managers;
 
 import model.City;
+
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
@@ -44,11 +46,36 @@ public class CollectionManager {
 
 
 
-    public void clearCollectionLower(City city){
-        int a = city.getId();
-        for (City city1 : cities){
+    public void clearCollectionGreater(String refCity){
+        City city = findCityByName(refCity);
 
+
+        if (city == null) {
+            System.out.println("Ошибка: Город с названием '" + refCity + "' не найден.");
+            return;
         }
+
+        Iterator<City> iterator = cities.iterator();
+        boolean exist = false;
+        while (iterator.hasNext()){
+            City nextCity= iterator.next();
+            if (nextCity.compareTo(city)>0){
+                iterator.remove();
+                exist = true;
+                System.out.println("Удален город " + city.getName());
+            }
+        }
+        if (!exist){
+            System.out.println("Нет городов превышающих " + city.getName());
+        }
+    }
+    private City findCityByName(String name) {
+        for (City city : cities) {
+            if (city.getName().equalsIgnoreCase(name)) {
+                return city;
+            }
+        }
+        return null;
     }
 
 
