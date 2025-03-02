@@ -128,10 +128,41 @@ public class CollectionManager {
     }
 
     public void clearById(String deletedCity){
+        if (deletedCity == null){
+            System.out.println("Ошибка: введите название города");
+        }else{
         int intDeletedCity = Integer.parseInt(deletedCity);
         City city =findCityById(intDeletedCity);
+
+            if (city == null) {
+                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
+                return;
+            }
         cities.remove(city);
+        System.out.println("Удален город - "+deletedCity);}
+
+
     }
+
+    public void clearForUpdateById(String deletedCity){
+        if (deletedCity == null){
+            System.out.println("Ошибка: введите название города");
+        }else{
+            int intDeletedCity = Integer.parseInt(deletedCity);
+            City city =findCityById(intDeletedCity);
+
+            if (city == null) {
+                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
+                return;
+            }
+            cities.remove(city);
+            System.out.println("Можете обновить город '"+deletedCity+"'");}
+
+
+    }
+
+
+
 
 
 

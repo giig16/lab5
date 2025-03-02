@@ -17,10 +17,6 @@ public class RemoveGreater implements Command{
     public RemoveGreater(){}
 
 
-    public void execute() {
-        System.out.println("Ошибка: команда 'remove_greater' требует аргумент (название города).");
-    }
-
     public void execute(String argument) {
         collectionManager.clearCollectionGreater(argument);
     }

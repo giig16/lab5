@@ -30,8 +30,6 @@ public class Main{
             String input = sc.nextLine().trim();
             invoker.processRunner(input);
             System.out.println("Введите следующую комманду");
-
-
         }
     }
 }
