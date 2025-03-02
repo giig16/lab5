@@ -13,15 +13,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/giig16/lab5.git",
-    "accountId": "8035b270-9692-4e67-9faf-045cc30b018e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/giig16/lab5.git&quot;,
+    &quot;accountId&quot;: &quot;8035b270-9692-4e67-9faf-045cc30b018e&quot;
   }
-}]]></component>
+}</component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "feature/maven-setup"
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="TaskManager">
