@@ -18,7 +18,7 @@ public class Invoker {
     commands.put("update_id", new UpdateID());
     commands.put("remove_by_id", new RemoveByID(cm));
     commands.put("clear", new Clear(cm));
-    commands.put("save", new Save());
+    commands.put("save", new Save(cm,csvManager));
     commands.put("execute_script file_name", new ExecuteScriptFileName());
     commands.put("add_if_min", new AddIfMin());
     commands.put("remove_greater", new RemoveGreater(cm));

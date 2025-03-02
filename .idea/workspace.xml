@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0ff71223-9951-4e6b-870f-346db953cb4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Save.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main1/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/managers/CSVManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CSVManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/Save.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Save.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main1/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/resources/cities.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>

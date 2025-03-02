@@ -1,6 +1,7 @@
 package commands;
 
 import managers.CollectionManager;
+import model.City;
 
 public class RemoveByID implements Command{
     private CollectionManager collectionManager;
@@ -13,6 +14,7 @@ public class RemoveByID implements Command{
 
     public void execute(String argument) {
         collectionManager.clearById(argument);
+        City.setGlobalIDCounter(City.getGlobalIDCounter()-1);
     }
 
     public String descr() {

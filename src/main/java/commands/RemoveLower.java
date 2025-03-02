@@ -13,11 +13,10 @@ public class RemoveLower implements Command{
 
     public void execute(String argument) {
         collectionManager.clearCollectionLower(argument);
+        City.setGlobalIDCounter(City.getGlobalIDCounter()-1);
     }
 
-    public void execute() {
-        System.out.println("Ошибка: команда 'remove_lower' требует аргумент (название города).");
-    }
+
 
     public String descr() {
         return "remove_lower {element} – удалить из коллекции все элементы, меньшие, чем заданный \n";
