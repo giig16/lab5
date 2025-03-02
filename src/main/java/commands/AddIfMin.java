@@ -24,6 +24,19 @@ public class AddIfMin implements Command{
 
     public void execute(String argument) {
 
+            City city = createCity1();
+            if(collectionManager.toCompare(city)){
+            if (city.validate()) {
+                collectionManager.addToSet(city);
+                //csvManager.writeInCollection(collectionManager.getCities());
+                System.out.println("Город добавлен в коллекцию");
+
+            } else {
+                System.out.println("Город не прошёл валидацию. Повторите ввод.");
+            }}else{
+                System.out.println("Город который вы создали превышает наименьший город коллекции");
+            }
+
     }
 
     public String descr() {

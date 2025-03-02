@@ -1,8 +1,20 @@
 package commands;
 
-public class GroupCountingByArea implements Command{
-    public void execute(String argument) {
+import managers.CollectionManager;
 
+public class GroupCountingByArea implements Command{
+    private CollectionManager collectionManager;
+
+    public GroupCountingByArea(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+    public GroupCountingByArea(){}
+
+
+
+
+    public void execute(String argument) {
+        collectionManager.groupCitiesByArea();
     }
 
     public String descr() {

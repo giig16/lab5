@@ -20,12 +20,12 @@ public class Invoker {
     commands.put("clear", new Clear(cm));
     commands.put("save", new Save());
     commands.put("execute_script file_name", new ExecuteScriptFileName());
-    commands.put("add_if_min", new AddIfMin());
+    commands.put("add_if_min", new AddIfMin(cm));
     commands.put("remove_greater", new RemoveGreater(cm));
     commands.put("remove_lower", new RemoveLower(cm));
-    commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel());
-    commands.put("group_counting_by_area", new GroupCountingByArea());
-    commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel());
+    commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel(cm));
+    commands.put("group_counting_by_area", new GroupCountingByArea(cm));
+    commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel(cm));
     }
 
     Scanner sc = new Scanner(System.in);
@@ -45,9 +45,9 @@ public class Invoker {
 
         if (command != null) {
             if (argument != null) {
-                command.execute(argument); // Передаём аргумент в команду
+                command.execute(argument);
             } else {
-                command.execute(argument); // Вызываем команду без аргументов
+                command.execute(argument);
             }
         } else {
             System.out.println("Ошибка: неизвестная команда '" + commandName + "'.");

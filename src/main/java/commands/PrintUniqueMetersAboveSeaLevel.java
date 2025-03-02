@@ -1,8 +1,19 @@
 package commands;
 
-public class PrintUniqueMetersAboveSeaLevel implements Command{
-    public void execute(String argument) {
+import managers.CollectionManager;
 
+public class PrintUniqueMetersAboveSeaLevel implements Command{
+    private CollectionManager collectionManager;
+
+    public PrintUniqueMetersAboveSeaLevel(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+    public PrintUniqueMetersAboveSeaLevel(){}
+
+
+
+    public void execute(String argument) {
+        collectionManager.getUniqueMetersAboveSeaLevel();
     }
 
     public String descr() {

@@ -1,8 +1,20 @@
 package commands;
 
+import managers.CollectionManager;
+
 public class AverageOfMetersAboveSeaLevel implements Command{
+    private CollectionManager collectionManager;
+
+    public AverageOfMetersAboveSeaLevel(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+    public AverageOfMetersAboveSeaLevel(){}
+
+
+
+
     public void execute(String argument) {
-        System.out.println("ЭЯйца алишераЭ");
+        collectionManager.getAverageMetersSeaLvl();
 
     }
 
