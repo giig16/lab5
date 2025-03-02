@@ -5,14 +5,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fade0b3-041f-44dc-a2c9-a9e2dd81fddb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Clear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main1/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/City.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Validatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Validatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Add.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/Clear.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Clear.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/commands/Help.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Help.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main1/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/City.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Coordinates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Government.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Government.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/cities.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utility/Element.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utility/Element.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "giig16"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/giig16/lab5.git",
+    "accountId": "8035b270-9692-4e67-9faf-045cc30b018e"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2tl5HfMIP18PadYSXOy9PmkfaAK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature__Mark3",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6fade0b3-041f-44dc-a2c9-a9e2dd81fddb" name="Changes" comment="" />
+      <created>1740913733986</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740913733986</updated>
+    </task>
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

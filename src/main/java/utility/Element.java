@@ -2,11 +2,10 @@ package utility;
 
 import model.City;
 
-public abstract class Element implements Comparable<Element> {
-//        abstract public Integer getId();
-
-//    public abstract int compareTo(Element element);
-//
-//    public abstract int compareTo(City city);
-//    //public abstract int compareTo(City city);
+public abstract class Element{
+        private static int globalIdCounter = 1;
+        protected Integer id;
+        public Integer getId(){
+            return id;
+        }
 }
