@@ -22,10 +22,16 @@ public class Add implements Command {
     public Add(CollectionManager collectionManager, CSVManager csvManager) {
         this.collectionManager = collectionManager;
         this.csvManager = csvManager;
-
     }
+
+    public CollectionManager getCollectionManager() {
+        return collectionManager;
+    }
+
+
+    public Add(){}
     public String descr(){
-        return "add {element} - добавить новый элемент в коллекцию";
+        return "add {element} – добавить новый элемент в коллекцию \n";
     }
 
     public void execute(){
@@ -82,29 +88,77 @@ public class Add implements Command {
         ZonedDateTime creationDate = ZonedDateTime.now();
         String crDate = creationDate.toString();
         // area
-        System.out.println("Введите площадь города...");
-        String input3 = scanner.nextLine();
-        while(input3.isEmpty()){
-            System.out.println("Площадь не может быть пустой"+"\n"+"Введите число...");
-            input3 = scanner.nextLine().trim();
+        double area;
+        while (true) {
+            System.out.println("Введите площадь города:");
+            String input3 = scanner.nextLine().trim();
+
+            if (input3.isEmpty()) {
+                System.out.println("Ошибка: Площадь не может быть пустой. Введите число.");
+                continue; // Повторяем ввод
+            }
+
+            try {
+                area = Double.parseDouble(input3);
+                if (area <= 0) {
+                    System.out.println("Ошибка: Площадь должна быть положительным числом. Повторите ввод.");
+                    continue;
+                }
+                break; // Выход из цикла, если ввод корректен
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Введите корректное число.");
+            }
         }
-        Double area = Double.parseDouble(input3);
         // population
-        System.out.println("Введите численность населения города...");
-        String input4 = scanner.nextLine();
-        while(input4.isEmpty()){
-            System.out.println("Численность населения не может быть пустой"+"\n"+"Введите число...");
-            input4 = scanner.nextLine().trim();
+        long population;
+        while (true) {
+            System.out.println("Введите численность населения города:");
+            String input4 = scanner.nextLine().trim();
+
+            if (input4.isEmpty()) {
+                System.out.println("Ошибка: Численность населения не может быть пустой. Введите число.");
+                continue; // Повторяем ввод
+            }
+
+            try {
+                population = Long.parseLong(input4);
+                if (population <= 0) {
+                    System.out.println("Ошибка: Численность населения должна быть положительным числом. Повторите ввод.");
+                    continue;
+                }
+                break; // Выход из цикла, если ввод корректен
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Введите корректное целое число.");
+            }
         }
-        Long population = Long.parseLong(input4);
+
         // meters above sea level
-        System.out.println("Введите абсолютную высоту города");
-        String input5 = scanner.nextLine();
-        while(input5.isEmpty()){
-            System.out.println("Абсолютная высота не может быть пустой"+"\n"+"Введите число...");
-            input5 = scanner.nextLine().trim();
+        long metersAboveSeaLevel;
+
+        while (true) {
+            System.out.println("Введите абсолютную высоту города:");
+
+            String input5 = scanner.nextLine().trim();
+
+            if (input5.isEmpty()) {
+                System.out.println("Абсолютная высота не может быть пустой. Введите число...");
+                continue;
+            }
+
+            try {
+                metersAboveSeaLevel = Long.parseLong(input5);
+
+                if (metersAboveSeaLevel < 0) {
+                    System.out.println("Ошибка: Введите корректное число.");
+                    continue;
+                }
+
+                break; // если число корректное, выходим из цикла
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Введите корректное число.");
+            }
         }
-        long metersAboveSeaLevel = Long.parseLong(input5);
+
         // establishmentDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ZonedDateTime establishmentDate = null;

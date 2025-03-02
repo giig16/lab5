@@ -27,7 +27,33 @@ public class CollectionManager {
         }
     }
 
+<<<<<<< HEAD
     public void setCities(LinkedHashSet<City> cities) {
         this.cities = cities;
     }
+=======
+
+    public int isEmpty() {
+        return cities.size();
+    }
+
+    public void clearCollection(){
+        cities.clear();
+    }
+
+
+
+
+    public void clearCollectionLower(City city){
+        int a = city.getId();
+        for (City city1 : cities){
+
+        }
+    }
+
+
+
+
+>>>>>>> CreateCommands
 }
+

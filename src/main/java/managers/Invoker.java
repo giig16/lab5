@@ -14,6 +14,18 @@ public class Invoker {
     commands.put("add", new Add(cm,csvManager));
     commands.put("exit", new Exit());
     commands.put("show", new Show(cm));
+    commands.put("info", new Info());
+    commands.put("update_id", new UpdateID());
+    commands.put("remove_by_id", new RemoveByID());
+    commands.put("clear", new Clear(cm));
+    commands.put("save", new Save());
+    commands.put("execute_script file_name", new ExecuteScriptFileName());
+    commands.put("add_if_min", new AddIfMin());
+    commands.put("remove_greater", new RemoveGreater());
+    commands.put("remove_lower", new RemoveLower(cm));
+    commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel());
+    commands.put("group_counting_by_area", new GroupCountingByArea());
+    commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel());
     }
 
     Scanner sc = new Scanner(System.in);

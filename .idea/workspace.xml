@@ -40,6 +40,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
@@ -50,6 +51,19 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/giig16/lab5.git&quot;,
     &quot;accountId&quot;: &quot;8035b270-9692-4e67-9faf-045cc30b018e&quot;
+=======
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/giig16/lab5.git&quot;,
+    &quot;accountId&quot;: &quot;8035b270-9692-4e67-9faf-045cc30b018e&quot;
+  }
+}</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "CreateCommands"
+>>>>>>> CreateCommands
   }
 }</component>
   <component name="ProjectColorInfo">{

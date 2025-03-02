@@ -8,9 +8,12 @@ public class Show implements Command{
         this.collectionManager = collectionManager;
     }
     public String descr(){
-        return "show - вывести все элементы коллекции";
+        return "show - вывести все элементы коллекции \n";
     }
     public void execute(){
-        collectionManager.printCities();
+        if (collectionManager.isEmpty()==0){
+            System.out.println("Коллекция пуста");}
+        else{collectionManager.printCities();}
     }
+    public Show(){}
 }
