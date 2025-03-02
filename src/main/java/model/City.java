@@ -8,7 +8,10 @@ import utility.Validatable;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Класс, представляющий город.
+ * Хранит информацию о названии, координатах, населении и т.д.
+ */
 public class City extends Element implements Comparable<City>,Validatable {
     private static int globalIDCounter = 1;
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -23,7 +26,21 @@ public class City extends Element implements Comparable<City>,Validatable {
     private StandardOfLiving standardOfLiving; //Поле не может быть null
     private Human governor; //Поле не может быть null
 
-
+    /**
+     * Основной конструктор, создающий {@code City} со всеми необходимыми полями.
+     * Значение поля {@code id} генерируется автоматически на основе {@link #globalIDCounter}.
+     *
+     * @param name               Название города (не может быть {@code null} или пустым).
+     * @param coordinates        Координаты города (не могут быть {@code null}).
+     * @param creationDate       Дата и время создания (не может быть {@code null}).
+     * @param area               Площадь города (не может быть {@code null} и должна быть больше 0).
+     * @param population         Численность населения (должна быть больше 0).
+     * @param metersAboveSeaLevel Высота над уровнем моря (может быть {@code null}).
+     * @param establishmentDate  Дата основания города (может быть {@code null}).
+     * @param government         Форма правления (не может быть {@code null}).
+     * @param standardOfLiving   Уровень жизни (не может быть {@code null}).
+     * @param governor           Губернатор (не может быть {@code null}; его возраст должен быть > 0).
+     */
     public City(String name, Coordinates coordinates, ZonedDateTime creationDate, Double area, long population, Long metersAboveSeaLevel, ZonedDateTime establishmentDate, Government government, StandardOfLiving standardOfLiving, Human governor) {
         this.id = globalIDCounter++;
         this.name = name;
@@ -85,14 +102,22 @@ public class City extends Element implements Comparable<City>,Validatable {
     public Human getGovernor() {
         return governor;
     }
-
+    /**
+     * Устанавливает глобальный счётчик ID (используется, если нужно подстроить нумерацию).
+     * @param value Новое значение глобального счётчика.
+     */
     public static void setGlobalIDCounter(int value) {
         City.globalIDCounter = value;
     }
     public static int getGlobalIDCounter(){
         return City.globalIDCounter;
     }
-
+    /**
+     * Сравнивает объекты City
+     * @return 1, если первый больше, второго
+     *  -1, если наоборот
+     *  0, если объекты равны
+     */
     @Override
     public int compareTo(City city){
         int result = Double.compare(this.getArea(),city.getArea());
@@ -112,6 +137,10 @@ public class City extends Element implements Comparable<City>,Validatable {
     }
 
 
+    /**
+     * Валидирует правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
 
@@ -127,7 +156,10 @@ public class City extends Element implements Comparable<City>,Validatable {
         return true;
     }
 
-
+    /**
+     * возвращает всю информацию об объекте City
+     * @return String
+     */
     @Override
     public String toString(){
         return "City{" +

@@ -7,7 +7,16 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZonedDateTime;
 import java.util.LinkedHashSet;
 import java.util.List;
-
+/**
+ * Класс, отвечающий за чтение и запись коллекции {@link City} в CSV-файл.
+ * <p>
+ * Использует библиотеку OpenCSV
+ * Позволяет:
+ * <ul>
+ *     <li>Считывать коллекцию из указанного файла ({@link #readCollectionFromFile()})</li>
+ *     <li>Записывать коллекцию в файл ({@link #writeInCollection(LinkedHashSet)})</li>
+ * </ul>
+ */
 public class CSVManager {
     private String filePath;
     public CSVManager(String filePath){

@@ -2,7 +2,9 @@ package commands;
 
 import managers.CSVManager;
 import managers.CollectionManager;
-
+/**
+ * Команда save, сохраняющая текущее состояние коллекции в CSV-файл
+ */
 public class Save implements Command {
     private CollectionManager collectionManager;
     private CSVManager csvManager;

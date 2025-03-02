@@ -3,7 +3,13 @@ package commands;
 import managers.Invoker;
 
 import java.io.*;
-
+/**
+ * Команда "execute_script", позволяющая считать и выполнить набор команд из указанного файла.
+ * <p>
+ * Файл должен содержать строки с командами в том же формате,
+ * как если бы пользователь вводил их интерактивно.
+ * Каждая строка передаётся в метод {@link Invoker#processRunner(String)}
+ */
 public class ExecuteScriptFileName implements Command{
     private Invoker invoker;
     public ExecuteScriptFileName(Invoker invoker){

@@ -2,7 +2,10 @@ package commands;
 
 import managers.CollectionManager;
 import model.City;
-
+/**
+ * Команда "remove_lower", удаляющая из коллекции все города,
+ * которые меньше заданного (по логике {@link City#compareTo(City)})
+ */
 public class RemoveLower implements Command{
     private CollectionManager collectionManager;
 

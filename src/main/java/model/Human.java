@@ -1,4 +1,9 @@
 package model;
+/**
+ * Класс, представляющий человека с полем возраста.
+ * <p>
+ * Поле {@code age} должно быть больше 0.
+ */
 public class Human {
     private Long age; //Значение поля должно быть больше 0
     public Human(Long age){

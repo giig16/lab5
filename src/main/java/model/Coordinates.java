@@ -1,7 +1,15 @@
 package model;
 
 import utility.Validatable;
-
+/**
+ * Класс, представляющий координаты в двумерном пространстве.
+ * <p>
+ * Содержит целочисленную координату {@code x} и вещественную координату {@code y}.
+ * Максимальное значение поля {@code y} по условию  19,
+ * однако фактически метод {@link #validate()} проверяет ограничение для {@code x} (x < 19).
+ * <p>
+ * Класс реализует интерфейс {@link Validatable}, позволяя проверить корректность значений координат.
+ */
 public class Coordinates implements Validatable  {
     private long x;
     private double y; //Максимальное значение поля: 19

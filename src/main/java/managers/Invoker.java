@@ -2,11 +2,13 @@ package managers;
 
 import commands.Add;
 import commands.*;
-
-
 import java.util.HashMap;
 import java.util.Scanner;
-
+/**
+ * Класс, отвечающий за хранение и вызов команд по их названиям.
+ * <p>
+ * Содержит {@code HashMap} строковых ключей (названий команд) и соответствующих объектов
+ */
 public class Invoker {
     public static HashMap<String, Command> commands = new HashMap<>();
     public Invoker(CollectionManager cm, CSVManager csvManager){
@@ -36,6 +38,16 @@ public class Invoker {
             String[] tokens = line.split("\\s+");
         }
     }
+    /**
+     * Основной метод, который разбирает строку на название команды и аргумент,
+     * а затем вызывает соответствующую команду из {@link #commands}.
+     * <p>
+     * Формат строки: {@code "<commandName> <argument>"} (аргумент опционален).
+     * Если команда найдена, вызывается {@code command.execute(argument)},
+     * в противном случае выводится сообщение об ошибке
+     *
+     * @param input строка, введённая пользователем
+     */
     public void processRunner(String input){
         String[] parts = input.split(" ", 2);
         String commandName = parts[0];

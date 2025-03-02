@@ -3,8 +3,11 @@ package commands;
 import managers.CollectionManager;
 import model.City;
 
-import java.util.Scanner;
 
+/**
+ * Команда "remove_greater", удаляющая из коллекции все элементы,
+ * которые превышают заданный (по логике {@link City#compareTo(City)})
+ */
 public class RemoveGreater implements Command{
     public String descr() {
         return "remove_greater {element} – удалить из коллекции все элементы, превышающие заданный \n";

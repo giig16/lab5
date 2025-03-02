@@ -14,7 +14,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
-
+/**
+ * Команда "add", позволяющая добавить новый {@link City} в коллекцию.
+ * <p>
+ * При выполнении команда запрашивает у пользователя данные для создания объекта {@code City},
+ * проверяет валидность (через {@link City#validate()}), и, если город корректен,
+ * добавляет его в коллекцию.
+ */
 public class Add implements Command {
     private CollectionManager collectionManager;
     private CSVManager csvManager;

@@ -2,7 +2,9 @@ package commands;
 
 import managers.CollectionManager;
 import model.City;
-
+/**
+ * Команда "remove_by_id", удаляющая элемент из коллекции по его id
+ */
 public class RemoveByID implements Command{
     private CollectionManager collectionManager;
 

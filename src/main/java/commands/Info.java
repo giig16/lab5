@@ -1,9 +1,15 @@
 package commands;
 
 import managers.CollectionManager;
-
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Команда "info", выводящая информацию о коллекции:
+ * <ul>
+ *     <li>Тип коллекции</li>
+ *     <li>Дата инициализации (формат {@code yyyy-MM-dd HH:mm})</li>
+ *     <li>Количество элементов</li>
+ * </ul>
+ */
 public class Info implements Command{
         private CollectionManager collectionManager;
         public Info(CollectionManager collectionManager){

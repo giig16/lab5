@@ -6,8 +6,16 @@ import java.time.ZonedDateTime;
 import java.util.*;
 
 
-
+/**
+ * Класс, управляющий коллекцией объектов {@link City}.
+ * <p>
+ * Хранит {@code LinkedHashSet<City>} и обеспечивает операции добавления,
+ * удаления и поиска городов. Также ведёт учёт времени инициализации.
+ */
 public class CollectionManager {
+    /**
+     * Основная коллекция, содержащая объекты {@link City}.
+     */
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
     private  CSVManager csvManager;
     private final ZonedDateTime initTime;
@@ -18,6 +26,12 @@ public class CollectionManager {
     public ZonedDateTime getInitTime(){
         return initTime;
     }
+    /**
+     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в CSV.
+     *
+     * @param city объект {@link City} для добавления
+     * @return {@code true}, если город был успешно добавлен
+     */
     public  boolean addToSet (City city){
         cities.add(city);
         csvManager.writeInCollection(cities);
@@ -138,10 +152,5 @@ public class CollectionManager {
         City city =findCityById(intDeletedCity);
         cities.remove(city);
     }
-
-
-
-
-
 }
 

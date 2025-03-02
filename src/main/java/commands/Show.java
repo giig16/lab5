@@ -1,7 +1,9 @@
 package commands;
 
 import managers.CollectionManager;
-
+/**
+ * Команда show, выводящая все элементы коллекции
+ */
 public class Show implements Command{
     private CollectionManager collectionManager;
     public Show(CollectionManager collectionManager){
