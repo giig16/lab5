@@ -1,15 +1,16 @@
 commands/Exit.class
 Ask.class
 model/Human.class
+main1/Main.class
 commands/Show.class
 utility/Console.class
-main/Main.class
 commands/Command.class
 model/City.class
 model/Government.class
 commands/Add.class
 commands/Help.class
 utility/Element.class
+managers/CSVManager.class
 managers/Invoker.class
 model/Coordinates.class
 utility/Validatable.class

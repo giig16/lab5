@@ -85,6 +85,13 @@ public class City  implements Comparable<City>  {
         return governor;
     }
 
+    public static void setGlobalIDCounter(int value) {
+        City.globalIDCounter = value;
+    }
+    public static int getGlobalIDCounter(){
+        return City.globalIDCounter;
+    }
+
     @Override
     public int compareTo(City city){
         int result = Double.compare(this.getArea(),city.getArea());

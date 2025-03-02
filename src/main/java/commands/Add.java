@@ -1,6 +1,7 @@
 package commands;
 
 import com.sun.tools.javac.Main;
+import managers.CSVManager;
 import managers.CollectionManager;
 import model.*;
 
@@ -17,8 +18,10 @@ import static java.lang.Long.parseLong;
 
 public class Add implements Command {
     private CollectionManager collectionManager;
-    public Add(CollectionManager collectionManager) {
+    private CSVManager csvManager;
+    public Add(CollectionManager collectionManager, CSVManager csvManager) {
         this.collectionManager = collectionManager;
+        this.csvManager = csvManager;
 
     }
     public String descr(){
@@ -28,6 +31,7 @@ public class Add implements Command {
     public void execute(){
         City city = createCity1();
         collectionManager.addToSet(city);
+        csvManager.writeInCollection(collectionManager.getCities());
         System.out.println("Город добавлен в коллекцию");
     }
 
@@ -116,6 +120,7 @@ public class Add implements Command {
                 break;
             }catch(DateTimeParseException e){
                 System.out.println("Ошибка: формат ввода неверен. Формат: yyyy-MM-dd HH:mm или ничего не вводите");
+
             }
         }
         // government
@@ -149,8 +154,16 @@ public class Add implements Command {
             System.out.println("Введите число, возраст не может быть пустым");
             input9 = scanner.nextLine().trim();
         }
-        Long age = Long.parseLong(input9);
-        Human governor = new Human(age);
+        Long age = null;
+        Human governor = null;
+
+        try{ age = Long.parseLong(input9);
+            governor = new Human(age);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Введите число");
+        }
+
 
 
         City city = new City(name, coordinates,  creationDate, area, population, metersAboveSeaLevel, establishmentDate, government, standardOfLiving, governor);
