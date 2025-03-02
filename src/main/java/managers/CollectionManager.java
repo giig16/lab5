@@ -27,11 +27,11 @@ public class CollectionManager {
         }
     }
 
-<<<<<<< HEAD
+
     public void setCities(LinkedHashSet<City> cities) {
         this.cities = cities;
     }
-=======
+
 
     public int isEmpty() {
         return cities.size();
@@ -54,6 +54,6 @@ public class CollectionManager {
 
 
 
->>>>>>> CreateCommands
+
 }
 
