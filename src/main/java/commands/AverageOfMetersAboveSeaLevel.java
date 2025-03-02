@@ -1,7 +1,10 @@
 package commands;
 
 import managers.CollectionManager;
-
+/**
+ * Команда "average_of_meters_above_sea_level", вычисляющая среднее значение поля
+ * {@code metersAboveSeaLevel} у всех объектов в коллекции
+ */
 public class AverageOfMetersAboveSeaLevel implements Command{
     private CollectionManager collectionManager;
 

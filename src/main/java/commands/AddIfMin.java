@@ -9,7 +9,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
+/**
+ * Команда "add_if_min", добавляющая новый {@link City} в коллекцию,
+ * если он «меньше» (согласно {@link City#compareTo(City)}) всех существующих элементов.
+ */
 public class AddIfMin implements Command{
     private CollectionManager collectionManager;
 

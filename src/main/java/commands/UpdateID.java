@@ -9,7 +9,16 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
+/**
+ * Команда "update_id", позволяющая обновить существующий элемент коллекции по его {@code id}
+ * <p>
+ * Логика команды:
+ * <ol>
+ *     <li>Сначала удаляется элемент с переданным {@code id} (метод {@link CollectionManager#clearForUpdateById(String)})</li>
+ *     <li>Затем пользователь заново вводит данные для нового {@link City}, который будет иметь тот же {@code id}</li>
+ *     <li>Проверяется валидность нового объекта (через {@link City#validate()}) Если всё корректно, он добавляется в коллекцию</li>
+ * </ol>
+ */
 public class UpdateID implements Command{
     private CollectionManager collectionManager;
 

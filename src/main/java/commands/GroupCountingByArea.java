@@ -1,7 +1,10 @@
 package commands;
 
 import managers.CollectionManager;
-
+/**
+ * Команда "group_counting_by_area", которая группирует элементы коллекции
+ * по значению поля {@code area} и выводит количество элементов в каждой группе.
+ */
 public class GroupCountingByArea implements Command{
     private CollectionManager collectionManager;
 
