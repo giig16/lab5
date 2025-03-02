@@ -4,35 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fade0b3-041f-44dc-a2c9-a9e2dd81fddb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Clear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utility/Validatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utility/Validatable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cities.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cities.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Add.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Clear.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Clear.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Help.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Help.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/cities.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main1/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main1/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CSVManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/City.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Coordinates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Government.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Government.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/resources/cities.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utility/Element.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utility/Element.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-    </list>
+    <list default="true" id="6fade0b3-041f-44dc-a2c9-a9e2dd81fddb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
