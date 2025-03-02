@@ -1,6 +1,7 @@
 package commands;
 
 import managers.CollectionManager;
+import model.City;
 
 public class Clear implements Command{
     private CollectionManager collectionManager;
@@ -16,6 +17,7 @@ public class Clear implements Command{
 
     public void execute(String argument) {
         collectionManager.clearCollection();
+        City.setGlobalIDCounter(1);
         System.out.println("Коллекция очищена.");
     }
 

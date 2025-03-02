@@ -1,8 +1,10 @@
 package commands;
 
+
 import managers.CSVManager;
 import managers.CollectionManager;
 import model.*;
+
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -11,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-import static java.lang.Long.parseLong;
 
 
 public class Add implements Command {
@@ -31,125 +32,116 @@ public class Add implements Command {
         return "add {element} – добавить новый элемент в коллекцию \n";
     }
 
+
     public void execute(String argument){
-        City city = createCity1();
-        collectionManager.addToSet(city);
-        System.out.println("Город добавлен в коллекцию");
+        while (true) {
+            City city = createCity1();
+            if (city.validate()) {
+                collectionManager.addToSet(city);
+                csvManager.writeInCollection(collectionManager.getCities());
+                System.out.println("Город добавлен в коллекцию");
+                break;
+            } else {
+                System.out.println("Город не прошёл валидацию. Повторите ввод.");
+            }
+        }
+
     }
 
 
-    public static City createCity1(){
+    public static City createCity1() {
         Scanner scanner = new Scanner(System.in);
         // name
-
         System.out.println("Введите название города...");
-        String name = scanner.nextLine();
-        while(name.isEmpty()){
-            System.out.println("Название не может быть пустым."+"\n"+"Введите название города...");
+        String name = scanner.nextLine().trim();
+        while (name.isEmpty()) {
+            System.out.println("Название не может быть пустым.\nВведите название города...");
             name = scanner.nextLine().trim();
         }
+
         // coordinates
-        System.out.println("Введит кооринаты:"+"\n"+"x:");
+        System.out.println("Введите координату x (число):");
         long x;
         while (true) {
-            String input1 = scanner.nextLine().trim();
-            if (input1.isEmpty()) {
-                System.out.println("Координата не может быть пустой. Введите число...");
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: x не может быть пустым. Повторите ввод:");
                 continue;
             }
             try {
-                x = Long.parseLong(input1);
-                break; // Выход из цикла, если ввод корректен
+                x = Long.parseLong(input);
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: координата должна быть числом. Повторите ввод:");
+                System.out.println("Ошибка: x должна быть числом. Повторите ввод:");
             }
         }
-        System.out.println("Y:");
+
+        System.out.println("Введите координату y (число):");
         double y;
         while (true) {
-            String input2 = scanner.nextLine().trim();
-            if (input2.isEmpty()) {
-                System.out.println("Координата не может быть пустой. Введите число...");
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: y не может быть пустым. Повторите ввод:");
                 continue;
             }
             try {
-                y = Double.parseDouble(input2);
-                break; // Выход из цикла, если ввод корректен
+                y = Double.parseDouble(input);
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: координата должна быть числом. Повторите ввод:");
+                System.out.println("Ошибка: y должна быть числом. Повторите ввод:");
             }
         }
         Coordinates coordinates = new Coordinates(x, y);
-        // zoneddatetime
+
+        //creationDate
         ZonedDateTime creationDate = ZonedDateTime.now();
-        String crDate = creationDate.toString();
+
         // area
-        double area;
+        System.out.println("Введите площадь города (число):");
+        Double area = null;
         while (true) {
-            System.out.println("Введите площадь города:");
-            String input3 = scanner.nextLine().trim();
-
-            if (input3.isEmpty()) {
-                System.out.println("Ошибка: Площадь не может быть пустой. Введите число.");
-                continue; // Повторяем ввод
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: Площадь не может быть пустой. Повторите ввод:");
+                continue;
             }
-
             try {
-                area = Double.parseDouble(input3);
-                if (area <= 0) {
-                    System.out.println("Ошибка: Площадь должна быть положительным числом. Повторите ввод.");
-                    continue;
-                }
-                break; // Выход из цикла, если ввод корректен
+                area = Double.parseDouble(input);
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: Введите корректное число.");
+                System.out.println("Ошибка: Площадь должна быть числом. Повторите ввод:");
             }
         }
+
         // population
+        System.out.println("Введите численность населения (число):");
         long population;
         while (true) {
-            System.out.println("Введите численность населения города:");
-            String input4 = scanner.nextLine().trim();
-
-            if (input4.isEmpty()) {
-                System.out.println("Ошибка: Численность населения не может быть пустой. Введите число.");
-                continue; // Повторяем ввод
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: Численность населения не может быть пустой. Повторите ввод:");
+                continue;
             }
-
             try {
-                population = Long.parseLong(input4);
-                if (population <= 0) {
-                    System.out.println("Ошибка: Численность населения должна быть положительным числом. Повторите ввод.");
-                    continue;
-                }
-                break; // Выход из цикла, если ввод корректен
+                population = Long.parseLong(input);
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: Введите корректное целое число.");
             }
         }
 
-        // meters above sea level
+        // metersAboveSeaLevel
+        System.out.println("Введите абсолютную высоту города (число):");
         long metersAboveSeaLevel;
-
         while (true) {
-            System.out.println("Введите абсолютную высоту города:");
-
-            String input5 = scanner.nextLine().trim();
-
-            if (input5.isEmpty()) {
-                System.out.println("Абсолютная высота не может быть пустой. Введите число...");
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: Значение не может быть пустым. Повторите ввод:");
                 continue;
             }
-
             try {
-                metersAboveSeaLevel = Long.parseLong(input5);
-
-                if (metersAboveSeaLevel < 0) {
-                    System.out.println("Ошибка: Введите корректное число.");
-                    continue;
-                }
-
-                break; // если число корректное, выходим из цикла
+                metersAboveSeaLevel = Long.parseLong(input);
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: Введите корректное число.");
             }
@@ -158,80 +150,83 @@ public class Add implements Command {
         // establishmentDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ZonedDateTime establishmentDate = null;
-        System.out.println("Введите дату основания города в формате yyyy-MM-dd HH:mm или не вводите ничего");
-        while(true){
-            String input6 = scanner.nextLine();
-            if(input6.isEmpty()){
+        System.out.println("Введите дату основания города в формате yyyy-MM-dd HH:mm или оставьте пустым:");
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
                 break;
             }
-            try{
-                LocalDateTime lDT = LocalDateTime.parse(input6,formatter);
+            try {
+                LocalDateTime lDT = LocalDateTime.parse(input, formatter);
                 establishmentDate = lDT.atZone(ZoneId.systemDefault());
                 break;
-            }catch(DateTimeParseException e){
-                System.out.println("Ошибка: формат ввода неверен. Формат: yyyy-MM-dd HH:mm или ничего не вводите");
-
+            } catch (DateTimeParseException e) {
+                System.out.println("Ошибка: формат ввода неверен. Формат: yyyy-MM-dd HH:mm или пустая строка.");
             }
         }
-        // government
-        Government government = null; // переменная для хранения выбранного enum
 
+        // Government
+        Government government = null;
         while (government == null) {
             System.out.println("Введите форму правления (ARISTOCRACY, STRATOCRACY, TELLUROCRACY): ");
-            String input7 = scanner.nextLine().trim().toUpperCase();
-
+            String input = scanner.nextLine().trim().toUpperCase();
             try {
-                government = Government.valueOf(input7);
+                government = Government.valueOf(input);
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: нет такого варианта. Повторите ввод.\n");
             }
         }
-        // standard of living
+
+        // StandardOfLiving
         StandardOfLiving standardOfLiving = null;
-        while(standardOfLiving==null){
-            System.out.println("Введите уровень жизни в городе (VERY_HIGH, HIGH, NIGHTMARE)");
-            String input8 = scanner.nextLine().trim().toUpperCase();
-            try{
-                standardOfLiving = StandardOfLiving.valueOf(input8);
+        while (standardOfLiving == null) {
+            System.out.println("Введите уровень жизни (VERY_HIGH, HIGH, NIGHTMARE):");
+            String input = scanner.nextLine().trim().toUpperCase();
+            try {
+                standardOfLiving = StandardOfLiving.valueOf(input);
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: нет такого варианта. Повторите ввод.\n");
             }
         }
-        // governor
-        System.out.println("Введите возраст губернатора города...");
+
+
+        // Governor
+        System.out.println("Введите возраст губернатора (число):");
         Long age = null;
-        Human governor = null;
-
         while (true) {
-            String input9 = scanner.nextLine().trim();
-
-            if (input9.isEmpty()) {
-                System.out.println("Ошибка: возраст не может быть пустым. Введите число.");
-                continue; // Повторяем ввод
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ошибка: возраст не может быть пустым. Повторите ввод:");
+                continue;
             }
-
             try {
-                age = Long.parseLong(input9);
-
-                if (age <= 0) {
-                    System.out.println("Ошибка: Введите корректное число.");
-                    continue;
-                }
-
-                governor = new Human(age);
-                break; // Выход из цикла, если ввод корректен
-
+                age = Long.parseLong(input);
+                break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: Введите корректное целое число.");
+                System.out.println("Ошибка: введите корректное число.");
+
             }
         }
+        Human governor = new Human(age);
+
+        //  City
+        City city = new City(
+                name,
+                coordinates,
+                creationDate,
+                area,
+                population,
+                metersAboveSeaLevel,
+                establishmentDate,
+                government,
+                standardOfLiving,
+                governor
+        );
 
 
-
-        City city = new City(name, coordinates,  creationDate, area, population, metersAboveSeaLevel, establishmentDate, government, standardOfLiving, governor);
         return city;
-
     }
+
 
 
 }

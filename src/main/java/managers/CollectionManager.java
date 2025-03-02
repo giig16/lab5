@@ -4,7 +4,7 @@ import model.City;
 
 import java.util.*;
 
-import static commands.Add.createCity1;
+
 
 public class CollectionManager {
     private LinkedHashSet<City> cities = new LinkedHashSet<>();

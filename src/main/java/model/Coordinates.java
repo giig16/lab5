@@ -1,4 +1,7 @@
 package model;
+
+import utility.Validatable;
+
 public class Coordinates  {
     private long x;
     private double y; //Максимальное значение поля: 19
@@ -23,5 +26,6 @@ public class Coordinates  {
         long coordinatesDistanceFromStart = coordinates.getX()* coordinates.getX()+(long)(coordinates.getY()* coordinates.getY());
         return Long.compare(thisDistanceFromStart,coordinatesDistanceFromStart);
     }
+
 
 }

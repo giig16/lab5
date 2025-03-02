@@ -3,13 +3,14 @@ package model;
 
 
 import utility.Element;
+import utility.Validatable;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class City  implements Comparable<City>  {
-    private static int globalIDCounter = 0;
+public class City extends Element implements Comparable<City>,Validatable {
+    private static int globalIDCounter = 1;
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -108,6 +109,22 @@ public class City  implements Comparable<City>  {
             result = getGovernor().compareTo(city.getGovernor());
         }
         return result;
+    }
+
+
+    @Override
+    public boolean validate() {
+        // Твоя логика проверки полей
+        if (this.getId() == null || this.getId() <= 0) return false;
+        if (name == null || name.isEmpty()) return false;
+        if (coordinates == null) return false;
+        if (creationDate == null) return false;
+        if (area == null || area <= 0) return false;
+        if (population <= 0) return false;
+        if (government == null) return false;
+        if (standardOfLiving == null) return false;
+        if (governor == null) return false;
+        return true;
     }
 
 
