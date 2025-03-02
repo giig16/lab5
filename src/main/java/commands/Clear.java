@@ -8,6 +8,7 @@ public class Clear implements Command{
     public Clear(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
+    public Clear(){}
 
     public String descr() {
         return "clear – очистить коллекцию \n";
@@ -17,7 +18,7 @@ public class Clear implements Command{
         collectionManager.clearCollection();
         System.out.println("Коллекция очищена.");
     }
-    public Clear(){}
+
 
 }
 

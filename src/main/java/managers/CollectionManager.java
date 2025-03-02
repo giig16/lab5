@@ -31,6 +31,20 @@ public class CollectionManager {
 
     public void clearCollection(){
         cities.clear();
+    }
+
+
+
+
+    public void clearCollectionLower(City city){
+        int a = city.getId();
+        for (City city1 : cities){
+
         }
+    }
+
+
+
+
 }
 

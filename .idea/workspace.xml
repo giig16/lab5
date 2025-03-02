@@ -4,41 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4db86206-5a8f-4ad9-bfa7-1e20fe3ac636" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/AverageOfMetersAboveSeaLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/Clear.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptFileName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/GroupCountingByArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/Info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/PrintUniqueMetersAboveSeaLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByID.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreater.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveLower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/Save.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Exit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Help.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Add.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Exit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Exit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Help.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Help.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Show.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Show.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/managers/Invoker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/Invoker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/City.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Coordinates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Government.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Government.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/StandardOfLiving.class" afterDir="false" />
-    </list>
+    <list default="true" id="4db86206-5a8f-4ad9-bfa7-1e20fe3ac636" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +30,7 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "CreateСommands"
+    "git-widget-placeholder": "CreateCommands"
   }
 }]]></component>
   <component name="TaskManager">
