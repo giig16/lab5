@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main{
        //public static LinkedHashSet<City> cities = new LinkedHashSet<>();
     public static void main(String[] args) {
-        String filePath = "/Users/marknorkin/Desktop/java/lab5/src/main/resources/cities.csv";
+        String filePath = "src/main/resources/cities.csv";
         //File csvFile = new File("/Users/marknorkin/Desktop/java/lab5/cities.csv");
         CSVManager csvManager = new CSVManager(filePath);
         CollectionManager cm = new CollectionManager(csvManager);

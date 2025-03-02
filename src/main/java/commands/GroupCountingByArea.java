@@ -1,7 +1,7 @@
 package commands;
 
 public class GroupCountingByArea implements Command{
-    public void execute() {
+    public void execute(String argument) {
 
     }
 

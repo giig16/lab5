@@ -11,13 +11,12 @@ public class RemoveLower implements Command{
     }
     public RemoveLower(){}
 
-
-    public void execute(City city) {
-
+    public void execute(String argument) {
+        collectionManager.clearCollectionLower(argument);
     }
 
     public void execute() {
-
+        System.out.println("Ошибка: команда 'remove_lower' требует аргумент (название города).");
     }
 
     public String descr() {

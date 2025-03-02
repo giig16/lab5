@@ -1,9 +1,7 @@
 package commands;
 
-import java.io.File;
-
 public class Exit implements Command{
-    public void execute(){
+    public void execute(String argument){
         System.out.println("выход из программы... ");
         System.exit(0);
     }

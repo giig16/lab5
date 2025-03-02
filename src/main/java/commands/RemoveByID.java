@@ -1,8 +1,18 @@
 package commands;
 
-public class RemoveByID implements Command{
-    public void execute() {
+import managers.CollectionManager;
 
+public class RemoveByID implements Command{
+    private CollectionManager collectionManager;
+
+    public RemoveByID(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+    public RemoveByID(){}
+
+
+    public void execute(String argument) {
+        collectionManager.clearById(argument);
     }
 
     public String descr() {

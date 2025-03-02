@@ -1,11 +1,9 @@
 package commands;
 
-import com.sun.tools.javac.Main;
 import managers.CSVManager;
 import managers.CollectionManager;
 import model.*;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -19,9 +17,8 @@ import static java.lang.Long.parseLong;
 public class Add implements Command {
     private CollectionManager collectionManager;
     private CSVManager csvManager;
-    public Add(CollectionManager collectionManager, CSVManager csvManager) {
+    public Add(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
-        this.csvManager = csvManager;
     }
 
     public CollectionManager getCollectionManager() {
@@ -34,10 +31,9 @@ public class Add implements Command {
         return "add {element} – добавить новый элемент в коллекцию \n";
     }
 
-    public void execute(){
+    public void execute(String argument){
         City city = createCity1();
         collectionManager.addToSet(city);
-        csvManager.writeInCollection(collectionManager.getCities());
         System.out.println("Город добавлен в коллекцию");
     }
 

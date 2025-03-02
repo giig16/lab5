@@ -11,12 +11,12 @@ public class Invoker {
     public static HashMap<String, Command> commands = new HashMap<>();
     public Invoker(CollectionManager cm, CSVManager csvManager){
     commands.put("help", new Help());
-    commands.put("add", new Add(cm,csvManager));
+    commands.put("add", new Add(cm));
     commands.put("exit", new Exit());
     commands.put("show", new Show(cm));
     commands.put("info", new Info());
     commands.put("update_id", new UpdateID());
-    commands.put("remove_by_id", new RemoveByID());
+    commands.put("remove_by_id", new RemoveByID(cm));
     commands.put("clear", new Clear(cm));
     commands.put("save", new Save());
     commands.put("execute_script file_name", new ExecuteScriptFileName());
@@ -37,20 +37,35 @@ public class Invoker {
         }
     }
     public void processRunner(String input){
+        String[] parts = input.split(" ", 2);
+        String commandName = parts[0]; // Название команды
+        String argument = parts.length > 1 ? parts[1] : null; // Аргумент (если есть)
 
+        Command command = commands.get(commandName);
 
-
-
-        Command command = commands.get(input);
-        if(command!=null){
-            command.execute();
-        }else{
-            System.out.println("введите правильное название комманды");
+        if (command != null) {
+            if (argument != null) {
+                command.execute(argument); // Передаём аргумент в команду
+            } else {
+                command.execute(argument); // Вызываем команду без аргументов
+            }
+        } else {
+            System.out.println("Ошибка: неизвестная команда '" + commandName + "'.");
         }
     }
 
 
 
-
-
+        /*Command command = commands.get(input);
+        if(command!=null){
+            command.execute();
+        }else{
+            System.out.println("введите правильное название комманды");
+        }*/
 }
+
+
+
+
+
+

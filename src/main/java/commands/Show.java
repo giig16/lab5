@@ -10,7 +10,7 @@ public class Show implements Command{
     public String descr(){
         return "show - вывести все элементы коллекции \n";
     }
-    public void execute(){
+    public void execute(String argument){
         if (collectionManager.isEmpty()==0){
             System.out.println("Коллекция пуста");}
         else{collectionManager.printCities();}

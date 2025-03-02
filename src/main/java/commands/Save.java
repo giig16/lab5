@@ -1,7 +1,7 @@
 package commands;
 
 public class Save implements Command {
-    public void execute() {
+    public void execute(String argument) {
 
     }
 

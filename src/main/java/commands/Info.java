@@ -2,7 +2,7 @@ package commands;
 
 public class Info implements Command{
 
-    public void execute() {
+    public void execute(String argument) {
 
     }
 

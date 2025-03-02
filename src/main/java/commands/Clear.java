@@ -14,7 +14,7 @@ public class Clear implements Command{
         return "clear – очистить коллекцию \n";
     }
 
-    public void execute() {
+    public void execute(String argument) {
         collectionManager.clearCollection();
         System.out.println("Коллекция очищена.");
     }

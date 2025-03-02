@@ -1,7 +1,7 @@
 package commands;
 
 public class AverageOfMetersAboveSeaLevel implements Command{
-    public void execute() {
+    public void execute(String argument) {
         System.out.println("ЭЯйца алишераЭ");
 
     }

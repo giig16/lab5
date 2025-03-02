@@ -7,7 +7,7 @@ public class Help implements Command {
         return "\"help — помощь, вывод справки по доступным командам и формату их использования\";";
     }
 
-    public void execute() {
+    public void execute(String argument) {
         System.out.println("Показываем справку помощи:");
         for (Command command : commands) {
             System.out.println(command.descr());
