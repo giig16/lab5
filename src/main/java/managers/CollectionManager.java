@@ -2,6 +2,7 @@ package managers;
 
 import model.City;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 
@@ -9,8 +10,13 @@ import java.util.*;
 public class CollectionManager {
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
     private  CSVManager csvManager;
+    private final ZonedDateTime initTime;
     public CollectionManager(CSVManager csvManager){
         this.csvManager = csvManager;
+        initTime = ZonedDateTime.now();
+    }
+    public ZonedDateTime getInitTime(){
+        return initTime;
     }
     public  boolean addToSet (City city){
         cities.add(city);

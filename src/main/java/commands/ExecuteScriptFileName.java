@@ -1,8 +1,25 @@
 package commands;
 
-public class ExecuteScriptFileName implements Command{
-    public void execute(String argument) {
+import managers.Invoker;
 
+import java.io.*;
+
+public class ExecuteScriptFileName implements Command{
+    private Invoker invoker;
+    public ExecuteScriptFileName(Invoker invoker){
+        this.invoker = invoker;
+    }
+    public ExecuteScriptFileName(){}
+    @Override
+    public void execute(String argument) {
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(argument)))){
+            String line;
+            while((line = bufferedReader.readLine())!=null){
+                invoker.processRunner(line.trim());
+            }
+        } catch (IOException e) {
+            System.out.println("Ошибка при чтении скрипта "+ e.getMessage());
+        }
     }
 
     public String descr() {

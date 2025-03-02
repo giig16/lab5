@@ -14,12 +14,12 @@ public class Invoker {
     commands.put("add", new Add(cm));
     commands.put("exit", new Exit());
     commands.put("show", new Show(cm));
-    commands.put("info", new Info());
+    commands.put("info", new Info(cm));
     commands.put("update_id", new UpdateID());
     commands.put("remove_by_id", new RemoveByID(cm));
     commands.put("clear", new Clear(cm));
     commands.put("save", new Save(cm,csvManager));
-    commands.put("execute_script file_name", new ExecuteScriptFileName());
+    commands.put("execute_script", new ExecuteScriptFileName(this));
     commands.put("add_if_min", new AddIfMin());
     commands.put("remove_greater", new RemoveGreater(cm));
     commands.put("remove_lower", new RemoveLower(cm));
@@ -38,8 +38,8 @@ public class Invoker {
     }
     public void processRunner(String input){
         String[] parts = input.split(" ", 2);
-        String commandName = parts[0]; // Название команды
-        String argument = parts.length > 1 ? parts[1] : null; // Аргумент (если есть)
+        String commandName = parts[0];
+        String argument = parts.length > 1 ? parts[1] : null;
 
         Command command = commands.get(commandName);
 

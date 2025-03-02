@@ -11,4 +11,8 @@ public class Human {
     public int compareTo(Human h){
         return Long.compare(this.getAge(),h.getAge());
     }
+    @Override
+    public String toString(){
+        return getAge().toString();
+    }
 }

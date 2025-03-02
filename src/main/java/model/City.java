@@ -134,14 +134,14 @@ public class City extends Element implements Comparable<City>,Validatable {
                 "id=" + id.toString() +
                 ", name='" + name.toString() + '\'' +
                 ", coordinates=" + coordinates.toString() +
-                ", creationDate=" + creationDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) +
+                ", creationDate=" + creationDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) +
                 ", area=" + area +
                 ", population=" + population +
                 ", metersAboveSeaLevel=" + metersAboveSeaLevel +
-                ", establishmentDate=" + (establishmentDate != null ? establishmentDate.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).toString() : "N/A") +
+                ", establishmentDate=" + (establishmentDate != null ? establishmentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).toString() : "N/A") +
                 ", government=" + government.toString() +
                 ", standardOfLiving=" + standardOfLiving.toString() +
-                ", governor=" + governor.toString() +
+                ", age_of_governor=" + governor.toString() +
                 '}';
     }
 
