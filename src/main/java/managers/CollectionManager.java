@@ -429,6 +429,100 @@ public class CollectionManager {
         return city;
     }
 
+    private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final Random RANDOM = new Random();
+
+
+    public static String generateRandomName() {
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            name.append(LETTERS.charAt(RANDOM.nextInt(LETTERS.length())));
+        }
+        return name.toString();
+    }
+
+
+    private static final String[] government = {
+            "ARISTOCRACY", "STRATOCRACY", "TELLUROCRACY"
+    };
+
+    public static String getRandomGovernment() {
+        Random random = new Random();
+        return government[random.nextInt(government.length)];
+    }
+
+    private static final String[] standardOfLiving = {
+            "VERY_HIGH", "HIGH", "NIGHTMARE"
+    };
+
+    public static String getRandomStandartsOfLiving() {
+        Random random = new Random();
+        return standardOfLiving[random.nextInt(standardOfLiving.length)];
+    }
+
+
+
+
+
+
+    public City createRandomCity(){
+
+        //name
+        String name =generateRandomName();
+
+        //coordinates
+        double dobX = Math.random()*18;
+        double dobY = Math.random()*18;
+        int x =(int) dobX;
+        int y = (int) dobY;
+        Coordinates coordinates = new Coordinates(x, y);
+
+        //creationDate
+        ZonedDateTime creationDate = ZonedDateTime.now();
+
+        //area
+        double area = Math.random()*100;
+
+        //population
+        double dobPopulation = Math.random()*100;
+        int population = (int) dobPopulation;
+
+        //metersAboveSeaLevel
+        double dobmetersAboveSeaLevel = Math.random()*100;
+        long metersAboveSeaLevel = (int) dobmetersAboveSeaLevel;
+
+        //establishmentDate
+        ZonedDateTime establishmentDate =null;
+
+        //government
+        String government52=getRandomGovernment();
+        Government government = Government.valueOf(government52);
+
+        //standardOfLiving
+        String standardOfLiving1=getRandomStandartsOfLiving();
+        StandardOfLiving standardOfLiving =StandardOfLiving.valueOf(standardOfLiving1);
+
+        //governor
+        double dobGovernor = Math.random()*100;
+        long age = (int) dobGovernor;
+        Human governor = new Human(age);
+
+        //Createcity
+        City city = new City(
+                name,
+                coordinates,
+                creationDate,
+                area,
+                population,
+                metersAboveSeaLevel,
+                establishmentDate,
+                government,
+                standardOfLiving,
+                governor
+        );
+        return city;
+    }
+
 
 
 }

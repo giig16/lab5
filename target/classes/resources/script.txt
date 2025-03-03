@@ -1,3 +1,2 @@
 show
-help
-exit
+add_for_script 5
