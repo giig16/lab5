@@ -11,11 +11,15 @@ import java.time.format.DateTimeFormatter;
  * </ul>
  */
 public class Info implements Command{
-        private CollectionManager collectionManager;
-        public Info(CollectionManager collectionManager){
+    /**Менеджер коллекции*/
+    private CollectionManager collectionManager;
+    /**Конструктор*/
+    public Info(CollectionManager collectionManager){
             this.collectionManager = collectionManager;
         }
+        /**Пустой конструктор*/
         public Info(){}
+    /**Метод выполнения*/
     public void execute(String argument) {
         String collectionType = "LinkedHashSet";
         String initTime = collectionManager.getInitTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -25,7 +29,7 @@ public class Info implements Command{
         System.out.println("Дата инициализации: " + initTime);
         System.out.println("Количество элементов: " + size);
     }
-
+    /**Описание*/
     public String descr() {
         return "info – вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.) \n";
     }

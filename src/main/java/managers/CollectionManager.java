@@ -17,12 +17,16 @@ public class CollectionManager {
      * Основная коллекция, содержащая объекты {@link City}.
      */
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
+    /**Менеджер csv*/
     private  CSVManager csvManager;
+    /**Время инициализации коллекции*/
     private final ZonedDateTime initTime;
+    /**Конструктор*/
     public CollectionManager(CSVManager csvManager){
         this.csvManager = csvManager;
         initTime = ZonedDateTime.now();
     }
+    /**Геттер для времени инициализации*/
     public ZonedDateTime getInitTime(){
         return initTime;
     }
@@ -37,33 +41,35 @@ public class CollectionManager {
         csvManager.writeInCollection(cities);
         return true;
     }
+    /**Геттер для коллекции*/
     public LinkedHashSet<City> getCities(){
         return cities;
     }
 
+    /**Метод, печатающий коллекцию*/
     public void printCities(){
         for(City c: cities){
             System.out.println(c.toString());
         }
     }
 
-
+    /**Сеттер для коллекции*/
     public void setCities(LinkedHashSet<City> cities) {
         this.cities = cities;
     }
 
-
+    /**Возвращает размер коллекции*/
     public int isEmpty() {
         return cities.size();
     }
-
+    /**Очищает коллекцию*/
     public void clearCollection(){
         cities.clear();
     }
 
 
 
-
+    /**Очищает все элементы коллекции, которые круче чем переданный в параметры*/
     public void clearCollectionGreater(String refCity){
         City city = findCityByName(refCity);
 
@@ -96,6 +102,7 @@ public class CollectionManager {
 
 
     }
+    /**Влзвращает city по имени*/
     private City findCityByName(String name) {
         for (City city : cities) {
             if (city.getName().equalsIgnoreCase(name)) {
@@ -104,7 +111,7 @@ public class CollectionManager {
         }
         return null;
     }
-
+    /**Возвращает city по id*/
     private City findCityById(int id) {
         for (City city : cities) {
             if (city.getId().equals(id)) {
@@ -116,7 +123,7 @@ public class CollectionManager {
 
 
 
-
+    /**Очищает все элементы коллекции, которые [e;t чем переданный в параметры*/
     public void clearCollectionLower(String refCity){
         City city = findCityByName(refCity);
 
@@ -146,7 +153,7 @@ public class CollectionManager {
             System.out.println("(Вот эти  – " + String.join(", ", delitedCities)+")");
         }
     }
-
+    /**Удаляет из коллекции объект по id*/
     public void clearById(String deletedCity){
         if (deletedCity == null){
             System.out.println("Ошибка: введите название города");
@@ -163,7 +170,7 @@ public class CollectionManager {
 
 
     }
-
+    /**Метод для удаления объекта для его обновления*/
     public void clearForUpdateById(String deletedCity){
         if (deletedCity == null){
             System.out.println("Ошибка: введите название города");
@@ -182,7 +189,7 @@ public class CollectionManager {
     }
 
 
-
+    /**Метод сравнения*/
     public boolean toCompare(City refCity){
         boolean smallerExist = false;
         for (City city:cities){
@@ -193,7 +200,7 @@ public class CollectionManager {
         return smallerExist;
     }
 
-
+    /**Группировка объектов по площади*/
     public void groupCitiesByArea() {
         Map<Double, Integer> groupsByArea = new HashMap<>();
 
@@ -208,7 +215,7 @@ public class CollectionManager {
         }
     }
 
-
+    /**Геттер для уникальной абсолютной высоты*/
     public void getUniqueMetersAboveSeaLevel(){
 
         /*Set<Long> uniqueMeters = new HashSet<>();
@@ -229,7 +236,7 @@ public class CollectionManager {
                 .forEach(System.out::println);
 
     }
-
+    /**Возвращает среднее значение абсолютной высоты*/
     public void getAverageMetersSeaLvl(){
         double average =cities.stream()
                 .mapToLong(City::getMetersAboveSeaLevel)

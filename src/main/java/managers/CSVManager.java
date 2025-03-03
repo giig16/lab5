@@ -18,11 +18,13 @@ import java.util.List;
  * </ul>
  */
 public class CSVManager {
+    /**Путь до файла*/
     private String filePath;
+    /**Конструктор*/
     public CSVManager(String filePath){
         this.filePath = filePath;
     }
-
+    /**Метод записи в коллекцию информации из файла*/
     public LinkedHashSet<City> readCollectionFromFile(){
             LinkedHashSet<City> cities = new LinkedHashSet<>();
             long maxId = 0;
@@ -66,6 +68,7 @@ public class CSVManager {
             }
             return cities;
     }
+    /**Метод записи коллекци в csv файл*/
     public void writeInCollection(LinkedHashSet<City> cities){
         try(CSVWriter writer = new CSVWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(filePath,false)),StandardCharsets.UTF_8))){
             for(City city:cities){

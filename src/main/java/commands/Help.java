@@ -10,17 +10,18 @@ import java.util.ArrayList;
  * описания всех этих команд (результат их метода {@code descr()})
  */
 public class Help implements Command {
+    /**Описание*/
     public String descr() {
         return "\"help — помощь, вывод справки по доступным командам и формату их использования\";";
     }
-
+    /**Метод выполнения*/
     public void execute(String argument) {
         System.out.println("Показываем справку помощи:");
         for (Command command : commands) {
             System.out.println(command.descr());
         }
     }
-
+    /**Список комманд*/
     private ArrayList<Command> commands = new ArrayList<>();
 
 

@@ -22,23 +22,28 @@ import java.util.Scanner;
  * добавляет его в коллекцию.
  */
 public class Add implements Command {
+    /**Менеджер коллкции*/
     private CollectionManager collectionManager;
+    /**csv менеджер*/
     private CSVManager csvManager;
+    /**Конструктор*/
     public Add(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
-
+    /**Геттер для менеджера коллекции*/
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }
 
-
+    /**
+     *  Пустой конструктор
+     */
     public Add(){}
     public String descr(){
         return "add {element} – добавить новый элемент в коллекцию \n";
     }
 
-
+    /**Выполнение*/
     public void execute(String argument){
         while (true) {
             City city = createCity1();
@@ -55,7 +60,7 @@ public class Add implements Command {
     }
 
 
-
+    /**Создание города*/
     public static City createCity1() {
         Scanner scanner = new Scanner(System.in);
         // name

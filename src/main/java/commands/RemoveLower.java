@@ -7,20 +7,22 @@ import model.City;
  * которые меньше заданного (по логике {@link City#compareTo(City)})
  */
 public class RemoveLower implements Command{
+    /**Менеджер коллекции*/
     private CollectionManager collectionManager;
-
+    /**Конструктор*/
     public RemoveLower(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
+    /**Пустой конструктор*/
     public RemoveLower(){}
-
+    /**Метод выполнения*/
     public void execute(String argument) {
         collectionManager.clearCollectionLower(argument);
         City.setGlobalIDCounter(City.getGlobalIDCounter()-1);
     }
 
 
-
+    /**Описание*/
     public String descr() {
         return "remove_lower {element} – удалить из коллекции все элементы, меньшие, чем заданный \n";
     }

@@ -14,17 +14,19 @@ import java.util.Scanner;
  * если он «меньше» (согласно {@link City#compareTo(City)}) всех существующих элементов.
  */
 public class AddIfMin implements Command{
+    /**Менеджер коллекции*/
     private CollectionManager collectionManager;
-
+    /**Конструктор*/
     public AddIfMin(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
+    /**Пустой конструктор*/
     public AddIfMin(){}
 
 
 
 
-
+    /**Выполнение*/
     public void execute(String argument) {
 
             City city = createCity1();
@@ -41,7 +43,7 @@ public class AddIfMin implements Command{
             }
 
     }
-
+    /**Описание*/
     public String descr() {
         return "add_if_min – добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции \n";
     }
@@ -56,7 +58,7 @@ public class AddIfMin implements Command{
 
 
 
-
+    /**Создание города*/
     public static City createCity1() {
         Scanner scanner = new Scanner(System.in);
         // name

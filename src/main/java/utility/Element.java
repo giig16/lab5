@@ -5,8 +5,9 @@ package utility;
  * Хранит поле {@code id} для конкретного элемента.
  */
 public abstract class Element{
-
+        /**Поле id*/
         protected Integer id;
+        /**Геттер для id*/
         public Integer getId(){
             return id;
         }

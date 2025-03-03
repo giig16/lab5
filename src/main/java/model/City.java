@@ -13,17 +13,29 @@ import java.time.format.DateTimeFormatter;
  * Хранит информацию о названии, координатах, населении и т.д.
  */
 public class City extends Element implements Comparable<City>,Validatable {
+    /**Счётчик id*/
     private static int globalIDCounter = 1;
+    /**id*/
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    /**Имя*/
     private String name; //Поле не может быть null, Строка не может быть пустой
+    /**Координаты*/
     private Coordinates coordinates; //Поле не может быть null
+    /**Дата создания объекта*/
     private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    /**Площадь города*/
     private Double area; //Значение поля должно быть больше 0, Поле не может быть null
+    /**Численность населения*/
     private long population; //Значение поля должно быть больше 0
+    /**Абсолютная высота*/
     private Long metersAboveSeaLevel;
+    /**Дата основания города*/
     private java.time.ZonedDateTime establishmentDate;
+    /**Форма правления*/
     private Government government; //Поле не может быть null
+    /**Уровень жизни*/
     private StandardOfLiving standardOfLiving; //Поле не может быть null
+    /**Губернатор*/
     private Human governor; //Поле не может быть null
 
     /**
@@ -54,51 +66,53 @@ public class City extends Element implements Comparable<City>,Validatable {
         this.standardOfLiving = standardOfLiving;
         this.governor = governor;
     }
+    /**Пустой конструктор*/
     public City(){}
-
+    /**Геттер для id*/
     public Integer getId() {
         return id;
     }
+    /**Геттер для имени*/
     public String getName(){
         return  name;
     }
-
+    /**Сеттер для id*/
     public void setId(Integer id) {
         this.id = id;
     }
-
+    /**Геттер для координат*/
     public Coordinates getCoordinates() {
         return coordinates;
     }
-
+    /**Геттер для даты создания*/
     public ZonedDateTime getCreationDate() {
         return creationDate;
     }
-
+    /**Геттер для площади*/
     public Double getArea() {
         return area;
     }
-
+    /**Геттер для численности населения*/
     public long getPopulation() {
         return population;
     }
-
+    /**Геттер для абсолютной высоты*/
     public Long getMetersAboveSeaLevel() {
         return metersAboveSeaLevel;
     }
-
+    /**Геттер для даты основания*/
     public ZonedDateTime getEstablishmentDate() {
         return establishmentDate;
     }
-
+    /**Геттер для формы правления*/
     public Government getGovernment() {
         return government;
     }
-
+    /**Геттер для уровня жизни*/
     public StandardOfLiving getStandardOfLiving() {
         return standardOfLiving;
     }
-
+    /**Геттер для губернатора*/
     public Human getGovernor() {
         return governor;
     }
@@ -109,6 +123,7 @@ public class City extends Element implements Comparable<City>,Validatable {
     public static void setGlobalIDCounter(int value) {
         City.globalIDCounter = value;
     }
+    /**Геттер для счётчика id*/
     public static int getGlobalIDCounter(){
         return City.globalIDCounter;
     }

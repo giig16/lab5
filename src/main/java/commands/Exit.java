@@ -6,10 +6,12 @@ package commands;
  * тем самым немедленно останавливая выполнение приложения.
  */
 public class Exit implements Command{
+    /**Метод выполнения*/
     public void execute(String argument){
         System.out.println("выход из программы... ");
         System.exit(0);
     }
+    /**Описание*/
     public String descr(){
         return "exit – завершить программу (без сохранения в файл) \n";
     }

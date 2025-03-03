@@ -20,18 +20,20 @@ import java.util.Scanner;
  * </ol>
  */
 public class UpdateID implements Command{
+    /**Менеджер коллекции*/
     private CollectionManager collectionManager;
-
+    /**Конструктор*/
     public UpdateID(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
+    /**Пустой конструктор*/
     public UpdateID(){}
 
 
 
 
 
-
+    /**Метод исполнения команды*/
     public void execute(String argument) {
         collectionManager.clearForUpdateById(argument);
         if(argument==null){
@@ -59,6 +61,7 @@ public class UpdateID implements Command{
 
     }
 
+    /**Возвращает описание команды*/
     public String descr() {
         return "update id {element} – обновить значение элемента коллекции, id которого равен заданному \n";
     }
@@ -72,7 +75,7 @@ public class UpdateID implements Command{
 
 
 
-
+    /**Метод создания города, как в Add*/
     public static City createCity1() {
         Scanner scanner = new Scanner(System.in);
         // name

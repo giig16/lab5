@@ -10,7 +10,9 @@ import java.util.Scanner;
  * Содержит {@code HashMap} строковых ключей (названий команд) и соответствующих объектов
  */
 public class Invoker {
+    /**Мапа команд*/
     public static HashMap<String, Command> commands = new HashMap<>();
+    /**Конструктор*/
     public Invoker(CollectionManager cm, CSVManager csvManager){
     commands.put("help", new Help());
     commands.put("add", new Add(cm));
@@ -29,7 +31,7 @@ public class Invoker {
     commands.put("group_counting_by_area", new GroupCountingByArea(cm));
     commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel(cm));
     }
-
+    /**Сканнер*/
     Scanner sc = new Scanner(System.in);
     public void scanNext() {
         String line;
