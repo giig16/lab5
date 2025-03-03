@@ -1,10 +1,8 @@
 commands/Exit.class
 commands/PrintUniqueMetersAboveSeaLevel.class
-Ask.class
 commands/RemoveLower.class
 main1/Main.class
 commands/GroupCountingByArea.class
-utility/Console.class
 commands/ExecuteScriptFileName.class
 commands/Command.class
 model/Government.class
