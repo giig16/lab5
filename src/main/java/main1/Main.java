@@ -20,7 +20,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = "src/main/resources/cities.csv";
+        String filePath = System.getenv("CITIES_FILE");
+        //String filePath = "src/main/resources/cities.csv";
+        if (filePath == null || filePath.isEmpty()) {
+            filePath = "src/main/resources/cities.csv";
+        }
 
         CSVManager csvManager = new CSVManager(filePath);
         CollectionManager cm = new CollectionManager(csvManager);

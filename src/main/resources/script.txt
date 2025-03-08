@@ -1,2 +1,7 @@
 show
-add 4000
+add 100
+
+
+save
+show
+
