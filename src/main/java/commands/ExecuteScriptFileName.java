@@ -22,13 +22,20 @@ public class ExecuteScriptFileName implements Command{
     /**Выполнение*/
     @Override
     public void execute(String argument) {
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(argument)))){
+        if (argument == null || argument.isEmpty()) {
+            System.out.println("Ошибка файл не найден");
+            return;
+        }
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(argument)))) {
             String line;
-            while((line = bufferedReader.readLine())!=null){
+            while ((line = bufferedReader.readLine()) != null) {
                 invoker.processRunner(line.trim());
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Ошибка: файл не найден -> " + argument);
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении скрипта "+ e.getMessage());
+            System.out.println("Ошибка при чтении скрипта: " + e.getMessage());
         }
     }
 

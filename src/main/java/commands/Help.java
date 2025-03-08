@@ -41,7 +41,6 @@ public class Help implements Command {
         commands.add(new Save());
         commands.add(new Show());
         commands.add(new UpdateID());
-        commands.add(new AddForScript());
     }
 
 

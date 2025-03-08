@@ -1,2 +1,2 @@
 show
-add_for_script 5
+add 4000

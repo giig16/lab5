@@ -35,7 +35,7 @@ public class Main {
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             invoker.processRunner(input);
-            System.out.println("Введите следующую комманду");
+            System.out.println("Введите следующую команду");
         }
     }
 }

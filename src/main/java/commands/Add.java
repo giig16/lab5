@@ -45,6 +45,7 @@ public class Add implements Command {
 
     /**Выполнение*/
     public void execute(String argument){
+        if (argument==null){
         while (true) {
             City city = collectionManager.createCity();
             if (city.validate()) {
@@ -54,6 +55,26 @@ public class Add implements Command {
                 break;
             } else {
                 System.out.println("Город не прошёл валидацию. Повторите ввод.");
+            }
+        }}else{
+            int value;
+            try{value = Integer.parseInt(argument);
+                if(value<=0){
+                    System.out.println("Ошибка: количество создаваемых городов должно быть положительным");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: аргумент комманды должен быть целочисленным");
+                return;
+            }
+            for(int i =0;i<value;i++){
+                City city = collectionManager.createRandomCity();
+                if(city.validate()){
+                    collectionManager.addToSet(city);
+                    System.out.println("Рандомный город"+(i+1)+ " добавлен в коллекцию");
+                }else{
+                    System.out.println("Рандомный город"+(i+1)+ " не прошёл валидацию");
+                }
             }
         }
 

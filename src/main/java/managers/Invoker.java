@@ -30,7 +30,6 @@ public class Invoker {
     commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel(cm));
     commands.put("group_counting_by_area", new GroupCountingByArea(cm));
     commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel(cm));
-    commands.put("add_for_script", new AddForScript(cm));
     }
     /**Сканнер*/
     Scanner sc = new Scanner(System.in);
