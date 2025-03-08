@@ -191,6 +191,5 @@ public class City extends Element implements Comparable<City>,Validatable {
                 ", age_of_governor=" + governor.toString() +
                 '}';
     }
-
 }
 

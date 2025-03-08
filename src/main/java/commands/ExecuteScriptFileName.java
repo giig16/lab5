@@ -22,6 +22,7 @@ public class ExecuteScriptFileName implements Command{
     /**Выполнение*/
     @Override
     public void execute(String argument) {
+        invoker.setScriptExistion(true);
         if (argument == null || argument.isEmpty()) {
             System.out.println("Ошибка файл не найден");
             return;
@@ -37,6 +38,7 @@ public class ExecuteScriptFileName implements Command{
         } catch (IOException e) {
             System.out.println("Ошибка при чтении скрипта: " + e.getMessage());
         }
+        invoker.setScriptExistion(false);
     }
 
     /**Описание*/

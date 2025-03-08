@@ -15,7 +15,7 @@ public class Invoker {
     /**Конструктор*/
     public Invoker(CollectionManager cm, CSVManager csvManager){
     commands.put("help", new Help());
-    commands.put("add", new Add(cm));
+    commands.put("add", new Add(cm,this));
     commands.put("exit", new Exit());
     commands.put("show", new Show(cm));
     commands.put("info", new Info(cm));
@@ -40,6 +40,36 @@ public class Invoker {
             String[] tokens = line.split("\\s+");
         }
     }
+
+
+
+
+    /**Поле булеан, для понимания используется команда через скрипт или нет*/
+    private boolean isScriptExist = false;
+
+    /**Геттер использования скрипта*/
+    public boolean getScript(){
+        return isScriptExist;
+    }
+    /**Сеттер использования скрипта*/
+    public void setScriptExistion(boolean isScriptExist){
+        this.isScriptExist=isScriptExist;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Основной метод, который разбирает строку на название команды и аргумент,
      * а затем вызывает соответствующую команду из {@link #commands}.

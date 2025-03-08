@@ -3,6 +3,7 @@ package commands;
 
 import managers.CSVManager;
 import managers.CollectionManager;
+import managers.Invoker;
 import model.*;
 
 
@@ -27,13 +28,23 @@ public class Add implements Command {
     /**csv менеджер*/
     private CSVManager csvManager;
     /**Конструктор*/
-    public Add(CollectionManager collectionManager) {
+    public Add(CollectionManager collectionManager, Invoker invoker) {
         this.collectionManager = collectionManager;
+        this.invoker=invoker;
     }
     /**Геттер для менеджера коллекции*/
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }
+    /**Вызывающий элемент*/
+    private Invoker invoker;
+    /**Конструктор*/
+    public Add(Invoker invoker){
+        this.invoker = invoker;
+    }
+
+
+
 
     /**
      *  Пустой конструктор
@@ -45,39 +56,109 @@ public class Add implements Command {
 
     /**Выполнение*/
     public void execute(String argument){
-        if (argument==null){
-        while (true) {
-            City city = collectionManager.createCity();
-            if (city.validate()) {
-                collectionManager.addToSet(city);
+        boolean isScriptUsed = invoker.getScript();
 
-                System.out.println("Город добавлен в коллекцию");
-                break;
+        //для командной строки
+        if(!isScriptUsed) {
+
+            /*
+            можно не вводить значение и самому создать
+            город с параметрами которые ты вставляешь
+            */
+
+            if (argument == null) {
+                while (true) {
+                    City city = collectionManager.createCity();
+                    if (city.validate()) {
+                        collectionManager.addToSet(city);
+
+                        System.out.println("Город добавлен в коллекцию");
+                        break;
+                    } else {
+                        System.out.println("Город не прошёл валидацию. Повторите ввод.");
+                    }
+                }
+
+                /*
+                можно поставить количество вводимых городов,
+                они создадутся сами с рандомными параметрами
+                */
+
             } else {
-                System.out.println("Город не прошёл валидацию. Повторите ввод.");
-            }
-        }}else{
-            int value;
-            try{value = Integer.parseInt(argument);
-                if(value<=0){
-                    System.out.println("Ошибка: количество создаваемых городов должно быть положительным");
+                int value;
+                try {
+                    value = Integer.parseInt(argument);
+                    if (value <= 0) {
+                        System.out.println("Ошибка: количество создаваемых городов должно быть положительным");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ошибка: аргумент комманды должен быть целочисленным");
                     return;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: аргумент комманды должен быть целочисленным");
-                return;
-            }
-            for(int i =0;i<value;i++){
-                City city = collectionManager.createRandomCity();
-                if(city.validate()){
-                    collectionManager.addToSet(city);
-                    System.out.println("Рандомный город"+(i+1)+ " добавлен в коллекцию");
-                }else{
-                    System.out.println("Рандомный город"+(i+1)+ " не прошёл валидацию");
+                for (int i = 0; i < value; i++) {
+                    City city = collectionManager.createRandomCity();
+                    if (city.validate()) {
+                        collectionManager.addToSet(city);
+                        System.out.println("Рандомный город" + (i + 1) + " добавлен в коллекцию");
+                    } else {
+                        System.out.println("Рандомный город" + (i + 1) + " не прошёл валидацию");
+                    }
                 }
             }
-        }
 
+            //для Script
+        }else {
+
+            /*
+            в скрипте похожая картина,
+            только тут уже нельзя создавать город со своими параметрами,
+            если ты не пишешь количество городов то их будет создаваться ровно 4001
+            */
+
+            if (argument == null) {
+                int value =4001;
+                for (int i = 0; i < value; i++) {
+                    City city = collectionManager.createRandomCity();
+                    if (city.validate()) {
+                        collectionManager.addToSet(city);
+                        System.out.println("Рандомный город" + (i + 1) + " добавлен в коллекцию");
+                    } else {
+                        System.out.println("Рандомный город" + (i + 1) + " не прошёл валидацию");
+                    }
+                }
+
+                /*
+                либо если в скрипте прописано число городов
+                то будет добавлено value городов в коллекцию
+                */
+
+            } else {
+                int value;
+                try {
+                    value = Integer.parseInt(argument);
+                    if (value <= 0) {
+                        System.out.println("Ошибка: количество создаваемых городов должно быть положительным");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ошибка: аргумент комманды должен быть целочисленным");
+                    return;
+                }
+                for (int i = 0; i < value; i++) {
+                    City city = collectionManager.createRandomCity();
+                    if (city.validate()) {
+                        collectionManager.addToSet(city);
+                        System.out.println("Рандомный город" + (i + 1) + " добавлен в коллекцию");
+                    } else {
+                        System.out.println("Рандомный город" + (i + 1) + " не прошёл валидацию");
+                    }
+                }
+
+
+            }
+
+        }
     }
 
 

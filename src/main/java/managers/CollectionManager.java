@@ -429,10 +429,15 @@ public class CollectionManager {
         return city;
     }
 
+    /**Вспомогательные массивы и методы
+     для метода который делает рандомный город с рандомными параметрами
+     и сам метод*/
+
+    /** LETTER для работы метода, который генерирует рандомное имя*/
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random RANDOM = new Random();
 
-
+    /**Метод, который генерирует рандомное имя*/
     public static String generateRandomName() {
         StringBuilder name = new StringBuilder();
         for (int i = 0; i < 5; i++) {
@@ -441,20 +446,21 @@ public class CollectionManager {
         return name.toString();
     }
 
-
+    /**Массив с типами правления, для метода, который выбирает рандомный тип правления*/
     private static final String[] government = {
             "ARISTOCRACY", "STRATOCRACY", "TELLUROCRACY"
     };
-
+    /**Метод, который выбирает рандомный тип правления */
     public static String getRandomGovernment() {
         Random random = new Random();
         return government[random.nextInt(government.length)];
     }
 
+    /**Массив с типами жизни населения, для метода, который выбирает рандомный тип жизни населения*/
     private static final String[] standardOfLiving = {
             "VERY_HIGH", "HIGH", "NIGHTMARE"
     };
-
+    /**Метод, который выбирает рандомный тип жизни населения*/
     public static String getRandomStandartsOfLiving() {
         Random random = new Random();
         return standardOfLiving[random.nextInt(standardOfLiving.length)];
@@ -464,7 +470,7 @@ public class CollectionManager {
 
 
 
-
+    /**Метод, который создает город с рандомными параметрами*/
     public City createRandomCity(){
 
         //name
