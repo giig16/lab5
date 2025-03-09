@@ -262,7 +262,7 @@ public class CollectionManager {
         }
 
         // coordinates
-        System.out.println("Введите координату x (число):");
+        System.out.println("Введите координату x (целое число):");
         long x;
         while (true) {
             String input = scanner.nextLine().trim();
@@ -274,11 +274,11 @@ public class CollectionManager {
                 x = Long.parseLong(input);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: x должна быть числом. Повторите ввод:");
+                System.out.println("Ошибка: x должна быть целым числом. Повторите ввод:");
             }
         }
 
-        System.out.println("Введите координату y (число):");
+        System.out.println("Введите координату y (вещественное число):");
         double y;
         while (true) {
             String input = scanner.nextLine().trim();
@@ -290,7 +290,7 @@ public class CollectionManager {
                 y = Double.parseDouble(input);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Ошибка: y должна быть числом. Повторите ввод:");
+                System.out.println("Ошибка: y должна быть вещественным числом. Повторите ввод:");
             }
         }
         Coordinates coordinates = new Coordinates(x, y);
@@ -299,7 +299,7 @@ public class CollectionManager {
         ZonedDateTime creationDate = ZonedDateTime.now();
 
         // area
-        System.out.println("Введите площадь города (число):");
+        System.out.println("Введите площадь города (вещественное число):");
         Double area = null;
         while (true) {
             String input = scanner.nextLine().trim();
@@ -316,7 +316,7 @@ public class CollectionManager {
         }
 
         // population
-        System.out.println("Введите численность населения (число):");
+        System.out.println("Введите численность населения (целое число):");
         long population;
         while (true) {
             String input = scanner.nextLine().trim();
@@ -333,7 +333,7 @@ public class CollectionManager {
         }
 
         // metersAboveSeaLevel
-        System.out.println("Введите абсолютную высоту города (число):");
+        System.out.println("Введите абсолютную высоту города (целое число):");
         long metersAboveSeaLevel;
         while (true) {
             String input = scanner.nextLine().trim();
@@ -393,7 +393,7 @@ public class CollectionManager {
 
 
         // Governor
-        System.out.println("Введите возраст губернатора (число):");
+        System.out.println("Введите возраст губернатора (целое число):");
         Long age = null;
         while (true) {
             String input = scanner.nextLine().trim();

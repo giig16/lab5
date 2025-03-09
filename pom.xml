@@ -25,7 +25,6 @@
     
     <build>
     <plugins>
-        <!-- Плагин для компиляции (Java 17) -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
@@ -46,6 +45,7 @@
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
+                        <finalName>lab5</finalName>
                     </configuration>
                 </execution>
             </executions>
@@ -63,6 +63,7 @@
             </executions>
         </plugin>
     </plugins>
+        <finalName>lab5</finalName>
 </build>
 
 

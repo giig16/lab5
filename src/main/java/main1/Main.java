@@ -20,11 +20,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = System.getenv("CITIES_FILE");
+        String filePath = System.getenv("CSV_PATH");
         //String filePath = "src/main/resources/cities.csv";
         if (filePath == null || filePath.isEmpty()) {
-            filePath = "src/main/resources/cities.csv";
+            System.err.println("Переменная окружения CSV_PATH не установлена");
+            System.exit(1);
         }
+
 
         CSVManager csvManager = new CSVManager(filePath);
         CollectionManager cm = new CollectionManager(csvManager);

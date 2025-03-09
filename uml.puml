@@ -1,0 +1,235 @@
+@startuml
+!theme plain
+top to bottom direction
+skinparam linetype polyline
+
+class Add {
+  + Add():
+  + Add(Invoker):
+  + Add(CollectionManager, Invoker):
+  - collectionManager: CollectionManager
+  + descr(): String
+  + execute(String): void
+   collectionManager: CollectionManager
+}
+class AddIfMin {
+  + AddIfMin():
+  + AddIfMin(CollectionManager):
+  + execute(String): void
+  + descr(): String
+}
+class AverageOfMetersAboveSeaLevel {
+  + AverageOfMetersAboveSeaLevel():
+  + AverageOfMetersAboveSeaLevel(CollectionManager):
+  + execute(String): void
+  + descr(): String
+}
+class CSVManager {
+  + CSVManager(String):
+  + readCollectionFromFile(): LinkedHashSet<City>
+  + writeInCollection(LinkedHashSet<City>): void
+}
+class City {
+  + City(String, Coordinates, ZonedDateTime, Double, long, Long, ZonedDateTime, Government, StandardOfLiving, Human):
+  + City():
+  - coordinates: Coordinates
+  - creationDate: ZonedDateTime
+  - area: Double
+  - governor: Human
+  - metersAboveSeaLevel: Long
+  - id: Integer
+  - name: String
+  - population: long
+  - standardOfLiving: StandardOfLiving
+  - government: Government
+  - establishmentDate: ZonedDateTime
+  - globalIDCounter: int
+  + validate(): boolean
+  + toString(): String
+  + compareTo(City): int
+   name: String
+   coordinates: Coordinates
+   metersAboveSeaLevel: Long
+   population: long
+   creationDate: ZonedDateTime
+   standardOfLiving: StandardOfLiving
+   area: Double
+   id: Integer
+   governor: Human
+   government: Government
+   globalIDCounter: int
+   establishmentDate: ZonedDateTime
+}
+class Clear {
+  + Clear(CollectionManager):
+  + Clear():
+  + descr(): String
+  + execute(String): void
+}
+class CollectionManager {
+  + CollectionManager(CSVManager):
+  - cities: LinkedHashSet<City>
+  - initTime: ZonedDateTime
+  + printCities(): void
+  + clearById(String): void
+  + clearCollectionGreater(String): void
+  - findCityByName(String): City?
+  + generateRandomName(): String
+  + toCompare(City): boolean
+  + isEmpty(): int
+  + getUniqueMetersAboveSeaLevel(): void
+  + createRandomCity(): City
+  + createCity(): City
+  - findCityById(int): City?
+  + clearCollectionLower(String): void
+  + clearCollection(): void
+  + groupCitiesByArea(): void
+  + getAverageMetersSeaLvl(): void
+  + clearForUpdateById(String): void
+  + addToSet(City): boolean
+   randomGovernment: String
+   randomStandartsOfLiving: String
+   initTime: ZonedDateTime
+   cities: LinkedHashSet<City>
+}
+interface Command << interface >> {
+  + execute(String): void
+  + descr(): String
+}
+class Coordinates {
+  + Coordinates(long, double):
+  - y: double
+  - x: long
+  + compareTo(Coordinates): int
+  + validate(): boolean
+  + toString(): String
+   x: long
+   y: double
+}
+class Element {
+  + Element():
+  # id: Integer
+   id: Integer
+}
+class ExecuteScriptFileName {
+  + ExecuteScriptFileName(Invoker):
+  + ExecuteScriptFileName():
+  + descr(): String
+  + execute(String): void
+}
+class Exit {
+  + Exit():
+  + execute(String): void
+  + descr(): String
+}
+enum Government << enumeration >> {
+  + Government():
+  + values(): Government[]
+  + valueOf(String): Government
+}
+class GroupCountingByArea {
+  + GroupCountingByArea(CollectionManager):
+  + GroupCountingByArea():
+  + descr(): String
+  + execute(String): void
+}
+class Help {
+  + Help():
+  + descr(): String
+  + execute(String): void
+}
+class Human {
+  + Human(Long):
+  - age: Long
+  + toString(): String
+  + compareTo(Human): int
+   age: Long
+}
+class Info {
+  + Info():
+  + Info(CollectionManager):
+  + descr(): String
+  + execute(String): void
+}
+class Invoker {
+  + Invoker(CollectionManager, CSVManager):
+  + scanNext(): void
+  + processRunner(String): void
+   scriptExistion: boolean
+   script: boolean
+}
+class Main {
+  + Main():
+  + main(String[]): void
+}
+class PrintUniqueMetersAboveSeaLevel {
+  + PrintUniqueMetersAboveSeaLevel():
+  + PrintUniqueMetersAboveSeaLevel(CollectionManager):
+  + descr(): String
+  + execute(String): void
+}
+class RemoveByID {
+  + RemoveByID(CollectionManager):
+  + RemoveByID():
+  + execute(String): void
+  + descr(): String
+}
+class RemoveGreater {
+  + RemoveGreater(CollectionManager):
+  + RemoveGreater():
+  + execute(String): void
+  + descr(): String
+}
+class RemoveLower {
+  + RemoveLower():
+  + RemoveLower(CollectionManager):
+  + execute(String): void
+  + descr(): String
+}
+class Save {
+  + Save():
+  + Save(CollectionManager, CSVManager):
+  + execute(String): void
+  + descr(): String
+}
+class Show {
+  + Show():
+  + Show(CollectionManager):
+  + execute(String): void
+  + descr(): String
+}
+enum StandardOfLiving << enumeration >> {
+  + StandardOfLiving():
+  + values(): StandardOfLiving[]
+  + valueOf(String): StandardOfLiving
+}
+class UpdateID {
+  + UpdateID(CollectionManager):
+  + UpdateID():
+  + descr(): String
+  + execute(String): void
+}
+interface Validatable << interface >> {
+  + validate(): boolean
+}
+
+Add                             -[#008200,dashed]-^  Command
+AddIfMin                        -[#008200,dashed]-^  Command
+AverageOfMetersAboveSeaLevel    -[#008200,dashed]-^  Command
+City                            -[#000082,plain]-^  Element
+City                            -[#008200,dashed]-^  Validatable
+Clear                           -[#008200,dashed]-^  Command
+Coordinates                     -[#008200,dashed]-^  Validatable
+ExecuteScriptFileName           -[#008200,dashed]-^  Command
+Exit                            -[#008200,dashed]-^  Command
+GroupCountingByArea             -[#008200,dashed]-^  Command
+Help                            -[#008200,dashed]-^  Command
+Info                            -[#008200,dashed]-^  Command
+PrintUniqueMetersAboveSeaLevel  -[#008200,dashed]-^  Command
+RemoveByID                      -[#008200,dashed]-^  Command
+RemoveGreater                   -[#008200,dashed]-^  Command
+RemoveLower                     -[#008200,dashed]-^  Command
+Save                            -[#008200,dashed]-^  Command
+Show                            -[#008200,dashed]-^  Command
+UpdateID                        -[#008200,dashed]-^  Command
+@enduml
