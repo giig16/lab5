@@ -18,7 +18,7 @@ public class RemoveByID implements Command{
     /**Метод выполнения*/
     public void execute(String argument) {
         collectionManager.clearById(argument);
-        City.setGlobalIDCounter(City.getGlobalIDCounter()-1);
+        City.setGlobalIDCounter(City.getGlobalIDCounter());
     }
     /**Описание*/
     public String descr() {

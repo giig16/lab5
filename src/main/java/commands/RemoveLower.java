@@ -18,7 +18,7 @@ public class RemoveLower implements Command{
     /**Метод выполнения*/
     public void execute(String argument) {
         collectionManager.clearCollectionLower(argument);
-        City.setGlobalIDCounter(City.getGlobalIDCounter()-1);
+        City.setGlobalIDCounter(City.getGlobalIDCounter());
     }
 
 
