@@ -36,10 +36,11 @@ public class UpdateID implements Command{
     /**Метод исполнения команды*/
     public void execute(String argument) {
         collectionManager.clearForUpdateById(argument);
-        if(argument==null){
+        if (argument == null || !argument.matches("\\d+")) {
 
         }else{
-        int id = Integer.parseInt(argument);
+        try{
+            int id = Integer.parseInt(argument);
         while (true) {
             City city = collectionManager.createCity();
             if (city.validate()) {
@@ -50,7 +51,10 @@ public class UpdateID implements Command{
                 break;
             } else {
                 System.out.println("Город не прошёл валидацию. Повторите ввод.");
-            }}
+            }}}
+        catch(NumberFormatException e){
+            System.out.println("Ошибка: некорректный ввод");
+        }
         }
 
 

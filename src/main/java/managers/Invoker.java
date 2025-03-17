@@ -19,7 +19,7 @@ public class Invoker {
     commands.put("exit", new Exit());
     commands.put("show", new Show(cm));
     commands.put("info", new Info(cm));
-    commands.put("update_id", new UpdateID(cm));
+    commands.put("update_by_id", new UpdateID(cm));
     commands.put("remove_by_id", new RemoveByID(cm));
     commands.put("clear", new Clear(cm));
     commands.put("save", new Save(cm,csvManager));

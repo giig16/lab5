@@ -159,9 +159,10 @@ public class CollectionManager {
     }
     /**Удаляет из коллекции объект по id*/
     public void clearById(String deletedCity){
-        if (deletedCity == null){
-            System.out.println("Ошибка: введите название города");
-        }else{
+        if (deletedCity == null||!deletedCity.matches("\\d+")){
+            System.out.println("Ошибка: введите числовой id города аргументом");
+            return;
+        }try {
         int intDeletedCity = Integer.parseInt(deletedCity);
         City city =findCityById(intDeletedCity);
 
@@ -171,26 +172,34 @@ public class CollectionManager {
             }
         cities.remove(city);
         System.out.println("Удален город - "+deletedCity);}
+        catch(NumberFormatException e){
+            System.out.println("Ошибка: некорректный формат id");
+        }
 
 
     }
     /**Метод для удаления объекта для его обновления*/
     public void clearForUpdateById(String deletedCity){
-        if (deletedCity == null){
-            System.out.println("Ошибка: введите название города");
-        }else{
+        if (deletedCity == null||!deletedCity.matches("\\d+")){
+            System.out.println("Ошибка: введите числовой id города аргументом");
+            return;
+        }try{
             int intDeletedCity = Integer.parseInt(deletedCity);
             City city =findCityById(intDeletedCity);
 
             if (city == null) {
-                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
+                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден. Создайте новый город...");
                 return;
             }
             cities.remove(city);
             System.out.println("Можете обновить город '"+deletedCity+"'");}
+            catch(NumberFormatException e){
+                System.out.println("Ошибка: некорректный формат id.");
+            }
+        }
 
 
-    }
+
 
 
     /**Метод сравнения*/

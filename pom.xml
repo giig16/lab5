@@ -35,6 +35,7 @@
                         <goal>single</goal>
                     </goals>
                     <configuration>
+                        <finalName>lab5</finalName>
                         <archive>
                             <manifest>
                                 <mainClass>
@@ -45,7 +46,6 @@
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
-                        <finalName>lab5</finalName>
                     </configuration>
                 </execution>
             </executions>

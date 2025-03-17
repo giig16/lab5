@@ -1,7 +1,0 @@
-show
-add 100
-
-
-save
-show
-
