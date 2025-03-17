@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8964fbc0-4cfd-4255-b9ca-29abfd0e83f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cities.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/script.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/managers/Invoker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/Invoker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/script.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/lab5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

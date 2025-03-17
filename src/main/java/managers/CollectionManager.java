@@ -1,9 +1,8 @@
 package managers;
 
 import model.*;
+import org.w3c.dom.ls.LSOutput;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -23,60 +22,84 @@ public class CollectionManager {
      * Основная коллекция, содержащая объекты {@link City}.
      */
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
-    /**Менеджер csv*/
-    private  CSVManager csvManager;
-    /**Время инициализации коллекции*/
+    /**
+     * Менеджер csv
+     */
+    private CSVManager csvManager;
+    /**
+     * Время инициализации коллекции
+     */
     private final ZonedDateTime initTime;
-    /**Конструктор*/
-    public CollectionManager(CSVManager csvManager){
+
+    /**
+     * Конструктор
+     */
+    public CollectionManager(CSVManager csvManager) {
         this.csvManager = csvManager;
         initTime = ZonedDateTime.now();
     }
-    /**Геттер для времени инициализации*/
-    public ZonedDateTime getInitTime(){
+
+    /**
+     * Геттер для времени инициализации
+     */
+    public ZonedDateTime getInitTime() {
         return initTime;
     }
+
     /**
      * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в CSV.
      *
      * @param city объект {@link City} для добавления
      * @return {@code true}, если город был успешно добавлен
      */
-    public  boolean addToSet (City city){
+    public boolean addToSet(City city) {
         cities.add(city);
         csvManager.writeInCollection(cities);
         return true;
     }
-    /**Геттер для коллекции*/
-    public LinkedHashSet<City> getCities(){
+
+    /**
+     * Геттер для коллекции
+     */
+    public LinkedHashSet<City> getCities() {
         return cities;
     }
 
-    /**Метод, печатающий коллекцию*/
-    public void printCities(){
-        for(City c: cities){
+    /**
+     * Метод, печатающий коллекцию
+     */
+    public void printCities() {
+        for (City c : cities) {
             System.out.println(c.toString());
         }
     }
 
-    /**Сеттер для коллекции*/
+    /**
+     * Сеттер для коллекции
+     */
     public void setCities(LinkedHashSet<City> cities) {
         this.cities = cities;
     }
 
-    /**Возвращает размер коллекции*/
+    /**
+     * Возвращает размер коллекции
+     */
     public int isEmpty() {
         return cities.size();
     }
-    /**Очищает коллекцию*/
-    public void clearCollection(){
+
+    /**
+     * Очищает коллекцию
+     */
+    public void clearCollection() {
         cities.clear();
     }
 
 
-
-    /**Очищает все элементы коллекции, которые круче чем переданный в параметры*/
-    public void clearCollectionGreater(String refCity){
+    /**
+     * Очищает все элементы коллекции, которые круче чем переданный в параметры
+     */
+    public void clearCollectionGreater(String refCity) {
         City city = findCityByName(refCity);
 
 
@@ -90,25 +113,27 @@ public class CollectionManager {
 
         List<String> delitedCities = new ArrayList<>();
 
-        while (iterator.hasNext()){
-            City nextCity= iterator.next();
-            if (nextCity.compareTo(city)>0){
+        while (iterator.hasNext()) {
+            City nextCity = iterator.next();
+            if (nextCity.compareTo(city) > 0) {
                 iterator.remove();
                 delitedCities.add(nextCity.getName());
                 exist = true;
                 System.out.println("Удалены все города превышающие " + city.getName());
             }
         }
-        if (!exist){
+        if (!exist) {
             System.out.println("Нет городов превышающих " + city.getName());
-        }else{
-            System.out.println("(Вот эти  – " + String.join(", ", delitedCities)+")");
+        } else {
+            System.out.println("(Вот эти  – " + String.join(", ", delitedCities) + ")");
         }
 
 
-
     }
-    /**Влзвращает city по имени*/
+
+    /**
+     * Влзвращает city по имени
+     */
     private City findCityByName(String name) {
         for (City city : cities) {
             if (city.getName().equalsIgnoreCase(name)) {
@@ -117,7 +142,10 @@ public class CollectionManager {
         }
         return null;
     }
-    /**Возвращает city по id*/
+
+    /**
+     * Возвращает city по id
+     */
     private City findCityById(int id) {
         for (City city : cities) {
             if (city.getId().equals(id)) {
@@ -128,9 +156,10 @@ public class CollectionManager {
     }
 
 
-
-    /**Очищает все элементы коллекции, которые [e;t чем переданный в параметры*/
-    public void clearCollectionLower(String refCity){
+    /**
+     * Очищает все элементы коллекции, которые [e;t чем переданный в параметры
+     */
+    public void clearCollectionLower(String refCity) {
         City city = findCityByName(refCity);
 
 
@@ -144,94 +173,105 @@ public class CollectionManager {
 
         List<String> delitedCities = new ArrayList<>();
 
-        while (iterator.hasNext()){
-            City nextCity= iterator.next();
-            if (nextCity.compareTo(city)<0){
+        while (iterator.hasNext()) {
+            City nextCity = iterator.next();
+            if (nextCity.compareTo(city) < 0) {
                 iterator.remove();
                 delitedCities.add(nextCity.getName());
                 exist = true;
                 System.out.println("Удалены все города меньшие чем " + city.getName());
             }
         }
-        if (!exist){
+        if (!exist) {
             System.out.println("Нет городов меньше чем " + city.getName());
-        }else{
-            System.out.println("(Вот эти  – " + String.join(", ", delitedCities)+")");
+        } else {
+            System.out.println("(Вот эти  – " + String.join(", ", delitedCities) + ")");
         }
     }
-    /**Удаляет из коллекции объект по id*/
-    public void clearById(String deletedCity){
-        if (deletedCity == null||!deletedCity.matches("\\d+")){
-            System.out.println("Ошибка: нужно вводить целочисленный id города аргументом");
+
+    /**
+     * Удаляет из коллекции объект по id
+     */
+    public void clearById(String deletedCity) {
+        if (deletedCity == null || !deletedCity.matches("\\d+")) {
+            System.out.println("Ошибка: введите числовой id города аргументом");
             return;
-        }try {
-        int intDeletedCity = Integer.parseInt(deletedCity);
-        City city =findCityById(intDeletedCity);
+        }
+        try {
+            int intDeletedCity = Integer.parseInt(deletedCity);
+            City city = findCityById(intDeletedCity);
 
             if (city == null) {
                 System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
                 return;
             }
-        cities.remove(city);
-        System.out.println("Удален город - "+deletedCity);}
-        catch(NumberFormatException e){
+            cities.remove(city);
+            System.out.println("Удален город - " + deletedCity);
+        } catch (NumberFormatException e) {
             System.out.println("Ошибка: некорректный формат id");
         }
 
 
     }
-    /**Метод для удаления объекта для его обновления*/
-    public void clearForUpdateById(String deletedCity){
-        if (deletedCity == null||!deletedCity.matches("\\d+")){
-            System.out.println("Ошибка: нужно вводить целочисленный id города аргументом");
+
+    /**
+     * Метод для удаления объекта для его обновления
+     */
+    public void clearForUpdateById(String deletedCity) {
+        if (deletedCity == null || !deletedCity.matches("\\d+")) {
+            System.out.println("Ошибка: введите числовой id города аргументом");
             return;
-        }try{
+        }
+        try {
             int intDeletedCity = Integer.parseInt(deletedCity);
-            City city =findCityById(intDeletedCity);
+            City city = findCityById(intDeletedCity);
 
             if (city == null) {
                 System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден. Создайте новый город...");
                 return;
             }
             cities.remove(city);
-            System.out.println("Можете обновить город '"+deletedCity+"'");}
-            catch(NumberFormatException e){
-                System.out.println("Ошибка: некорректный формат id.");
-            }
+            System.out.println("Можете обновить город '" + deletedCity + "'");
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка: некорректный формат id.");
         }
+    }
 
 
-
-
-
-    /**Метод сравнения*/
-    public boolean toCompare(City refCity){
+    /**
+     * Метод сравнения
+     */
+    public boolean toCompare(City refCity) {
         boolean smallerExist = false;
-        for (City city:cities){
-            if(refCity.compareTo(city)<0){
-                smallerExist=true;
+        for (City city : cities) {
+            if (refCity.compareTo(city) < 0) {
+                smallerExist = true;
             }
         }
         return smallerExist;
     }
 
-    /**Группировка объектов по площади*/
+    /**
+     * Группировка объектов по площади
+     */
     public void groupCitiesByArea() {
-        Map<BigDecimal, Integer> groupsByArea = new HashMap<>();
+        Map<Double, Integer> groupsByArea = new HashMap<>();
 
 
         for (City city : cities) {
-            BigDecimal area = BigDecimal.valueOf(city.getArea()).setScale(0, RoundingMode.HALF_UP);
+            double area = city.getArea();
             groupsByArea.put(area, groupsByArea.getOrDefault(area, 0) + 1);
         }
 
-        for (Map.Entry<BigDecimal, Integer> group : groupsByArea.entrySet()) {
+        for (Map.Entry<Double, Integer> group : groupsByArea.entrySet()) {
             System.out.println("Площадь: " + group.getKey() + "\nКоличество городов – " + group.getValue());
         }
     }
 
-    /**Геттер для уникальной абсолютной высоты*/
-    public void getUniqueMetersAboveSeaLevel(){
+    /**
+     * Геттер для уникальной абсолютной высоты
+     */
+    public void getUniqueMetersAboveSeaLevel() {
 
         /*Set<Long> uniqueMeters = new HashSet<>();
 
@@ -251,9 +291,12 @@ public class CollectionManager {
                 .forEach(System.out::println);
 
     }
-    /**Возвращает среднее значение абсолютной высоты*/
-    public void getAverageMetersSeaLvl(){
-        double average =cities.stream()
+
+    /**
+     * Возвращает среднее значение абсолютной высоты
+     */
+    public void getAverageMetersSeaLvl() {
+        double average = cities.stream()
                 .mapToLong(City::getMetersAboveSeaLevel)
                 .average()
                 .orElse(0);
@@ -261,7 +304,9 @@ public class CollectionManager {
 
     }
 
-    /**Метод создания города*/
+    /**
+     * Метод создания города
+     */
     public City createCity() {
         Scanner scanner = new Scanner(System.in);
         // name
@@ -444,11 +489,15 @@ public class CollectionManager {
      для метода который делает рандомный город с рандомными параметрами
      и сам метод*/
 
-    /** LETTER для работы метода, который генерирует рандомное имя*/
+    /**
+     * LETTER для работы метода, который генерирует рандомное имя
+     */
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random RANDOM = new Random();
 
-    /**Метод, который генерирует рандомное имя*/
+    /**
+     * Метод, который генерирует рандомное имя
+     */
     public static String generateRandomName() {
         StringBuilder name = new StringBuilder();
         for (int i = 0; i < 5; i++) {
@@ -457,40 +506,49 @@ public class CollectionManager {
         return name.toString();
     }
 
-    /**Массив с типами правления, для метода, который выбирает рандомный тип правления*/
+    /**
+     * Массив с типами правления, для метода, который выбирает рандомный тип правления
+     */
     private static final String[] government = {
             "ARISTOCRACY", "STRATOCRACY", "TELLUROCRACY"
     };
-    /**Метод, который выбирает рандомный тип правления */
+
+    /**
+     * Метод, который выбирает рандомный тип правления
+     */
     public static String getRandomGovernment() {
         Random random = new Random();
         return government[random.nextInt(government.length)];
     }
 
-    /**Массив с типами жизни населения, для метода, который выбирает рандомный тип жизни населения*/
+    /**
+     * Массив с типами жизни населения, для метода, который выбирает рандомный тип жизни населения
+     */
     private static final String[] standardOfLiving = {
             "VERY_HIGH", "HIGH", "NIGHTMARE"
     };
-    /**Метод, который выбирает рандомный тип жизни населения*/
+
+    /**
+     * Метод, который выбирает рандомный тип жизни населения
+     */
     public static String getRandomStandartsOfLiving() {
         Random random = new Random();
         return standardOfLiving[random.nextInt(standardOfLiving.length)];
     }
 
 
-
-
-
-    /**Метод, который создает город с рандомными параметрами*/
-    public City createRandomCity(){
+    /**
+     * Метод, который создает город с рандомными параметрами
+     */
+    public City createRandomCity() {
 
         //name
-        String name =generateRandomName();
+        String name = generateRandomName();
 
         //coordinates
-        double dobX = Math.random()*18;
-        double dobY = Math.random()*18;
-        int x =(int) dobX;
+        double dobX = Math.random() * 18;
+        double dobY = Math.random() * 18;
+        int x = (int) dobX;
         int y = (int) dobY;
         Coordinates coordinates = new Coordinates(x, y);
 
@@ -498,29 +556,29 @@ public class CollectionManager {
         ZonedDateTime creationDate = ZonedDateTime.now();
 
         //area
-        double area = Math.random()*100;
+        double area = Math.random() * 100;
 
         //population
-        double dobPopulation = Math.random()*100;
+        double dobPopulation = Math.random() * 100;
         int population = (int) dobPopulation;
 
         //metersAboveSeaLevel
-        double dobmetersAboveSeaLevel = Math.random()*100;
+        double dobmetersAboveSeaLevel = Math.random() * 100;
         long metersAboveSeaLevel = (int) dobmetersAboveSeaLevel;
 
         //establishmentDate
-        ZonedDateTime establishmentDate =null;
+        ZonedDateTime establishmentDate = null;
 
         //government
-        String government52=getRandomGovernment();
+        String government52 = getRandomGovernment();
         Government government = Government.valueOf(government52);
 
         //standardOfLiving
-        String standardOfLiving1=getRandomStandartsOfLiving();
-        StandardOfLiving standardOfLiving =StandardOfLiving.valueOf(standardOfLiving1);
+        String standardOfLiving1 = getRandomStandartsOfLiving();
+        StandardOfLiving standardOfLiving = StandardOfLiving.valueOf(standardOfLiving1);
 
         //governor
-        double dobGovernor = Math.random()*100;
+        double dobGovernor = Math.random() * 100;
         long age = (int) dobGovernor;
         Human governor = new Human(age);
 
@@ -541,8 +599,64 @@ public class CollectionManager {
     }
 
 
+    /**
+     * Парсит строку из скрипта, где команда add имеет вид:
+     * add name,area,population,coordX,coordY,metersAboveSeaLevel,government,standardOfLiving,governorName
+     */
+    public City parseCityFromScript(String scriptLine) {
+        if (scriptLine.startsWith("add ")) {
+            System.out.println("Неверный формат команды. Ожидается 'add <параметры>'");
+            return null;
+        }
 
+        String paramsStr = scriptLine.substring(0).trim();
+        String[] params = paramsStr.split(",");
 
+        if (params.length < 9) {
+            System.out.println("Недостаточно параметров для команды add.");
+            System.out.println(params.length);
+            return null;
+        }
+
+        try {
+            String name = params[0].trim();
+            double area = Double.parseDouble(params[1].trim());
+            long population = Long.parseLong(params[2].trim());
+
+            long coordX = Long.parseLong(params[3].trim());
+            double coordY = Double.parseDouble(params[4].trim());
+            Coordinates coordinates = new Coordinates(coordX, coordY);
+
+            long metersAboveSeaLevel = Long.parseLong(params[5].trim());
+
+            Government government = Government.valueOf(params[6].trim().toUpperCase());
+            StandardOfLiving standardOfLiving = StandardOfLiving.valueOf(params[7].trim().toUpperCase());
+            Human governor = new Human(Long.parseLong(params[8].trim()));
+
+            ZonedDateTime establishmentDate = null;
+            ZonedDateTime creationDate = ZonedDateTime.now();
+
+            City city = new City(
+                    name,
+                    coordinates,
+                    creationDate,
+                    area,
+                    population,
+                    metersAboveSeaLevel,
+                    establishmentDate,
+                    government,
+                    standardOfLiving,
+                    governor
+            );
+            return city;
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка при преобразовании числовых значений: " + e.getMessage());
+            return null;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при преобразовании перечислений: " + e.getMessage());
+            return null;
+        }
+    }
 
 
 }
