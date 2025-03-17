@@ -6,144 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8964fbc0-4cfd-4255-b9ca-29abfd0e83f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/cities.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/City.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/resources/script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/managers/Invoker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/Invoker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/lab5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-javadoc-plugin-stale-data.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/AddIfMin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/AverageOfMetersAboveSeaLevel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Clear.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Command.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/ExecuteScriptFileName.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Exit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/GroupCountingByArea.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Help.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/PrintUniqueMetersAboveSeaLevel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/RemoveByID.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/RemoveGreater.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/RemoveLower.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Save.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/Show.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/UpdateID.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/AddIfMin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/AverageOfMetersAboveSeaLevel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Clear.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Command.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/ExecuteScriptFileName.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Exit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/GroupCountingByArea.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Help.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/PrintUniqueMetersAboveSeaLevel.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/RemoveByID.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/RemoveGreater.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/RemoveLower.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Save.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/Show.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/class-use/UpdateID.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/commands/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/index-all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/dejavufonts.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/main1/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/main1/class-use/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/main1/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/main1/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/main1/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/CSVManager.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/CollectionManager.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/Invoker.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/class-use/CSVManager.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/class-use/CollectionManager.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/class-use/Invoker.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/managers/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/City.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/Coordinates.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/Government.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/Human.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/StandardOfLiving.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/class-use/City.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/class-use/Coordinates.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/class-use/Government.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/class-use/Human.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/class-use/StandardOfLiving.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/model/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/copy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-BoldOblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-BoldOblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-Oblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans-Oblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSans.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-BoldOblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-BoldOblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-Oblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono-Oblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSansMono.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-BoldItalic.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-BoldItalic.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-Italic.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif-Italic.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/DejaVuLGCSerif.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/fonts/dejavu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/link.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/resource-files/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/script-files/jquery-3.7.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/script-files/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/script-files/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/script-files/search-page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/script-files/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/Element.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/Validatable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/class-use/Element.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/class-use/Validatable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/site/apidocs/utility/package-use.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,16 +51,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>

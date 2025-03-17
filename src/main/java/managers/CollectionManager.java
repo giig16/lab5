@@ -2,6 +2,8 @@ package managers;
 
 import model.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -160,7 +162,7 @@ public class CollectionManager {
     /**Удаляет из коллекции объект по id*/
     public void clearById(String deletedCity){
         if (deletedCity == null||!deletedCity.matches("\\d+")){
-            System.out.println("Ошибка: введите числовой id города аргументом");
+            System.out.println("Ошибка: нужно вводить целочисленный id города аргументом");
             return;
         }try {
         int intDeletedCity = Integer.parseInt(deletedCity);
@@ -181,7 +183,7 @@ public class CollectionManager {
     /**Метод для удаления объекта для его обновления*/
     public void clearForUpdateById(String deletedCity){
         if (deletedCity == null||!deletedCity.matches("\\d+")){
-            System.out.println("Ошибка: введите числовой id города аргументом");
+            System.out.println("Ошибка: нужно вводить целочисленный id города аргументом");
             return;
         }try{
             int intDeletedCity = Integer.parseInt(deletedCity);
@@ -215,15 +217,15 @@ public class CollectionManager {
 
     /**Группировка объектов по площади*/
     public void groupCitiesByArea() {
-        Map<Double, Integer> groupsByArea = new HashMap<>();
+        Map<BigDecimal, Integer> groupsByArea = new HashMap<>();
 
 
         for (City city : cities) {
-            double area = city.getArea();
+            BigDecimal area = BigDecimal.valueOf(city.getArea()).setScale(0, RoundingMode.HALF_UP);
             groupsByArea.put(area, groupsByArea.getOrDefault(area, 0) + 1);
         }
 
-        for (Map.Entry<Double, Integer> group : groupsByArea.entrySet()) {
+        for (Map.Entry<BigDecimal, Integer> group : groupsByArea.entrySet()) {
             System.out.println("Площадь: " + group.getKey() + "\nКоличество городов – " + group.getValue());
         }
     }
