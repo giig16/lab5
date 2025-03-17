@@ -63,6 +63,6 @@ public class UpdateID implements Command{
 
     /**Возвращает описание команды*/
     public String descr() {
-        return "update id {element} – обновить значение элемента коллекции, id которого равен заданному \n";
+        return "update_by_id id {element} – обновить значение элемента коллекции, id которого равен заданному \n";
     }
 }
