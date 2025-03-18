@@ -21,12 +21,10 @@ public class Main {
 
     public static void main(String[] args) {
         String filePath = System.getenv("CSV_PATH");
-        //String filePath = "src/main/resources/cities.csv";
         if (filePath == null || filePath.isEmpty()) {
             System.err.println("Переменная окружения CSV_PATH не установленаe");
             System.exit(1);
         }
-
 
         CSVManager csvManager = new CSVManager(filePath);
         CollectionManager cm = new CollectionManager(csvManager);

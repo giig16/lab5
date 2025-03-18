@@ -6,15 +6,6 @@ import managers.CollectionManager;
 import managers.Invoker;
 import model.*;
 
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-
-
 /**
  * Команда "add", позволяющая добавить новый {@link City} в коллекцию.
  * <p>
@@ -42,9 +33,6 @@ public class Add implements Command {
     public Add(Invoker invoker){
         this.invoker = invoker;
     }
-
-
-
 
     /**
      *  Пустой конструктор

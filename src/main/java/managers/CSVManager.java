@@ -64,7 +64,7 @@ public class CSVManager {
             }
             int currentGlobalId = City.getGlobalIDCounter();
             if(currentGlobalId<=maxId){
-            City.setGlobalIDCounter((int)(maxId+1));
+                City.setGlobalIDCounter((int)(maxId+1));
             }
             return cities;
     }
