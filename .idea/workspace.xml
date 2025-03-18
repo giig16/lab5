@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8964fbc0-4cfd-4255-b9ca-29abfd0e83f8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/managers/CSVManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/CSVManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/managers/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/commands/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/commands/Add.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/managers/CollectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/resources/script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lab5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/lab5.jar" afterDir="false" />
-    </list>
+    <list default="true" id="8964fbc0-4cfd-4255-b9ca-29abfd0e83f8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
