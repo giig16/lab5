@@ -3,6 +3,8 @@ package managers;
 import model.*;
 import org.w3c.dom.ls.LSOutput;
 
+import javax.swing.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -23,9 +25,9 @@ public class CollectionManager {
      */
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
     /**
-     * Менеджер csv
+     * Менеджер файлов
      */
-    private CSVManager csvManager;
+    private FileManager fileManager;
     /**
      * Время инициализации коллекции
      */
@@ -34,8 +36,8 @@ public class CollectionManager {
     /**
      * Конструктор
      */
-    public CollectionManager(CSVManager csvManager) {
-        this.csvManager = csvManager;
+    public CollectionManager(FileManager fileManager) {
+        this.fileManager = fileManager;
         initTime = ZonedDateTime.now();
     }
 
@@ -47,14 +49,15 @@ public class CollectionManager {
     }
 
     /**
-     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в CSV.
+     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в файл.
+     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в файл.
      *
      * @param city объект {@link City} для добавления
      * @return {@code true}, если город был успешно добавлен
      */
     public boolean addToSet(City city) {
         cities.add(city);
-        csvManager.writeInCollection(cities);
+        fileManager.writeInCollection(cities);
         return true;
     }
 

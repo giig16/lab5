@@ -14,7 +14,7 @@ public class Invoker {
     public static HashMap<String, Command> commands = new HashMap<>();
 
     /**Конструктор*/
-    public Invoker(CollectionManager cm, CSVManager csvManager){
+    public Invoker(CollectionManager cm, FileManager fileManager){
         commands.put("help", new Help());
         commands.put("add", new Add(cm,this));
         commands.put("exit", new Exit());
@@ -23,7 +23,7 @@ public class Invoker {
         commands.put("update_by_id", new UpdateID(cm));
         commands.put("remove_by_id", new RemoveByID(cm));
         commands.put("clear", new Clear(cm));
-        commands.put("save", new Save(cm,csvManager));
+        commands.put("save", new Save(cm, fileManager));
         commands.put("execute_script", new ExecuteScriptFileName(this));
         commands.put("add_if_min", new AddIfMin(cm));
         commands.put("remove_greater", new RemoveGreater(cm));

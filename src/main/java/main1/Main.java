@@ -4,6 +4,7 @@ package main1;
 import managers.CSVManager;
 
 import managers.CollectionManager;
+import managers.FileManager;
 import managers.Invoker;
 import model.City;
 import java.util.LinkedHashSet;
@@ -20,18 +21,17 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String filePath = System.getenv("CSV_PATH");
+        String filePath = System.getenv("FILE_PATH");
         if (filePath == null || filePath.isEmpty()) {
-            System.err.println("Переменная окружения CSV_PATH не установленаe");
+            System.err.println("Переменная окружения FILE_PATH не установленаe");
             System.exit(1);
         }
+        FileManager fileManager = new CSVManager(filePath);
+        CollectionManager cm = new CollectionManager(fileManager);
 
-        CSVManager csvManager = new CSVManager(filePath);
-        CollectionManager cm = new CollectionManager(csvManager);
-
-        Invoker invoker = new Invoker(cm, csvManager);
+        Invoker invoker = new Invoker(cm, fileManager);
         Scanner sc = new Scanner(System.in);
-        LinkedHashSet<City> initialSet = csvManager.readCollectionFromFile();
+        LinkedHashSet<City> initialSet = fileManager.readCollectionFromFile();
         cm.setCities(initialSet);
 
         System.out.println("Введите комманду");

@@ -17,12 +17,11 @@ import java.util.List;
  *     <li>Записывать коллекцию в файл ({@link #writeInCollection(LinkedHashSet)})</li>
  * </ul>
  */
-public class CSVManager {
-    /**Путь до файла*/
-    private String filePath;
+public class CSVManager extends FileManager {
     /**Конструктор*/
     public CSVManager(String filePath){
-        this.filePath = filePath;
+        super(filePath);
+
     }
     /**Метод записи в коллекцию информации из файла*/
     public LinkedHashSet<City> readCollectionFromFile(){

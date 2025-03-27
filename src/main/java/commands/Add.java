@@ -3,6 +3,7 @@ package commands;
 
 import managers.CSVManager;
 import managers.CollectionManager;
+import managers.FileManager;
 import managers.Invoker;
 import model.*;
 
@@ -17,7 +18,7 @@ public class Add implements Command {
     /**Менеджер коллкции*/
     private CollectionManager collectionManager;
     /**csv менеджер*/
-    private CSVManager csvManager;
+    private FileManager fileManager;
     /**Конструктор*/
     public Add(CollectionManager collectionManager, Invoker invoker) {
         this.collectionManager = collectionManager;

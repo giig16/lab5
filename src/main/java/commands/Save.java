@@ -2,6 +2,8 @@ package commands;
 
 import managers.CSVManager;
 import managers.CollectionManager;
+import managers.FileManager;
+
 /**
  * Команда save, сохраняющая текущее состояние коллекции в CSV-файл
  */
@@ -9,17 +11,17 @@ public class Save implements Command {
     /**Менеджер коллекции*/
     private CollectionManager collectionManager;
     /**Менеджер csv*/
-    private CSVManager csvManager;
+    private FileManager fileManager;
     /**Конструктор*/
-    public Save(CollectionManager collectionManager,CSVManager csvManager){
+    public Save(CollectionManager collectionManager,FileManager fileManager){
         this.collectionManager = collectionManager;
-        this.csvManager = csvManager;
+        this.fileManager = fileManager;
     }
     /**Пустой конструктор*/
     public Save(){}
     /**Метод выполнения*/
     public void execute(String argument) {
-        csvManager.writeInCollection(collectionManager.getCities());
+        fileManager.writeInCollection(collectionManager.getCities());
         System.out.println("Коллекция сохранена в файл");
     }
     /**Описание*/
