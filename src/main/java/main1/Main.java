@@ -22,6 +22,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        DbFunctions db=new DbFunctions();
+        db.connect_to_db("lab5","postgres","12345");
         String filePath = System.getenv("FILE_PATH");
         if (filePath == null || filePath.isEmpty()) {
             System.err.println("Переменная окружения FILE_PATH не установленаe");
@@ -42,7 +44,6 @@ public class Main {
             invoker.processRunner(input);
             System.out.println("Введите следующую команду");
         }
-        DbFunctions db=new DbFunctions();
-        db.connect_to_db("lab5","postgres","12345");
+
     }
 }
