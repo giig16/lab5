@@ -1,6 +1,7 @@
 package main1;
 
 
+import db.DbFunctions;
 import managers.CSVManager;
 
 import managers.CollectionManager;
@@ -41,5 +42,7 @@ public class Main {
             invoker.processRunner(input);
             System.out.println("Введите следующую команду");
         }
+        DbFunctions db=new DbFunctions();
+        db.connect_to_db("lab5","postgres","12345");
     }
 }
