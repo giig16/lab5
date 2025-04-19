@@ -8,6 +8,8 @@ import managers.CollectionManager;
 import managers.FileManager;
 import managers.Invoker;
 import model.City;
+
+import java.sql.Connection;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 /**
@@ -23,7 +25,22 @@ public class Main {
 
     public static void main(String[] args) {
         DbFunctions db=new DbFunctions();
-        db.connect_to_db("lab5","postgres","12345");
+        Connection conn=db.connect_to_db("lab5","postgres","12345");
+       /* db.createTable(conn,"employee");
+        db.insertRow(conn, "employee","rostik","Novosibirsk");
+        db.insertRow(conn, "employee","kirilldauun","Novosibirsk");
+        db.readData(conn,"employee");
+        //db.updateName(conn,"employee","rostik","leha");
+        //db.readData(conn,"employee");
+        //db.searchByName(conn,"employee","tima");
+        //db.searchById(conn,"employee",2);
+        //db.deleteRowByName(conn,"employee","leha");
+        //db.deleteRowByName(conn,"employee","kirilldauun");
+        //db.deleteRowById(conn,"employee",5);
+        db.deleteRowById(conn,"employee",14);
+        db.readData(conn,"employee");
+        db.deleteTable(conn,"employee");
+*/
         String filePath = System.getenv("FILE_PATH");
         if (filePath == null || filePath.isEmpty()) {
             System.err.println("Переменная окружения FILE_PATH не установленаe");
