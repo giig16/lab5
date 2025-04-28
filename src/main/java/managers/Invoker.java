@@ -1,75 +1,46 @@
 package managers;
 
-import commands.Add;
 import commands.*;
 import java.util.HashMap;
 import java.util.Scanner;
-/**
- * Класс, отвечающий за хранение и вызов команд по их названиям.
- * <p>
- * Содержит {@code HashMap} строковых ключей (названий команд) и соответствующих объектов
- */
-public class Invoker {
-    /**Мапа команд*/
-    public static HashMap<String, Command> commands = new HashMap<>();
 
-    /**Конструктор*/
-    public Invoker(CollectionManager cm, FileManager fileManager){
+public class Invoker {
+    private HashMap<String, Command> commands = new HashMap<>();
+    private Scanner sc = new Scanner(System.in);
+
+    private boolean isScriptExist = false;
+
+    public Invoker(CollectionManager cm, FileManager fileManager, DBManager dbManager) {
         commands.put("help", new Help());
-        commands.put("add", new Add(cm,this));
+        commands.put("add", new Add(cm, this));
         commands.put("exit", new Exit());
         commands.put("show", new Show(cm));
         commands.put("info", new Info(cm));
-        commands.put("update_by_id", new UpdateID(cm));
-        commands.put("remove_by_id", new RemoveByID(cm));
-        commands.put("clear", new Clear(cm));
-        commands.put("save", new Save(cm, fileManager));
+        commands.put("update_by_id", new UpdateID(cm, dbManager));
+        commands.put("remove_by_id", new RemoveByID(cm, dbManager));
+        commands.put("clear", new Clear(cm, dbManager));
+        commands.put("save", new Save(cm, fileManager)); // файл — если сохраняешь в CSV
         commands.put("execute_script", new ExecuteScriptFileName(this));
-        commands.put("add_if_min", new AddIfMin(cm));
-        commands.put("remove_greater", new RemoveGreater(cm));
-        commands.put("remove_lower", new RemoveLower(cm));
+        commands.put("add_if_min", new AddIfMin(cm, dbManager));
+        commands.put("remove_greater", new RemoveGreater(cm, dbManager));
+        commands.put("remove_lower", new RemoveLower(cm, dbManager));
         commands.put("average_of_meters_above_sea_level", new AverageOfMetersAboveSeaLevel(cm));
         commands.put("group_counting_by_area", new GroupCountingByArea(cm));
         commands.put("print_unique_meters_above_sea_level", new PrintUniqueMetersAboveSeaLevel(cm));
     }
-    /**Сканнер*/
-    Scanner sc = new Scanner(System.in);
-    public void scanNext() {
-        String line;
-        while(sc.hasNextLine()){
-            line = sc.nextLine();
-            String[] tokens = line.split("\\s+");
-        }
-    }
 
 
 
-
-    /**Поле булеан, для понимания используется команда через скрипт или нет*/
-    private boolean isScriptExist = false;
-
-    /**Геттер использования скрипта*/
-    public boolean getScript(){
+    public boolean getScript() {
         return isScriptExist;
     }
-    /**Сеттер использования скрипта*/
-    public void setScriptExistion(boolean isScriptExist){
-        this.isScriptExist=isScriptExist;
+
+    public void setScriptExistion(boolean isScriptExist) {
+        this.isScriptExist = isScriptExist;
     }
 
-
-    /**
-     * Основной метод, который разбирает строку на название команды и аргумент,
-     * а затем вызывает соответствующую команду из {@link #commands}.
-     * <p>
-     * Формат строки: {@code "<commandName> <argument>"} (аргумент опционален).
-     * Если команда найдена, вызывается {@code command.execute(argument)},
-     * в противном случае выводится сообщение об ошибке
-     *
-     * @param input строка, введённая пользователем
-     */
-    public void processRunner(String input){
-        String[] parts = input.split(" ", 2);
+    public void processRunner(String input) {
+        String[] parts = input.trim().split(" ", 2);
         String commandName = parts[0];
         String argument = parts.length > 1 ? parts[1] : null;
 
@@ -81,13 +52,4 @@ public class Invoker {
             System.out.println("Ошибка: неизвестная команда '" + commandName + "'.");
         }
     }
-
-
-
 }
-
-
-
-
-
-

@@ -1,10 +1,8 @@
 package managers;
 
 import model.*;
-import org.w3c.dom.ls.LSOutput;
 
-import javax.swing.*;
-import java.io.File;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -12,132 +10,80 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-
 /**
  * Класс, управляющий коллекцией объектов {@link City}.
- * <p>
- * Хранит {@code LinkedHashSet<City>} и обеспечивает операции добавления,
- * удаления и поиска городов. Также ведёт учёт времени инициализации.
  */
 public class CollectionManager {
-    /**
-     * Основная коллекция, содержащая объекты {@link City}.
-     */
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
-    /**
-     * Менеджер файлов
-     */
-    private FileManager fileManager;
-    /**
-     * Время инициализации коллекции
-     */
     private final ZonedDateTime initTime;
+    private DBManager dbManager;
+    public String currentUser;
 
-    /**
-     * Конструктор
-     */
-    public CollectionManager(FileManager fileManager) {
-        this.fileManager = fileManager;
-        initTime = ZonedDateTime.now();
+    public CollectionManager(DBManager dbManager) {
+        this.dbManager = dbManager;
+        this.initTime = ZonedDateTime.now();
+        loadCollection();
     }
 
-    /**
-     * Геттер для времени инициализации
-     */
+    private void loadCollection() {
+        cities = dbManager.loadAllCities();
+        System.out.println("Коллекция успешно загружена из базы данных.");
+    }
+
+    public void loadCollectionFromDatabase() {
+        try {
+            cities = dbManager.loadAllCities();
+            System.out.println("Коллекция успешно загружена из базы данных. Загружено " + cities.size() + " городов.");
+        } catch (Exception e) {
+            System.out.println("Ошибка загрузки коллекции: " + e.getMessage());
+        }
+    }
+
+    public void setCurrentUser(String username) {
+        this.currentUser = username;
+    }
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+
     public ZonedDateTime getInitTime() {
         return initTime;
     }
 
-    /**
-     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в файл.
-     * Добавляет объект {@link City} в коллекцию и сразу сохраняет изменения в файл.
-     *
-     * @param city объект {@link City} для добавления
-     * @return {@code true}, если город был успешно добавлен
-     */
-    public boolean addToSet(City city) {
-        cities.add(city);
-        fileManager.writeInCollection(cities);
-        return true;
-    }
-
-    /**
-     * Геттер для коллекции
-     */
     public LinkedHashSet<City> getCities() {
         return cities;
     }
 
-    /**
-     * Метод, печатающий коллекцию
-     */
-    public void printCities() {
-        for (City c : cities) {
-            System.out.println(c.toString());
+    public boolean addToSet(City city) {
+        try {
+            int newId = dbManager.add(city);
+            city.setId(newId);
+            cities.add(city);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Ошибка добавления города: " + e.getMessage());
+            return false;
         }
     }
 
-    /**
-     * Сеттер для коллекции
-     */
-    public void setCities(LinkedHashSet<City> cities) {
-        this.cities = cities;
+    public void printCities() {
+        for (City city : cities) {
+            System.out.println(city);
+        }
     }
 
-    /**
-     * Возвращает размер коллекции
-     */
     public int isEmpty() {
         return cities.size();
     }
 
-    /**
-     * Очищает коллекцию
-     */
     public void clearCollection() {
+        dbManager.clear();
         cities.clear();
+        System.out.println("Коллекция успешно очищена.");
     }
 
-
-    /**
-     * Очищает все элементы коллекции, которые круче чем переданный в параметры
-     */
-    public void clearCollectionGreater(String refCity) {
-        City city = findCityByName(refCity);
-
-
-        if (city == null) {
-            System.out.println("Ошибка: Город с названием '" + refCity + "' не найден.");
-            return;
-        }
-
-        Iterator<City> iterator = cities.iterator();
-        boolean exist = false;
-
-        List<String> delitedCities = new ArrayList<>();
-
-        while (iterator.hasNext()) {
-            City nextCity = iterator.next();
-            if (nextCity.compareTo(city) > 0) {
-                iterator.remove();
-                delitedCities.add(nextCity.getName());
-                exist = true;
-                System.out.println("Удалены все города превышающие " + city.getName());
-            }
-        }
-        if (!exist) {
-            System.out.println("Нет городов превышающих " + city.getName());
-        } else {
-            System.out.println("(Вот эти  – " + String.join(", ", delitedCities) + ")");
-        }
-
-
-    }
-
-    /**
-     * Влзвращает city по имени
-     */
-    private City findCityByName(String name) {
+    public City findCityByName(String name) {
         for (City city : cities) {
             if (city.getName().equalsIgnoreCase(name)) {
                 return city;
@@ -146,362 +92,199 @@ public class CollectionManager {
         return null;
     }
 
-    /**
-     * Возвращает city по id
-     */
-    private City findCityById(int id) {
+    public City findCityById(int id) {
         for (City city : cities) {
-            if (city.getId().equals(id)) {
+            if (city.getId() == id) {
                 return city;
             }
         }
         return null;
     }
 
+    public void clearCollectionGreater(String refCity) {
+        City city = findCityByName(refCity);
+        if (city == null) {
+            System.out.println("Город с таким названием не найден.");
+            return;
+        }
+        List<Integer> idsToDelete = new ArrayList<>();
+        for (City c : cities) {
+            if (c.compareTo(city) > 0) {
+                idsToDelete.add(c.getId());
+            }
+        }
+        for (Integer id : idsToDelete) {
+            dbManager.removeById(id);
+        }
+        cities.removeIf(c -> idsToDelete.contains(c.getId()));
+    }
 
-    /**
-     * Очищает все элементы коллекции, которые [e;t чем переданный в параметры
-     */
     public void clearCollectionLower(String refCity) {
         City city = findCityByName(refCity);
-
-
         if (city == null) {
-            System.out.println("Ошибка: Город с названием '" + refCity + "' не найден.");
+            System.out.println("Город с таким названием не найден.");
             return;
         }
-
-        Iterator<City> iterator = cities.iterator();
-        boolean exist = false;
-
-        List<String> delitedCities = new ArrayList<>();
-
-        while (iterator.hasNext()) {
-            City nextCity = iterator.next();
-            if (nextCity.compareTo(city) < 0) {
-                iterator.remove();
-                delitedCities.add(nextCity.getName());
-                exist = true;
-                System.out.println("Удалены все города меньшие чем " + city.getName());
+        List<Integer> idsToDelete = new ArrayList<>();
+        for (City c : cities) {
+            if (c.compareTo(city) < 0) {
+                idsToDelete.add(c.getId());
             }
         }
-        if (!exist) {
-            System.out.println("Нет городов меньше чем " + city.getName());
-        } else {
-            System.out.println("(Вот эти  – " + String.join(", ", delitedCities) + ")");
+        for (Integer id : idsToDelete) {
+            dbManager.removeById(id);
         }
+        cities.removeIf(c -> idsToDelete.contains(c.getId()));
     }
 
-    /**
-     * Удаляет из коллекции объект по id
-     */
-    public void clearById(String deletedCity) {
-        if (deletedCity == null || !deletedCity.matches("\\d+")) {
-            System.out.println("Ошибка: введите числовой id города аргументом");
+    public void clearById(String idStr) {
+        if (idStr == null || !idStr.matches("\\d+")) {
+            System.out.println("Введите корректный id города");
             return;
         }
-        try {
-            int intDeletedCity = Integer.parseInt(deletedCity);
-            City city = findCityById(intDeletedCity);
-
-            if (city == null) {
-                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден.");
-                return;
-            }
-            cities.remove(city);
-            System.out.println("Удален город - " + deletedCity);
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка: некорректный формат id");
-        }
-
-
+        int id = Integer.parseInt(idStr);
+        dbManager.removeById(id);
+        cities.removeIf(c -> c.getId() == id);
+        System.out.println("Город с id " + id + " удалён.");
     }
 
-    /**
-     * Метод для удаления объекта для его обновления
-     */
-    public void clearForUpdateById(String deletedCity) {
-        if (deletedCity == null || !deletedCity.matches("\\d+")) {
-            System.out.println("Ошибка: введите числовой id города аргументом");
-            return;
+    public boolean clearForUpdateById(String idStr) {
+        if (idStr == null || !idStr.matches("\\d+")) {
+            System.out.println("Введите корректный id города");
+            return false;
         }
-        try {
-            int intDeletedCity = Integer.parseInt(deletedCity);
-            City city = findCityById(intDeletedCity);
-
-            if (city == null) {
-                System.out.println("Ошибка: Город с id '" + deletedCity + "' не найден. Создайте новый город...");
-                return;
-            }
-            cities.remove(city);
-            System.out.println("Можете обновить город '" + deletedCity + "'");
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка: некорректный формат id.");
+        int id = Integer.parseInt(idStr);
+        City city = findCityById(id);
+        if (city == null) {
+            System.out.println("Город с id " + id + " не найден.");
+            return false;
         }
+        cities.remove(city);
+        return true;
     }
 
-
-    /**
-     * Метод сравнения
-     */
     public boolean toCompare(City refCity) {
-        boolean smallerExist = false;
-        for (City city : cities) {
-            if (refCity.compareTo(city) < 0) {
-                smallerExist = true;
-            }
-        }
-        return smallerExist;
+        return cities.stream().anyMatch(c -> refCity.compareTo(c) < 0);
     }
 
-    /**
-     * Группировка объектов по площади
-     */
     public void groupCitiesByArea() {
-        Map<Double, Integer> groupsByArea = new HashMap<>();
-
-
+        Map<Double, Integer> groups = new HashMap<>();
         for (City city : cities) {
-            double area = city.getArea();
-            groupsByArea.put(area, groupsByArea.getOrDefault(area, 0) + 1);
+            groups.put(city.getArea(), groups.getOrDefault(city.getArea(), 0) + 1);
         }
-
-        for (Map.Entry<Double, Integer> group : groupsByArea.entrySet()) {
-            System.out.println("Площадь: " + group.getKey() + "\nКоличество городов – " + group.getValue());
-        }
+        groups.forEach((area, count) -> System.out.println("Площадь: " + area + ", количество городов: " + count));
     }
 
-    /**
-     * Геттер для уникальной абсолютной высоты
-     */
     public void getUniqueMetersAboveSeaLevel() {
-
-        /*Set<Long> uniqueMeters = new HashSet<>();
-
-        for (City city : cities) {
-            uniqueMeters.add(city.getMetersAboveSeaLevel()); // Добавляем высоту в Set
-        }
-
-        System.out.println("Уникальные значения metersAboveSeaLevel:");
-        for (Long height : uniqueMeters) {
-            System.out.println(height);
-        }*/
-
-
         cities.stream()
                 .map(City::getMetersAboveSeaLevel)
                 .distinct()
                 .forEach(System.out::println);
-
     }
 
-    /**
-     * Возвращает среднее значение абсолютной высоты
-     */
     public void getAverageMetersSeaLvl() {
         double average = cities.stream()
                 .mapToLong(City::getMetersAboveSeaLevel)
                 .average()
                 .orElse(0);
         System.out.println(average);
-
     }
 
-    /**
-     * Метод создания города
-     */
+
+
+    public City createRandomCity() {
+        String name = generateRandomName();
+        Coordinates coordinates = new Coordinates((long) (Math.random() * 100), Math.random() * 100);
+        ZonedDateTime creationDate = ZonedDateTime.now();
+        double area = Math.random() * 1000 + 1;
+        long population = (long) (Math.random() * 10000 + 1);
+        long metersAboveSeaLevel = (long) (Math.random() * 500);
+        ZonedDateTime establishmentDate = null;
+        Government government = Government.valueOf(getRandomGovernment());
+        StandardOfLiving sol = StandardOfLiving.valueOf(getRandomStandardOfLiving());
+        Human governor = new Human((long) (Math.random() * 100 + 1));
+
+        return new City(name, coordinates, creationDate, area, population, metersAboveSeaLevel, establishmentDate, government, sol, governor, currentUser);
+    }
+
     public City createCity() {
         Scanner scanner = new Scanner(System.in);
-        // name
-        System.out.println("Введите название города...");
+
+        System.out.println("Введите название города:");
         String name = scanner.nextLine().trim();
         while (name.isEmpty()) {
-            System.out.println("Название не может быть пустым.\nВведите название города...");
+            System.out.println("Название не может быть пустым:");
             name = scanner.nextLine().trim();
         }
 
-        // coordinates
-        System.out.println("Введите координату x (целое число):");
-        long x;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: x не может быть пустым. Повторите ввод:");
-                continue;
-            }
-            try {
-                x = Long.parseLong(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: x должна быть целым числом. Повторите ввод:");
-            }
-        }
+        long x = askLong(scanner, "Введите координату x:");
+        double y = askDouble(scanner, "Введите координату y:");
+        double area = askDouble(scanner, "Введите площадь:");
+        long population = askLong(scanner, "Введите население:");
+        long metersAboveSeaLevel = askLong(scanner, "Введите высоту над уровнем моря:");
 
-        System.out.println("Введите координату y (вещественное число):");
-        double y;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: y не может быть пустым. Повторите ввод:");
-                continue;
-            }
-            try {
-                y = Double.parseDouble(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: y должна быть вещественным числом. Повторите ввод:");
-            }
-        }
-        Coordinates coordinates = new Coordinates(x, y);
-
-        //creationDate
-        ZonedDateTime creationDate = ZonedDateTime.now();
-
-        // area
-        System.out.println("Введите площадь города (вещественное число):");
-        Double area = null;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: Площадь не может быть пустой. Повторите ввод:");
-                continue;
-            }
-            try {
-                area = Double.parseDouble(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: Площадь должна быть числом. Повторите ввод:");
-            }
-        }
-
-        // population
-        System.out.println("Введите численность населения (целое число):");
-        long population;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: Численность населения не может быть пустой. Повторите ввод:");
-                continue;
-            }
-            try {
-                population = Long.parseLong(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: Введите корректное целое число.");
-            }
-        }
-
-        // metersAboveSeaLevel
-        System.out.println("Введите абсолютную высоту города (целое число):");
-        long metersAboveSeaLevel;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: Значение не может быть пустым. Повторите ввод:");
-                continue;
-            }
-            try {
-                metersAboveSeaLevel = Long.parseLong(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: Введите корректное число.");
-            }
-        }
-
-        // establishmentDate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ZonedDateTime establishmentDate = null;
-        System.out.println("Введите дату основания города в формате yyyy-MM-dd HH:mm или оставьте пустым:");
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                break;
-            }
+        System.out.println("Введите дату основания (yyyy-MM-dd HH:mm) или оставьте пустым:");
+        String estInput = scanner.nextLine().trim();
+        if (!estInput.isEmpty()) {
             try {
-                LocalDateTime lDT = LocalDateTime.parse(input, formatter);
-                establishmentDate = lDT.atZone(ZoneId.systemDefault());
-                break;
+                establishmentDate = LocalDateTime.parse(estInput, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).atZone(ZoneId.systemDefault());
             } catch (DateTimeParseException e) {
-                System.out.println("Ошибка: формат ввода неверен. Формат: yyyy-MM-dd HH:mm или пустая строка.");
+                System.out.println("Неверный формат даты. Дата основания будет пропущена.");
             }
         }
 
-        // Government
-        Government government = null;
-        while (government == null) {
-            System.out.println("Введите форму правления (ARISTOCRACY, STRATOCRACY, TELLUROCRACY): ");
-            String input = scanner.nextLine().trim().toUpperCase();
-            try {
-                government = Government.valueOf(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ошибка: нет такого варианта. Повторите ввод.\n");
-            }
-        }
+        Government government = askEnum(scanner, Government.class, "Введите форму правления (ARISTOCRACY, STRATOCRACY, TELLUROCRACY):");
+        StandardOfLiving sol = askEnum(scanner, StandardOfLiving.class, "Введите уровень жизни (VERY_HIGH, HIGH, NIGHTMARE):");
+        long governorAge = askLong(scanner, "Введите возраст губернатора:");
+        Human governor = new Human(governorAge);
 
-        // StandardOfLiving
-        StandardOfLiving standardOfLiving = null;
-        while (standardOfLiving == null) {
-            System.out.println("Введите уровень жизни (VERY_HIGH, HIGH, NIGHTMARE):");
-            String input = scanner.nextLine().trim().toUpperCase();
-            try {
-                standardOfLiving = StandardOfLiving.valueOf(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ошибка: нет такого варианта. Повторите ввод.\n");
-            }
-        }
-
-
-        // Governor
-        System.out.println("Введите возраст губернатора (целое число):");
-        Long age = null;
-        while (true) {
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ошибка: возраст не может быть пустым. Повторите ввод:");
-                continue;
-            }
-            try {
-                age = Long.parseLong(input);
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введите корректное число.");
-
-            }
-        }
-        Human governor = new Human(age);
-
-        //  City
-        City city = new City(
-                name,
-                coordinates,
-                creationDate,
-                area,
-                population,
-                metersAboveSeaLevel,
-                establishmentDate,
-                government,
-                standardOfLiving,
-                governor
-        );
-
-
-        return city;
+        Coordinates coordinates = new Coordinates(x, y);
+        return new City(name, coordinates, ZonedDateTime.now(), area, population, metersAboveSeaLevel, establishmentDate, government, sol, governor, currentUser);
     }
 
-    /**Вспомогательные массивы и методы
-     для метода который делает рандомный город с рандомными параметрами
-     и сам метод*/
+    public City parseCityFromScript(String scriptLine) {
+        String[] params = scriptLine.trim().split(",");
+        if (params.length < 9) {
+            System.out.println("Недостаточно параметров для создания города.");
+            return null;
+        }
+        try {
+            String name = params[0].trim();
+            double area = Double.parseDouble(params[1].trim());
+            long population = Long.parseLong(params[2].trim());
+            long coordX = Long.parseLong(params[3].trim());
+            double coordY = Double.parseDouble(params[4].trim());
+            long metersAboveSeaLevel = Long.parseLong(params[5].trim());
+            Government government = Government.valueOf(params[6].trim().toUpperCase());
+            StandardOfLiving sol = StandardOfLiving.valueOf(params[7].trim().toUpperCase());
+            long governorAge = Long.parseLong(params[8].trim());
 
-    /**
-     * LETTER для работы метода, который генерирует рандомное имя
-     */
+            return new City(
+                    name,
+                    new Coordinates(coordX, coordY),
+                    ZonedDateTime.now(),
+                    area,
+                    population,
+                    metersAboveSeaLevel,
+                    null,
+                    government,
+                    sol,
+                    new Human(governorAge),
+                    currentUser
+            );
+        } catch (Exception e) {
+            System.out.println("Ошибка при разборе города из скрипта: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random RANDOM = new Random();
 
-    /**
-     * Метод, который генерирует рандомное имя
-     */
-    public static String generateRandomName() {
+    private static String generateRandomName() {
         StringBuilder name = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             name.append(LETTERS.charAt(RANDOM.nextInt(LETTERS.length())));
@@ -509,160 +292,46 @@ public class CollectionManager {
         return name.toString();
     }
 
-    /**
-     * Массив с типами правления, для метода, который выбирает рандомный тип правления
-     */
-    private static final String[] government = {
-            "ARISTOCRACY", "STRATOCRACY", "TELLUROCRACY"
-    };
-
-    /**
-     * Метод, который выбирает рандомный тип правления
-     */
-    public static String getRandomGovernment() {
-        Random random = new Random();
-        return government[random.nextInt(government.length)];
+    private static String getRandomGovernment() {
+        String[] gov = {"ARISTOCRACY", "STRATOCRACY", "TELLUROCRACY"};
+        return gov[RANDOM.nextInt(gov.length)];
     }
 
-    /**
-     * Массив с типами жизни населения, для метода, который выбирает рандомный тип жизни населения
-     */
-    private static final String[] standardOfLiving = {
-            "VERY_HIGH", "HIGH", "NIGHTMARE"
-    };
-
-    /**
-     * Метод, который выбирает рандомный тип жизни населения
-     */
-    public static String getRandomStandartsOfLiving() {
-        Random random = new Random();
-        return standardOfLiving[random.nextInt(standardOfLiving.length)];
+    private static String getRandomStandardOfLiving() {
+        String[] sol = {"VERY_HIGH", "HIGH", "NIGHTMARE"};
+        return sol[RANDOM.nextInt(sol.length)];
     }
 
-
-    /**
-     * Метод, который создает город с рандомными параметрами
-     */
-    public City createRandomCity() {
-
-        //name
-        String name = generateRandomName();
-
-        //coordinates
-        double dobX = Math.random() * 18;
-        double dobY = Math.random() * 18;
-        int x = (int) dobX;
-        int y = (int) dobY;
-        Coordinates coordinates = new Coordinates(x, y);
-
-        //creationDate
-        ZonedDateTime creationDate = ZonedDateTime.now();
-
-        //area
-        double area = Math.random() * 100;
-
-        //population
-        double dobPopulation = Math.random() * 100;
-        int population = (int) dobPopulation;
-
-        //metersAboveSeaLevel
-        double dobmetersAboveSeaLevel = Math.random() * 100;
-        long metersAboveSeaLevel = (int) dobmetersAboveSeaLevel;
-
-        //establishmentDate
-        ZonedDateTime establishmentDate = null;
-
-        //government
-        String government52 = getRandomGovernment();
-        Government government = Government.valueOf(government52);
-
-        //standardOfLiving
-        String standardOfLiving1 = getRandomStandartsOfLiving();
-        StandardOfLiving standardOfLiving = StandardOfLiving.valueOf(standardOfLiving1);
-
-        //governor
-        double dobGovernor = Math.random() * 100;
-        long age = (int) dobGovernor;
-        Human governor = new Human(age);
-
-        //Createcity
-        City city = new City(
-                name,
-                coordinates,
-                creationDate,
-                area,
-                population,
-                metersAboveSeaLevel,
-                establishmentDate,
-                government,
-                standardOfLiving,
-                governor
-        );
-        return city;
-    }
-
-
-    /**
-     * Парсит строку из скрипта, где команда add имеет вид:
-     * add name,area,population,coordX,coordY,metersAboveSeaLevel,government,standardOfLiving,governorName
-     */
-    public City parseCityFromScript(String scriptLine) {
-        if (scriptLine.startsWith("add ")) {
-            System.out.println("Неверный формат команды. Ожидается 'add <параметры>'");
-            return null;
-        }
-
-        String paramsStr = scriptLine.substring(0).trim();
-        String[] params = paramsStr.split(",");
-
-        if (params.length < 9) {
-            System.out.println("Недостаточно параметров для команды add.");
-            System.out.println(params.length);
-            return null;
-        }
-
-        try {
-            String name = params[0].trim();
-            double area = Double.parseDouble(params[1].trim());
-            long population = Long.parseLong(params[2].trim());
-
-            long coordX = Long.parseLong(params[3].trim());
-            double coordY = Double.parseDouble(params[4].trim());
-            Coordinates coordinates = new Coordinates(coordX, coordY);
-
-            long metersAboveSeaLevel = Long.parseLong(params[5].trim());
-
-            Government government = Government.valueOf(params[6].trim().toUpperCase());
-            StandardOfLiving standardOfLiving = StandardOfLiving.valueOf(params[7].trim().toUpperCase());
-            Human governor = new Human(Long.parseLong(params[8].trim()));
-
-            ZonedDateTime establishmentDate = null;
-            ZonedDateTime creationDate = ZonedDateTime.now();
-
-            City city = new City(
-                    name,
-                    coordinates,
-                    creationDate,
-                    area,
-                    population,
-                    metersAboveSeaLevel,
-                    establishmentDate,
-                    government,
-                    standardOfLiving,
-                    governor
-            );
-            return city;
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка при преобразовании числовых значений: " + e.getMessage());
-            return null;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при преобразовании перечислений: " + e.getMessage());
-            return null;
+    private static long askLong(Scanner scanner, String prompt) {
+        System.out.println(prompt);
+        while (true) {
+            try {
+                return Long.parseLong(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Введите целое число.");
+            }
         }
     }
 
+    private static double askDouble(Scanner scanner, String prompt) {
+        System.out.println(prompt);
+        while (true) {
+            try {
+                return Double.parseDouble(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Введите число с точкой.");
+            }
+        }
+    }
 
+    private static <T extends Enum<T>> T askEnum(Scanner scanner, Class<T> enumClass, String prompt) {
+        System.out.println(prompt);
+        while (true) {
+            try {
+                return Enum.valueOf(enumClass, scanner.nextLine().trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Неверное значение. Повторите:");
+            }
+        }
+    }
 }
-
-
-

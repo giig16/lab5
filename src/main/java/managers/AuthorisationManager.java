@@ -1,16 +1,17 @@
 package managers;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import static managers.DBManager.getConnection;
+
 public class AuthorisationManager {
-
-    public boolean authorize() {
-        Scanner scanner = new Scanner(System.in);
-
+    public boolean authorize(Scanner scanner) {
         System.out.println("У вас уже есть аккаунт? (да/нет)");
         String answer = scanner.nextLine().trim().toLowerCase();
 
@@ -25,6 +26,16 @@ public class AuthorisationManager {
         }
     }
 
+    private String login1=null;
+
+    public String getLogin(){
+        return login1;
+    }
+
+    public void printLogin(AuthorisationManager authorisationManager){
+        System.out.println(authorisationManager.getLogin());
+    }
+
     private boolean login(Scanner scanner) {
         System.out.println("Введите логин:");
         String login = scanner.nextLine();
@@ -34,15 +45,16 @@ public class AuthorisationManager {
 
         String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 
-        try (Connection conn = DBManager.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, login);
-            pstmt.setString(2, password);
+            pstmt.setString(2, hashPassword(password));
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Авторизация успешна! Добро пожаловать, " + login + "!");
+                login1 = login;
                 return true;
             } else {
                 System.out.println("Неверный логин или пароль. Доступ запрещён.");
@@ -65,11 +77,12 @@ public class AuthorisationManager {
 
         String sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
 
-        try (Connection conn = DBManager.getConnection();
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, newLogin);
-            pstmt.setString(2, newPassword);
+            pstmt.setString(2, hashPassword(newPassword));
+
             pstmt.executeUpdate();
             System.out.println("Регистрация успешна! Теперь войдите под своим логином.");
 
@@ -82,14 +95,33 @@ public class AuthorisationManager {
             }
         }
     }
-    public void isAuthorised(){
+
+
+
+    public void isAuthorised(Scanner scanner) {
         while (true) {
-            if (authorize()) {
+            if (authorize(scanner)) {
                 System.out.println("Теперь можно работать с коллекцией!");
                 break; // Выход из цикла после успешной авторизации
             } else {
                 System.out.println("Попробуйте еще раз");
             }
+        }
+    }
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            byte[] hashBytes = md.digest(password.getBytes());
+
+            // Переводим байты в строку шестнадцатеричного формата
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-1 algorithm not found", e);
         }
     }
 }

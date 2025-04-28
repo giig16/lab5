@@ -1,7 +1,5 @@
 package model;
 
-
-
 import utility.Element;
 import utility.Validatable;
 
@@ -10,50 +8,31 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Класс, представляющий город.
- * Хранит информацию о названии, координатах, населении и т.д.
  */
-public class City extends Element implements Comparable<City>,Validatable {
-    /**Счётчик id*/
+public class City extends Element implements Comparable<City>, Validatable {
     private static int globalIDCounter = 1;
-    /**id*/
-    private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    /**Имя*/
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    /**Координаты*/
-    private Coordinates coordinates; //Поле не может быть null
-    /**Дата создания объекта*/
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    /**Площадь города*/
-    private Double area; //Значение поля должно быть больше 0, Поле не может быть null
-    /**Численность населения*/
-    private long population; //Значение поля должно быть больше 0
-    /**Абсолютная высота*/
+
+    private Integer id;
+    private String name;
+    private Coordinates coordinates;
+    private ZonedDateTime creationDate;
+    private Double area;
+    private long population;
     private Long metersAboveSeaLevel;
-    /**Дата основания города*/
-    private java.time.ZonedDateTime establishmentDate;
-    /**Форма правления*/
-    private Government government; //Поле не может быть null
-    /**Уровень жизни*/
-    private StandardOfLiving standardOfLiving; //Поле не может быть null
-    /**Губернатор*/
-    private Human governor; //Поле не может быть null
+    private ZonedDateTime establishmentDate;
+    private Government government;
+    private StandardOfLiving standardOfLiving;
+    private Human governor;
+    private String owner; // ➔ новое поле: владелец города (пользователь)
+
+    // --- Конструкторы ---
 
     /**
-     * Основной конструктор, создающий {@code City} со всеми необходимыми полями.
-     * Значение поля {@code id} генерируется автоматически на основе {@link #globalIDCounter}.
-     *
-     * @param name               Название города (не может быть {@code null} или пустым).
-     * @param coordinates        Координаты города (не могут быть {@code null}).
-     * @param creationDate       Дата и время создания (не может быть {@code null}).
-     * @param area               Площадь города (не может быть {@code null} и должна быть больше 0).
-     * @param population         Численность населения (должна быть больше 0).
-     * @param metersAboveSeaLevel Высота над уровнем моря (может быть {@code null}).
-     * @param establishmentDate  Дата основания города (может быть {@code null}).
-     * @param government         Форма правления (не может быть {@code null}).
-     * @param standardOfLiving   Уровень жизни (не может быть {@code null}).
-     * @param governor           Губернатор (не может быть {@code null}; его возраст должен быть > 0).
+     * Основной конструктор с указанием владельца.
      */
-    public City(String name, Coordinates coordinates, ZonedDateTime creationDate, Double area, long population, Long metersAboveSeaLevel, ZonedDateTime establishmentDate, Government government, StandardOfLiving standardOfLiving, Human governor) {
+    public City(String name, Coordinates coordinates, ZonedDateTime creationDate, Double area, long population,
+                Long metersAboveSeaLevel, ZonedDateTime establishmentDate, Government government,
+                StandardOfLiving standardOfLiving, Human governor, String owner) {
         this.id = globalIDCounter++;
         this.name = name;
         this.coordinates = coordinates;
@@ -65,97 +44,80 @@ public class City extends Element implements Comparable<City>,Validatable {
         this.government = government;
         this.standardOfLiving = standardOfLiving;
         this.governor = governor;
+        this.owner = owner;
     }
-    /**Пустой конструктор*/
-    public City(){}
-    /**Геттер для id*/
+
+    /** Пустой конструктор */
+    public City() {}
+
+    // --- Геттеры и сеттеры ---
+
     public Integer getId() {
         return id;
     }
-    /**Геттер для имени*/
-    public String getName(){
-        return  name;
-    }
-    /**Сеттер для id*/
+
     public void setId(Integer id) {
         this.id = id;
     }
-    /**Геттер для координат*/
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-    /**Геттер для даты создания*/
-    public ZonedDateTime getCreationDate() {
-        return creationDate;
-    }
-    /**Геттер для площади*/
-    public Double getArea() {
-        return area;
-    }
-    /**Геттер для численности населения*/
-    public long getPopulation() {
-        return population;
-    }
-    /**Геттер для абсолютной высоты*/
-    public Long getMetersAboveSeaLevel() {
-        return metersAboveSeaLevel;
-    }
-    /**Геттер для даты основания*/
-    public ZonedDateTime getEstablishmentDate() {
-        return establishmentDate;
-    }
-    /**Геттер для формы правления*/
-    public Government getGovernment() {
-        return government;
-    }
-    /**Геттер для уровня жизни*/
-    public StandardOfLiving getStandardOfLiving() {
-        return standardOfLiving;
-    }
-    /**Геттер для губернатора*/
-    public Human getGovernor() {
-        return governor;
-    }
-    /**
-     * Устанавливает глобальный счётчик ID (используется, если нужно подстроить нумерацию).
-     * @param value Новое значение глобального счётчика.
-     */
+
     public static void setGlobalIDCounter(int value) {
         City.globalIDCounter = value;
     }
-    /**Геттер для счётчика id*/
-    public static int getGlobalIDCounter(){
-        return City.globalIDCounter;
-    }
-    /**
-     * Сравнивает объекты City
-     * @return 1, если первый больше, второго
-     *  -1, если наоборот
-     *  0, если объекты равны
-     */
-    @Override
-    public int compareTo(City city){
-        int result = Double.compare(this.getArea(),city.getArea());
-        if(result == 0){
-            result = Long.compare(this.getPopulation(),city.getPopulation());
-        }
-        if(result ==0){
-            result = Long.compare(this.getMetersAboveSeaLevel(), city.getMetersAboveSeaLevel());
-        }
-        if(result == 0){
-            result = getCoordinates().compareTo(city.getCoordinates());
-        }
-        if(result ==0){
-            result = getGovernor().compareTo(city.getGovernor());
-        }
-        return result;
+
+    public static int getGlobalIDCounter() {
+        return globalIDCounter;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * Валидирует правильность полей.
-     * @return true, если все верно, иначе false
-     */
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public ZonedDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public Double getArea() {
+        return area;
+    }
+
+    public long getPopulation() {
+        return population;
+    }
+
+    public Long getMetersAboveSeaLevel() {
+        return metersAboveSeaLevel;
+    }
+
+    public ZonedDateTime getEstablishmentDate() {
+        return establishmentDate;
+    }
+
+    public Government getGovernment() {
+        return government;
+    }
+
+    public StandardOfLiving getStandardOfLiving() {
+        return standardOfLiving;
+    }
+
+    public Human getGovernor() {
+        return governor;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    // --- Переопределённые методы ---
+
     @Override
     public boolean validate() {
 
@@ -171,25 +133,31 @@ public class City extends Element implements Comparable<City>,Validatable {
         return true;
     }
 
-    /**
-     * возвращает всю информацию об объекте City
-     * @return String
-     */
     @Override
-    public String toString(){
+    public int compareTo(City other) {
+        int result = Double.compare(this.area, other.area);
+        if (result == 0) result = Long.compare(this.population, other.population);
+        if (result == 0) result = Long.compare(this.metersAboveSeaLevel, other.metersAboveSeaLevel);
+        if (result == 0) result = this.coordinates.compareTo(other.coordinates);
+        if (result == 0) result = this.governor.compareTo(other.governor);
+        return result;
+    }
+
+    @Override
+    public String toString() {
         return "City{" +
-                "id=" + id.toString() +
-                ", name='" + name.toString() + '\'' +
-                ", coordinates=" + coordinates.toString() +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates +
                 ", creationDate=" + creationDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) +
                 ", area=" + area +
                 ", population=" + population +
                 ", metersAboveSeaLevel=" + metersAboveSeaLevel +
-                ", establishmentDate=" + (establishmentDate != null ? establishmentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).toString() : "N/A") +
-                ", government=" + government.toString() +
-                ", standardOfLiving=" + standardOfLiving.toString() +
-                ", age_of_governor=" + governor.toString() +
+                ", establishmentDate=" + (establishmentDate != null ? establishmentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "N/A") +
+                ", government=" + government +
+                ", standardOfLiving=" + standardOfLiving +
+                ", governor=" + governor +
+                ", owner='" + owner + '\'' +
                 '}';
     }
 }
-

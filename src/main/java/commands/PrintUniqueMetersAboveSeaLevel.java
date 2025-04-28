@@ -1,30 +1,42 @@
 package commands;
 
 import managers.CollectionManager;
+
 /**
  * Команда "print_unique_meters_above_sea_level", выводящая уникальные значения поля
- * {@code metersAboveSeaLevel} у всех объектов в коллекции
- * <p>
- * При выполнении вызывает метод {@link CollectionManager#getUniqueMetersAboveSeaLevel()},
- * который обрабатывает коллекцию и выводит (или возвращает) уникальные значения
+ * {@code metersAboveSeaLevel} у всех объектов коллекции.
  */
-public class PrintUniqueMetersAboveSeaLevel implements Command{
-    /**Менеджер коллекции*/
+public class PrintUniqueMetersAboveSeaLevel implements Command {
+
+    /** Менеджер коллекции */
     private CollectionManager collectionManager;
-    /**Конструктор*/
+
+    /** Конструктор с менеджером коллекции */
     public PrintUniqueMetersAboveSeaLevel(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
-    /**Пустой конструктор*/
-    public PrintUniqueMetersAboveSeaLevel(){}
 
+    /** Пустой конструктор */
+    public PrintUniqueMetersAboveSeaLevel() {}
 
-    /**Метод выполнения*/
+    /** Метод выполнения команды */
+    @Override
     public void execute(String argument) {
+        if (collectionManager == null) {
+            System.out.println("Ошибка: менеджер коллекции не инициализирован.");
+            return;
+        }
         collectionManager.getUniqueMetersAboveSeaLevel();
     }
-    /**Описание*/
+
+    /** Описание команды */
+    @Override
     public String descr() {
-        return "print_unique_meters_above_sea_level – вывести уникальные значения поля metersAboveSeaLevel всех элементов в коллекции \n";
+        return "print_unique_meters_above_sea_level – вывести уникальные значения поля metersAboveSeaLevel всех элементов коллекции.\n";
+    }
+
+    /** Сеттер для установки менеджера коллекции */
+    public void setCollectionManager(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 }

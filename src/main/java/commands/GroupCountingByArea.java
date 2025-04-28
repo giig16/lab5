@@ -1,29 +1,33 @@
 package commands;
 
 import managers.CollectionManager;
+
 /**
- * Команда "group_counting_by_area", которая группирует элементы коллекции
- * по значению поля {@code area} и выводит количество элементов в каждой группе.
+ * Команда "group_counting_by_area", группирующая элементы коллекции
+ * по значению поля {@code area} и выводящая количество элементов в каждой группе.
  */
-public class GroupCountingByArea implements Command{
-    /**Менеджер коллекции*/
+public class GroupCountingByArea implements Command {
+
+    /** Менеджер коллекции */
     private CollectionManager collectionManager;
-    /**Конструктор*/
+
+    /** Конструктор с параметром */
     public GroupCountingByArea(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
-    /**Пустой конструктор*/
-    public GroupCountingByArea(){}
 
+    /** Пустой конструктор */
+    public GroupCountingByArea() {}
 
-
-
-    /**Метод выполнения команды*/
+    /** Выполнение команды */
+    @Override
     public void execute(String argument) {
         collectionManager.groupCitiesByArea();
     }
-    /**Описание*/
+
+    /** Описание команды */
+    @Override
     public String descr() {
-        return "group_counting_by_area – сгруппировать элементы коллекции по значению поля area, вывести количество элементов в каждой группе \n";
+        return "group_counting_by_area – сгруппировать элементы коллекции по значению поля area и вывести количество элементов в каждой группе.\n";
     }
 }

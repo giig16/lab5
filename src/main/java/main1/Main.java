@@ -1,75 +1,48 @@
 package main1;
 
-
-import managers.DBManager;
 import managers.*;
-
 import model.City;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.util.LinkedHashSet;
 import java.util.Scanner;
-//import managers.AuthorisationManager;
+
 /**
  * Главный класс, запускающий приложение по работе с коллекцией {@link City}.
- * <p>
- * 1. Инициализирует {@link CSVManager} с путём к CSV-файлу.<br>
- * 2. Создаёт {@link CollectionManager} для хранения и управления коллекцией городов.<br>
- * 3. Создаёт {@link Invoker}, регистрирующий все доступные команды.<br>
- * 4. Считывает существующую коллекцию из CSV-файла и передаёт её в {@link CollectionManager}.<br>
- * 5. Запускает цикл чтения команд из консоли.
  */
 public class Main {
 
     public static void main(String[] args) {
-        DBManager db=new DBManager();
-        Connection conn=db.connect_to_db("lab5","postgres","12345");
-        db.isTableExist(conn);
+        Scanner scanner = new Scanner(System.in);
+        try {
 
-        AuthorisationManager authorisationManager = new AuthorisationManager();
-        authorisationManager.isAuthorised();
+            DBManager dbManager = new DBManager();
+            FileManager fileManager = new CSVManager("52");
+            CollectionManager collectionManager = new CollectionManager(dbManager);
 
-        //db.createTable(conn,"users");
-        /*db.createTable(conn,"LogPass");
-        db.createTable(conn,"employee");
-        db.insertRow(conn, "employee","rostik","Novosibirsk");
-        db.insertRow(conn, "employee","kirilldauun","Novosibirsk");
-        db.readData(conn,"employee");
-        //db.updateName(conn,"employee","rostik","leha");
-        //db.readData(conn,"employee");
-        //db.searchByName(conn,"employee","tima");
-        //db.searchById(conn,"employee",2);
-        //db.deleteRowByName(conn,"employee","leha");
-        //db.deleteRowByName(conn,"employee","kirilldauun");
-        //db.deleteRowById(conn,"employee",5);
-        db.deleteRowById(conn,"employee",14);
-        db.readData(conn,"employee");
-        db.deleteTable(conn,"users");*/
+            //dbManager.clearUsersTable();
+            //dbManager.clearCitiesTable();
+
+            dbManager.isTableExist(dbManager.getConnection());
+            dbManager.addOwnerColumnIfNotExists();
+
+            AuthorisationManager authorisationManager = new AuthorisationManager();
+            authorisationManager.isAuthorised(scanner);
+
+            collectionManager.setCurrentUser(authorisationManager.getLogin());
+            Invoker invoker = new Invoker(collectionManager, fileManager, dbManager);
+
+            System.out.println("Введите команду:");
 
 
-
-        String filePath = System.getenv("FILE_PATH");
-        if (filePath == null || filePath.isEmpty()) {
-            System.err.println("Переменная окружения FILE_PATH не установленаe");
-            System.exit(1);
+            while (scanner.hasNextLine()) {
+                String input = scanner.nextLine().trim();
+                if (!input.isEmpty()) {
+                    invoker.processRunner(input);
+                }
+                System.out.println("Введите следующую команду:");
+            }
+        } catch (Exception e) {
+            System.out.println("Ошибка запуска программы: " + e.getMessage());
+            e.printStackTrace();
         }
-        FileManager fileManager = new CSVManager(filePath);
-        CollectionManager cm = new CollectionManager(fileManager);
-
-        Invoker invoker = new Invoker(cm, fileManager);
-        Scanner sc = new Scanner(System.in);
-        LinkedHashSet<City> initialSet = fileManager.readCollectionFromFile();
-        cm.setCities(initialSet);
-
-        System.out.println("Введите комманду");
-
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine().trim();
-            invoker.processRunner(input);
-            System.out.println("Введите следующую команду");
-        }
-
     }
 }

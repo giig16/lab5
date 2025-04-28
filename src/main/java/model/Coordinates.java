@@ -42,7 +42,7 @@ public class Coordinates implements Validatable  {
     /**Валидация*/
     @Override
     public boolean validate(){
-        if(this.getX()>=19){return false;}
+        if(this.getX()==0){return false;}
         else{return true;}
     }
 

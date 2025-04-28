@@ -1,51 +1,57 @@
 package commands;
 
 import managers.CollectionManager;
-import model.*;
+import managers.DBManager;
+import managers.Invoker;
+import model.City;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 /**
  * Команда "add_if_min", добавляющая новый {@link City} в коллекцию,
- * если он «меньше» (согласно {@link City#compareTo(City)}) всех существующих элементов.
+ * если он «меньше» всех существующих элементов.
  */
-public class AddIfMin implements Command{
-    /**Менеджер коллекции*/
+public class AddIfMin implements Command {
     private CollectionManager collectionManager;
-    /**Конструктор*/
-    public AddIfMin(CollectionManager collectionManager) {
+    private Invoker invoker;
+    private DBManager dbManager;
+
+    public AddIfMin(CollectionManager collectionManager, DBManager dbManager) {
         this.collectionManager = collectionManager;
+        this.invoker = invoker;
+        this.dbManager = dbManager;
     }
-    /**Пустой конструктор*/
-    public AddIfMin(){}
 
+    public AddIfMin() {}
 
-
-
-    /**Выполнение*/
+    @Override
     public void execute(String argument) {
+        boolean isScriptUsed = invoker.getScript();
+        City city;
 
-            City city = collectionManager.createCity();
-            if(collectionManager.toCompare(city)){
-            if (city.validate()) {
-                collectionManager.addToSet(city);
-                //csvManager.writeInCollection(collectionManager.getCities());
-                System.out.println("Город добавлен в коллекцию");
+        if (isScriptUsed && argument != null && argument.contains(",")) {
+            city = collectionManager.parseCityFromScript(argument);
+        } else {
+            city = collectionManager.createCity();
+        }
 
+        if (city == null || !city.validate()) {
+            System.out.println("Ошибка: не удалось создать или валидировать город.");
+            return;
+        }
+
+        if (collectionManager.getCities().isEmpty() || collectionManager.toCompare(city)) {
+            boolean success = collectionManager.addToSet(city);
+            if (success) {
+                System.out.println("Город добавлен в коллекцию (он минимальный).");
             } else {
-                System.out.println("Город не прошёл валидацию. Повторите ввод.");
-            }}else{
-                System.out.println("Город который вы создали превышает наименьший город коллекции");
+                System.out.println("Ошибка при добавлении города в базу данных.");
             }
-
+        } else {
+            System.out.println("Город не добавлен, так как он не минимальный.");
+        }
     }
-    /**Описание*/
+
+    @Override
     public String descr() {
-        return "add_if_min – добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции \n";
+        return "add_if_min – добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента коллекции.\n";
     }
-
 }

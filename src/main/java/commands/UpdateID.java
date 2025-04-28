@@ -1,72 +1,76 @@
 package commands;
 
 import managers.CollectionManager;
-import model.*;
+import managers.DBManager;
+import model.City;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 /**
- * Команда "update_id", позволяющая обновить существующий элемент коллекции по его {@code id}
- * <p>
- * Логика команды:
- * <ol>
- *     <li>Сначала удаляется элемент с переданным {@code id} (метод {@link CollectionManager#clearForUpdateById(String)})</li>
- *     <li>Затем пользователь заново вводит данные для нового {@link City}, который будет иметь тот же {@code id}</li>
- *     <li>Проверяется валидность нового объекта (через {@link City#validate()}) Если всё корректно, он добавляется в коллекцию</li>
- * </ol>
+ * Команда "update_by_id", обновляющая город по id,
+ * если текущий пользователь является владельцем.
  */
-public class UpdateID implements Command{
-    /**Менеджер коллекции*/
+public class UpdateID implements Command {
     private CollectionManager collectionManager;
-    /**Конструктор*/
-    public UpdateID(CollectionManager collectionManager) {
+    private DBManager dbManager;
+
+    public UpdateID(CollectionManager collectionManager, DBManager dbManager) {
         this.collectionManager = collectionManager;
+        this.dbManager = dbManager;
     }
-    /**Пустой конструктор*/
-    public UpdateID(){}
 
+    public UpdateID() {}
 
-
-
-
-    /**Метод исполнения команды*/
+    @Override
     public void execute(String argument) {
-        collectionManager.clearForUpdateById(argument);
-        if (argument == null || !argument.matches("\\d+")) {
+        if (collectionManager == null || dbManager == null) {
+            System.out.println("Ошибка: менеджеры не инициализированы.");
+            return;
+        }
 
-        }else{
-        try{
-            int id = Integer.parseInt(argument);
+        if (argument == null || !argument.matches("\\d+")) {
+            System.out.println("Ошибка: укажите id числом.");
+            return;
+        }
+
+        int id = Integer.parseInt(argument);
+
+        City oldCity = collectionManager.findCityById(id);
+        if (oldCity == null) {
+            System.out.println("Город с id " + id + " не найден.");
+            return;
+        }
+
+        String currentUser = collectionManager.getCurrentUser();
+        String owner = dbManager.getOwnerByCityId(id);
+
+        if (owner == null) {
+            System.out.println("Ошибка: город не найден в базе данных.");
+            return;
+        }
+
+        if (!owner.equals(currentUser)) {
+            System.out.println("Ошибка: вы не являетесь владельцем этого города. Обновление запрещено.");
+            return;
+        }
+
+        System.out.println("Создайте новый город для обновления:");
+
         while (true) {
-            City city = collectionManager.createCity();
-            if (city.validate()) {
-                collectionManager.addToSet(city);
-                city.setId(id);
-                //csvManager.writeInCollection(collectionManager.getCities());
-                System.out.println("Город обновлен");
+            City newCity = collectionManager.createCity();
+            if (newCity.validate()) {
+                newCity.setId(id); // сохраняем старый id
+                dbManager.updateId(id, newCity);
+                collectionManager.getCities().remove(oldCity);
+                collectionManager.getCities().add(newCity);
+                System.out.println("Город успешно обновлён!");
                 break;
             } else {
-                System.out.println("Город не прошёл валидацию. Повторите ввод.");
-            }}}
-        catch(NumberFormatException e){
-            System.out.println("Ошибка: некорректный ввод");
+                System.out.println("Ошибка валидации города. Повторите ввод.");
+            }
         }
-        }
-
-
-
-
-
-
-
     }
 
-    /**Возвращает описание команды*/
+    @Override
     public String descr() {
-        return "update_by_id id {element} – обновить значение элемента коллекции, id которого равен заданному \n";
+        return "update_by_id id {element} – обновить значение элемента коллекции по его id (если он ваш)";
     }
 }
