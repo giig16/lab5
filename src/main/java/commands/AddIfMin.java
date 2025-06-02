@@ -13,11 +13,13 @@ public class AddIfMin implements Command {
     private CollectionManager collectionManager;
     private Invoker invoker;
     private DBManager dbManager;
+    private String currentUser;
 
-    public AddIfMin(CollectionManager collectionManager, DBManager dbManager) {
+    public AddIfMin(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.invoker = invoker;
         this.dbManager = dbManager;
+        this.currentUser = currentUser;
     }
 
     public AddIfMin() {}
@@ -28,9 +30,9 @@ public class AddIfMin implements Command {
         City city;
 
         if (isScriptUsed && argument != null && argument.contains(",")) {
-            city = collectionManager.parseCityFromScript(argument);
+            city = collectionManager.parseCityFromScript(argument, currentUser);
         } else {
-            city = collectionManager.createCity();
+            city = collectionManager.createCity(currentUser);
         }
 
         if (city == null || !city.validate()) {

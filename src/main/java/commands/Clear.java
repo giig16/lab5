@@ -11,10 +11,12 @@ import model.City;
 public class Clear implements Command {
     private CollectionManager collectionManager;
     private DBManager dbManager;
+    private String currentUser;
 
-    public Clear(CollectionManager collectionManager, DBManager dbManager) {
+    public Clear(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.dbManager = dbManager;
+        this.currentUser = currentUser;
     }
 
     public Clear() {}
@@ -31,7 +33,7 @@ public class Clear implements Command {
             return;
         }
 
-        String currentUser = collectionManager.getCurrentUser();
+
         boolean anyRemoved = false;
 
         for (City city : new java.util.ArrayList<>(collectionManager.getCities())) {

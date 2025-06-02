@@ -11,6 +11,7 @@ import java.util.Scanner;
 import static managers.DBManager.getConnection;
 
 public class AuthorisationManager {
+    private String login;
     public boolean authorize(Scanner scanner) {
         System.out.println("У вас уже есть аккаунт? (да/нет)");
         String answer = scanner.nextLine().trim().toLowerCase();
@@ -26,10 +27,10 @@ public class AuthorisationManager {
         }
     }
 
-    private String login1=null;
+
 
     public String getLogin(){
-        return login1;
+        return login;
     }
 
     public void printLogin(AuthorisationManager authorisationManager){
@@ -54,7 +55,7 @@ public class AuthorisationManager {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 System.out.println("Авторизация успешна! Добро пожаловать, " + login + "!");
-                login1 = login;
+                this.login = login;
                 return true;
             } else {
                 System.out.println("Неверный логин или пароль. Доступ запрещён.");

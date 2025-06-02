@@ -74,7 +74,7 @@ public class DBManager {
     public void createTableUsers(Connection conn, String tableName) {
         try (Statement statement = conn.createStatement()) {
             String query = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
-                    "id SERIAL PRIMARY KEY, " +
+                    "id INTEGER PRIMARY KEY, " +
                     "username TEXT UNIQUE NOT NULL, " +
                     "password TEXT NOT NULL" +
                     ");";
@@ -174,28 +174,31 @@ public class DBManager {
 
     /** Добавить город и вернуть id */
     public int add(City city) throws SQLException {
-        String sql = "INSERT INTO cities (name, x, y, creation_date, area, population, meters_above_sea_level, establishment_date, government, standard_of_living, governor_age, owner) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
+        int newId = getNextAvailableId();
+        city.setId(newId);
+        String sql = "INSERT INTO cities (id,name, x, y, creation_date, area, population, meters_above_sea_level, establishment_date, government, standard_of_living, governor_age, owner) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, city.getName());
-            stmt.setLong(2, city.getCoordinates().getX());
-            stmt.setDouble(3, city.getCoordinates().getY());
-            stmt.setTimestamp(4, Timestamp.valueOf(city.getCreationDate().toLocalDateTime()));
-            stmt.setDouble(5, city.getArea());
-            stmt.setLong(6, city.getPopulation());
-            stmt.setLong(7, city.getMetersAboveSeaLevel());
+            stmt.setInt(1, newId);
+            stmt.setString(2, city.getName());
+            stmt.setLong(3, city.getCoordinates().getX());
+            stmt.setDouble(4, city.getCoordinates().getY());
+            stmt.setTimestamp(5, Timestamp.valueOf(city.getCreationDate().toLocalDateTime()));
+            stmt.setDouble(6, city.getArea());
+            stmt.setLong(7, city.getPopulation());
+            stmt.setLong(8, city.getMetersAboveSeaLevel());
             if (city.getEstablishmentDate() != null) {
-                stmt.setTimestamp(8, Timestamp.valueOf(city.getEstablishmentDate().toLocalDateTime()));
+                stmt.setTimestamp(9, Timestamp.valueOf(city.getEstablishmentDate().toLocalDateTime()));
             } else {
-                stmt.setNull(8, Types.TIMESTAMP);
+                stmt.setNull(9, Types.TIMESTAMP);
             }
-            stmt.setString(9, city.getGovernment().name());
-            stmt.setString(10, city.getStandardOfLiving().name());
-            stmt.setLong(11, city.getGovernor().getAge());
-            stmt.setString(12, city.getOwner());
+            stmt.setString(10, city.getGovernment().name());
+            stmt.setString(11, city.getStandardOfLiving().name());
+            stmt.setLong(12, city.getGovernor().getAge());
+            stmt.setString(13, city.getOwner());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -275,6 +278,25 @@ public class DBManager {
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Ошибка удаления городов (больше по площади): " + e.getMessage());
+        }
+    }
+    public int getNextAvailableId() throws SQLException {
+        String sql = "SELECT id FROM Cities ORDER BY id";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            int expected = 1;
+            while (rs.next()) {
+                int existing = rs.getInt("id");
+                if (existing == expected) {
+                    expected++;
+                } else if (existing > expected) {
+                    break;
+                }
+                // если existing < expected, просто идём дальше
+            }
+            return expected;
         }
     }
 

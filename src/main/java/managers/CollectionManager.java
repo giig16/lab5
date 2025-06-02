@@ -17,7 +17,7 @@ public class CollectionManager {
     private LinkedHashSet<City> cities = new LinkedHashSet<>();
     private final ZonedDateTime initTime;
     private DBManager dbManager;
-    public String currentUser;
+    //private String currentUser;
 
     public CollectionManager(DBManager dbManager) {
         this.dbManager = dbManager;
@@ -39,12 +39,12 @@ public class CollectionManager {
         }
     }
 
-    public void setCurrentUser(String username) {
+    /*public void setCurrentUser(String username) {
         this.currentUser = username;
     }
     public String getCurrentUser() {
         return currentUser;
-    }
+    }**/
 
 
     public ZonedDateTime getInitTime() {
@@ -192,7 +192,7 @@ public class CollectionManager {
 
 
 
-    public City createRandomCity() {
+    public City createRandomCity(String currentUser) {
         String name = generateRandomName();
         Coordinates coordinates = new Coordinates((long) (Math.random() * 100), Math.random() * 100);
         ZonedDateTime creationDate = ZonedDateTime.now();
@@ -207,7 +207,7 @@ public class CollectionManager {
         return new City(name, coordinates, creationDate, area, population, metersAboveSeaLevel, establishmentDate, government, sol, governor, currentUser);
     }
 
-    public City createCity() {
+    public City createCity(String currentUser) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите название города:");
@@ -243,7 +243,7 @@ public class CollectionManager {
         return new City(name, coordinates, ZonedDateTime.now(), area, population, metersAboveSeaLevel, establishmentDate, government, sol, governor, currentUser);
     }
 
-    public City parseCityFromScript(String scriptLine) {
+    public City parseCityFromScript(String scriptLine, String currentUser) {
         String[] params = scriptLine.trim().split(",");
         if (params.length < 9) {
             System.out.println("Недостаточно параметров для создания города.");

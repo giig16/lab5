@@ -13,10 +13,12 @@ import java.util.Iterator;
 public class RemoveLower implements Command {
     private CollectionManager collectionManager;
     private DBManager dbManager;
+    private String currentUser;
 
-    public RemoveLower(CollectionManager collectionManager, DBManager dbManager) {
+    public RemoveLower(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.dbManager = dbManager;
+        this.currentUser = currentUser;
     }
 
     public RemoveLower() {}
@@ -39,7 +41,7 @@ public class RemoveLower implements Command {
             return;
         }
 
-        String currentUser = collectionManager.getCurrentUser();
+
         Iterator<City> iterator = collectionManager.getCities().iterator();
         boolean anyRemoved = false;
 

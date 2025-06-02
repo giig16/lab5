@@ -13,10 +13,12 @@ import java.util.Iterator;
 public class RemoveGreater implements Command {
     private CollectionManager collectionManager;
     private DBManager dbManager;
+    private String currentUser;
 
-    public RemoveGreater(CollectionManager collectionManager, DBManager dbManager) {
+    public RemoveGreater(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.dbManager = dbManager;
+        this.currentUser = currentUser;
     }
 
     public RemoveGreater() {}
@@ -39,7 +41,7 @@ public class RemoveGreater implements Command {
             return;
         }
 
-        String currentUser = collectionManager.getCurrentUser();
+
         Iterator<City> iterator = collectionManager.getCities().iterator();
         boolean anyRemoved = false;
 

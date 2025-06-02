@@ -25,10 +25,13 @@ public class Main {
             dbManager.addOwnerColumnIfNotExists();
 
             AuthorisationManager authorisationManager = new AuthorisationManager();
-            authorisationManager.isAuthorised(scanner);
 
-            collectionManager.setCurrentUser(authorisationManager.getLogin());
-            Invoker invoker = new Invoker(collectionManager, fileManager, dbManager);
+            authorisationManager.isAuthorised(scanner);
+            String currentUser = authorisationManager.getLogin();
+            Invoker invoker = new Invoker(collectionManager, fileManager, dbManager, currentUser);
+
+            collectionManager.loadCollectionFromDatabase();
+
 
             System.out.println("Введите команду:");
 

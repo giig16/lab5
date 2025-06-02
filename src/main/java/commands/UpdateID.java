@@ -11,10 +11,12 @@ import model.City;
 public class UpdateID implements Command {
     private CollectionManager collectionManager;
     private DBManager dbManager;
+    private String currentUser;
 
-    public UpdateID(CollectionManager collectionManager, DBManager dbManager) {
+    public UpdateID(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.dbManager = dbManager;
+        this.currentUser = currentUser;
     }
 
     public UpdateID() {}
@@ -39,7 +41,7 @@ public class UpdateID implements Command {
             return;
         }
 
-        String currentUser = collectionManager.getCurrentUser();
+
         String owner = dbManager.getOwnerByCityId(id);
 
         if (owner == null) {
@@ -55,7 +57,7 @@ public class UpdateID implements Command {
         System.out.println("Создайте новый город для обновления:");
 
         while (true) {
-            City newCity = collectionManager.createCity();
+            City newCity = collectionManager.createCity(currentUser);
             if (newCity.validate()) {
                 newCity.setId(id); // сохраняем старый id
                 dbManager.updateId(id, newCity);

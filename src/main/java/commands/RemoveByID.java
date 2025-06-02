@@ -9,7 +9,7 @@ public class RemoveByID implements Command {
     private DBManager dbManager;
     private String currentUser;
 
-    public RemoveByID(CollectionManager collectionManager, DBManager dbManager) {
+    public RemoveByID(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
         this.dbManager = dbManager;
         this.currentUser = currentUser;

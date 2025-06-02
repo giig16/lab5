@@ -7,10 +7,13 @@ import model.City;
 public class Add implements Command {
     private CollectionManager collectionManager;
     private Invoker invoker;
+    private String currentUser;
 
-    public Add(CollectionManager collectionManager, Invoker invoker) {
+    public Add(CollectionManager collectionManager, Invoker invoker, String currentUser) {
         this.collectionManager = collectionManager;
         this.invoker = invoker;
+        this.currentUser = currentUser;
+
     }
 
     public Add() {}
@@ -25,7 +28,7 @@ public class Add implements Command {
         boolean isScriptUsed = invoker.getScript();
 
         if (isScriptUsed && argument != null && argument.contains(",")) {
-            City parsedCity = collectionManager.parseCityFromScript(argument);
+            City parsedCity = collectionManager.parseCityFromScript(argument, currentUser);
             if (parsedCity != null && parsedCity.validate()) {
                 boolean success = collectionManager.addToSet(parsedCity);
                 if (success) {
@@ -41,7 +44,7 @@ public class Add implements Command {
 
         if (!isScriptUsed && (argument == null || argument.isEmpty())) {
             while (true) {
-                City city = collectionManager.createCity();
+                City city = collectionManager.createCity(currentUser);
                 if (city.validate()) {
                     boolean success = collectionManager.addToSet(city);
                     if (success) {
@@ -66,7 +69,7 @@ public class Add implements Command {
                 return;
             }
             for (int i = 0; i < value; i++) {
-                City city = collectionManager.createRandomCity();
+                City city = collectionManager.createRandomCity(currentUser);
                 if (city.validate()) {
                     boolean success = collectionManager.addToSet(city);
                     if (success) {
