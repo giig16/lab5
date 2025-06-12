@@ -109,7 +109,7 @@ public class AuthorisationManager {
             }
         }
     }
-    private String hashPassword(String password) {
+    public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             byte[] hashBytes = md.digest(password.getBytes());
