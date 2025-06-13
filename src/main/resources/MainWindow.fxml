@@ -51,7 +51,7 @@
                   <MenuItem mnemonicParsing="false" text="Выполнить скрипт" />
                   <Menu mnemonicParsing="false" text="Добавить">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Добавить элемент" />
+                      <MenuItem fx:id="addCityMenuItem" mnemonicParsing="false" onAction="#onAddCityClicked" text="Добавить элемент" />
                         <MenuItem mnemonicParsing="false" text="Добавить, если меньше" />
                     </items>
                   </Menu>

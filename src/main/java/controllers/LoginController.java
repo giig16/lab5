@@ -92,6 +92,7 @@ public class LoginController implements Initializable {
 
                     MainWindowController controller = loader.getController();
                     controller.setUsername(usernameTextField.getText());
+                    controller.setCurrentUser(usernameTextField.getText());
 
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(root));

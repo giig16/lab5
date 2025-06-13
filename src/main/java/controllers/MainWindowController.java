@@ -11,10 +11,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import managers.CollectionManager;
 import managers.DBManager;
 import model.City;
+import controllers.AddWindowController;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -65,6 +67,22 @@ public class MainWindowController {
     public void setUsername(String username) {
         usernameLabel.setText(username);
     }
+
+
+
+
+    public void setCollectionManager(CollectionManager collectionManager) {this.collectionManager = collectionManager;}
+    private String currentUser;
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+
 
     @FXML
     private void handleLogout(ActionEvent event) {
@@ -146,6 +164,8 @@ public class MainWindowController {
         }
     }
 
+
+
     @FXML
     private void onCollectionInfoClicked() {
         try {
@@ -217,6 +237,37 @@ public class MainWindowController {
 
         FXCollections.sort(citiesTable.getItems(),Comparator.reverseOrder());
     }
+
+    @FXML
+    private void onAddCityClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddCommandWindow.fxml"));
+            Parent root = loader.load();
+
+            AddWindowController controller = loader.getController();
+            controller.setCollectionManager(collectionManager);
+            controller.setMainWindowController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add City");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            City createdCity = controller.getCreatedCity();
+            if (createdCity != null) {
+                citiesTable.getItems().add(createdCity);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void refreshTable() {
+        citiesTable.getItems().clear();
+        citiesTable.getItems().addAll(collectionManager.getCities());
+    }
+
 
 
 

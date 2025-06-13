@@ -47,8 +47,12 @@ public class City extends Element implements Comparable<City>, Validatable {
         this.owner = owner;
     }
 
+
     /** Пустой конструктор */
-    public City() {}
+    public City() {
+        this.id = globalIDCounter++;
+        this.creationDate = ZonedDateTime.now();
+    }
 
     // --- Геттеры и сеттеры ---
 
@@ -116,6 +120,52 @@ public class City extends Element implements Comparable<City>, Validatable {
         this.owner = owner;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setCreationDate(ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
+    public void setPopulation(long population) {
+        this.population = population;
+    }
+
+    public void setMetersAboveSeaLevel(Long metersAboveSeaLevel) {
+        this.metersAboveSeaLevel = metersAboveSeaLevel;
+    }
+
+    public void setEstablishmentDate(ZonedDateTime establishmentDate) {
+        this.establishmentDate = establishmentDate;
+    }
+
+    public void setGovernment(Government government) {
+        this.government = government;
+    }
+
+    public void setStandardOfLiving(StandardOfLiving standardOfLiving) {
+        this.standardOfLiving = standardOfLiving;
+    }
+
+    public void setGovernor(Human governor) {
+        this.governor = governor;
+    }
+
+
+    public void setArea() {this.creationDate = creationDate;}
     // --- Переопределённые методы ---
 
     @Override
