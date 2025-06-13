@@ -68,6 +68,26 @@ public class AuthorisationManager {
         }
     }
 
+    public static boolean register(String login, String password) {
+        String sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, login);
+            pstmt.setString(2, hashPassword(password));
+
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Ошибка при регистрации: " + e.getMessage());
+            return false;
+        }
+    }
+
+
+
     private void register(Scanner scanner) {
         System.out.println("Регистрация нового пользователя:");
         System.out.print("Придумайте логин: ");
