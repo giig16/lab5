@@ -48,7 +48,7 @@ public class RemoveLower implements Command {
         while (iterator.hasNext()) {
             City city = iterator.next();
             if (city.compareTo(referenceCity) < 0 && city.getOwner().equals(currentUser)) {
-                dbManager.removeById(city.getId());
+                dbManager.removeCityById(city.getId());
                 iterator.remove();
                 anyRemoved = true;
                 System.out.println("Удалён город с id " + city.getId());

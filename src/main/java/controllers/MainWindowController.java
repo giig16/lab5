@@ -21,7 +21,8 @@ import controllers.AddWindowController;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainWindowController {
     @FXML
@@ -59,6 +60,17 @@ public class MainWindowController {
     @FXML
     private MenuItem helpMenuItem;
     @FXML
+    private MenuItem addIfMinMenuItem;
+    @FXML
+    private MenuItem removeSelectedMenuItem;
+    @FXML
+    private MenuItem deleteByIdMenuItem;
+    @FXML
+    private MenuItem removeIfMinMenuItem;
+    @FXML
+    private MenuItem removeIfMaxMenuItem;
+    @FXML
+    private MenuItem clearCollectionMenuItem;
 
 
 
@@ -184,46 +196,45 @@ public class MainWindowController {
 
     @FXML
     private void onAverageMetersClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AverageMetersWindow.fxml"));
-        Parent root = loader.load();
+        double avg = collectionManager.getCities().stream()
+                .filter(c -> c.getMetersAboveSeaLevel() != null)
+                .mapToDouble(City::getMetersAboveSeaLevel)
+                .average()
+                .orElse(Double.NaN);
 
-        AverageMetersController controller = loader.getController();
-        controller.showAverageMeters();
-
-        Stage stage = new Stage();
-        stage.setTitle("Average meters above sea level");
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.centerOnScreen();
-        stage.show();
+        showInfo("Среднее значение абсолютной высоты: " + (Double.isNaN(avg) ? "нет данных" : avg));
     }
 
     @FXML
     private void onUniqueMetersClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UniqueMeters.fxml"));
-        Parent root = loader.load();
+        Set<Long> unique = collectionManager.getCities().stream()
+                .map(City::getMetersAboveSeaLevel)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
 
-        UniqueMetersController controller = loader.getController();
-        controller.showUniqueMeters(collectionManager.getCities());
-
-        Stage stage = new Stage();
-        stage.setTitle("Unique meters above sea level");
-        stage.setScene(new Scene(root));
-        stage.show();
+        if (unique.isEmpty()) {
+            showInfo("Уникальные значения отсутствуют.");
+        } else {
+            String text = unique.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
+            showInfo("Уникальные значения абсолютной высоты:\n" + text);
+        }
     }
 
     @FXML
     private void onGroupByAreaClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GroupByArea.fxml"));
-        Parent root = loader.load();
+        Map<Double, Long> grouped = collectionManager.getCities().stream()
+                .collect(Collectors.groupingBy(City::getArea, Collectors.counting()));
 
-        GroupByAreaController controller = loader.getController();
-        controller.showGroupByArea(collectionManager.getCities());
-
-        Stage stage = new Stage();
-        stage.setTitle("Группировка по площади");
-        stage.setScene(new Scene(root));
-        stage.show();
+        if (grouped.isEmpty()) {
+            showInfo("Группировка по площади: нет данных.");
+        } else {
+            String text = grouped.entrySet().stream()
+                    .map(e -> "Площадь " + e.getKey() + ": " + e.getValue() + " городов")
+                    .collect(Collectors.joining("\n"));
+            showInfo("Группировка по площади:\n" + text);
+        }
     }
 
     @FXML
@@ -267,6 +278,169 @@ public class MainWindowController {
         citiesTable.getItems().clear();
         citiesTable.getItems().addAll(collectionManager.getCities());
     }
+
+    @FXML
+    private void onAddIfMinClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddIfMinWindow.fxml"));
+            Parent root = loader.load();
+
+            AddIfMinWindowController controller = loader.getController();
+            controller.setCollectionManager(collectionManager);
+            controller.setCurrentUser(currentUser);
+
+
+            Stage stage = new Stage();
+            stage.setTitle("Добавить, если меньше");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+
+            refreshTable();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void onRemoveSelected() {
+
+        City selected = citiesTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            showInfo("Сначала выберите элемент в таблице.");
+            return;
+        }
+
+        if (!selected.getOwner().equals(currentUser)) {
+            showInfo("Вы можете удалять только свои элементы.");
+            return;
+        }
+
+        boolean removed = collectionManager.removeById(selected.getId());
+
+        if (removed) {
+            refreshTable();
+            showInfo("Элемент успешно удалён.");
+        } else {
+            showInfo("Не удалось удалить элемент.");
+        }
+    }
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Информация");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    @FXML
+    private void updateTable() {
+        refreshTable();
+    }
+    @FXML
+    private void onDeleteByIdMenuClicked() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeletByIdWindow.fxml"));
+            Parent root = loader.load();
+
+            DeleteByIdController controller = loader.getController();
+            controller.setCollectionManager(collectionManager);
+            controller.setCurrentUser(currentUser);
+
+            Stage stage = new Stage();
+            stage.setTitle("Delete City By Id");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            refreshTable();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void onRemoveIfMinClicked() {
+        City selected = citiesTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            showInfo("Сначала выберите элемент в таблице.");
+            return;
+        }
+
+        if (!selected.getOwner().equals(currentUser)) {
+            showInfo("Вы можете удалять только свои элементы.");
+            return;
+        }
+
+        boolean isMin = collectionManager.getCities().stream()
+                .allMatch(c -> selected.compareTo(c) < 0 || c.getId() == selected.getId());
+
+        if (isMin) {
+            boolean removed = collectionManager.removeById(selected.getId());
+            if (removed) {
+                refreshTable();
+                showInfo("Элемент удалён, так как был минимальным.");
+            } else {
+                showInfo("Не удалось удалить элемент.");
+            }
+        } else {
+            showInfo("Элемент не является минимальным — удаление отменено.");
+        }
+    }
+    @FXML
+    private void onRemoveIfMaxClicked() {
+        City selected = citiesTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            showInfo("Сначала выберите элемент в таблице.");
+            return;
+        }
+
+        if (!selected.getOwner().equals(currentUser)) {
+            showInfo("Вы можете удалять только свои элементы.");
+            return;
+        }
+
+        boolean isMax = collectionManager.getCities().stream()
+                .allMatch(c -> selected.compareTo(c) > 0 || c.getId() == selected.getId());
+
+        if (isMax) {
+            boolean removed = collectionManager.removeById(selected.getId());
+            if (removed) {
+                refreshTable();
+                showInfo("Элемент удалён, так как был максимальным.");
+            } else {
+                showInfo("Не удалось удалить элемент.");
+            }
+        } else {
+            showInfo("Элемент не является максимальным — удаление отменено.");
+        }
+    }
+    @FXML
+    private void onClearCollectionClicked() {
+
+        List<City> toRemove = collectionManager.getCities().stream()
+                .filter(c -> currentUser.equals(c.getOwner()))
+                .collect(Collectors.toList());
+
+        if (toRemove.isEmpty()) {
+            showInfo("У вас нет элементов для удаления.");
+            return;
+        }
+
+
+
+        for (City city : toRemove) {
+            collectionManager.removeById(city.getId());
+        }
+
+        refreshTable();
+        showInfo("Все ваши элементы успешно удалены.");
+    }
+
+
 
 
 

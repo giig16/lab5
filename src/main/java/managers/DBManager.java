@@ -210,7 +210,7 @@ public class DBManager {
     }
 
     /** Удалить город по id */
-    public void removeById(int id) {
+    public void removeCityById(int id) {
         String sql = "DELETE FROM cities WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

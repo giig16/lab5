@@ -114,7 +114,7 @@ public class CollectionManager {
             }
         }
         for (Integer id : idsToDelete) {
-            dbManager.removeById(id);
+            dbManager.removeCityById(id);
         }
         cities.removeIf(c -> idsToDelete.contains(c.getId()));
     }
@@ -132,7 +132,7 @@ public class CollectionManager {
             }
         }
         for (Integer id : idsToDelete) {
-            dbManager.removeById(id);
+            dbManager.removeCityById(id);
         }
         cities.removeIf(c -> idsToDelete.contains(c.getId()));
     }
@@ -143,7 +143,7 @@ public class CollectionManager {
             return;
         }
         int id = Integer.parseInt(idStr);
-        dbManager.removeById(id);
+        dbManager.removeCityById(id);
         cities.removeIf(c -> c.getId() == id);
         System.out.println("Город с id " + id + " удалён.");
     }
@@ -333,5 +333,18 @@ public class CollectionManager {
                 System.out.println("Неверное значение. Повторите:");
             }
         }
+    }
+    public boolean removeById(int id) {
+        Optional<City> cityOpt = getCities().stream()
+                .filter(c -> c.getId() == id)
+                .findFirst();
+
+        if (cityOpt.isPresent()) {
+            cities.remove(cityOpt.get());
+            dbManager.removeCityById(id); // если работаешь с БД
+            return true;
+        }
+
+        return false;
     }
 }

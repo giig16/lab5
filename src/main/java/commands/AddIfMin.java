@@ -17,7 +17,6 @@ public class AddIfMin implements Command {
 
     public AddIfMin(CollectionManager collectionManager, DBManager dbManager, String currentUser) {
         this.collectionManager = collectionManager;
-        this.invoker = invoker;
         this.dbManager = dbManager;
         this.currentUser = currentUser;
     }

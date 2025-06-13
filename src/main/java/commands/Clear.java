@@ -38,7 +38,7 @@ public class Clear implements Command {
 
         for (City city : new java.util.ArrayList<>(collectionManager.getCities())) {
             if (city.getOwner().equals(currentUser)) {
-                dbManager.removeById(city.getId());
+                dbManager.removeCityById(city.getId());
                 collectionManager.getCities().remove(city);
                 anyRemoved = true;
             }
