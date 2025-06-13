@@ -1,6 +1,7 @@
 package commands;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Команда "help", выводящая список всех доступных команд и их краткое описание.
@@ -22,7 +23,7 @@ public class Help implements Command {
         }
     }
     /**Список комманд*/
-    private ArrayList<Command> commands = new ArrayList<>();
+    public ArrayList<Command> commands = new ArrayList<>();
 
 
     {
@@ -42,6 +43,7 @@ public class Help implements Command {
         commands.add(new Show());
         commands.add(new UpdateID());
     }
+    public ArrayList<Command> getCommands() { return commands; }
 
 
 }

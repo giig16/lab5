@@ -1,7 +1,10 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -26,6 +29,8 @@ import static managers.AuthorisationManager.hashPassword;
 
 public class LoginController implements Initializable {
 
+    @FXML
+    private Button loginButton;
     @FXML
     private Button cancelButton;
     @FXML
@@ -82,6 +87,18 @@ public class LoginController implements Initializable {
             //while(queryResult.next()){
                 if (queryResult.next()) {
                     loginMessageLabel.setText(" You are logged in!");
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
+                    Parent root = loader.load();
+
+                    MainWindowController controller = loader.getController();
+                    controller.setUsername(usernameTextField.getText());
+
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Main Window");
+                    stage.centerOnScreen();
+                    stage.setResizable(false);
+                    stage.show();
                 } else {
                     loginMessageLabel.setText(" Login is invalid! Try again!");
                 }

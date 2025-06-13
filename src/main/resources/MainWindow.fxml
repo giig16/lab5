@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="866.0" prefWidth="1394.0" style="-fx-background-color: #36454F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController">
+   <children>
+      <TableView fx:id="citiesTable" layoutY="94.0" prefHeight="771.0" prefWidth="1393.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="33.66666793823242" text="ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="106.16667175292969" text="Название" />
+            <TableColumn prefWidth="110.33332824707031" text="Координаты">
+               <columns>
+                  <TableColumn prefWidth="46.0" text="X" fx:id="xCoordColumn" />
+                  <TableColumn fx:id="yCoordColumn" prefWidth="51.0" text="Y" />
+               </columns>
+            </TableColumn>
+            <TableColumn fx:id="creationDateColumn" prefWidth="125.16668701171875" text="Дата создания" />
+            <TableColumn fx:id="areaColumn" prefWidth="82.83331298828125" text="Площадь" />
+            <TableColumn fx:id="populationColumn" prefWidth="105.5" text="Население" />
+            <TableColumn fx:id="metersAboveSeaLevelColumn" prefWidth="132.3333740234375" text="Абсолютная высота" />
+            <TableColumn fx:id="establishmentDateColumn" prefWidth="149.0" text="Дата основания" />
+            <TableColumn fx:id="governmentColumn" prefWidth="150.0" text="Форма правления" />
+            <TableColumn fx:id="standardOfLivingColumn" prefWidth="135.0" text="Уровень жизни" />
+            <TableColumn fx:id="governorColumn" prefWidth="141.83331298828125" text="Возраст губернатора" />
+            <TableColumn fx:id="ownerColumn" prefWidth="141.6666259765625" text="Владелец" />
+        </columns>
+      </TableView>
+      <MenuBar layoutY="43.0" prefHeight="28.0" prefWidth="1393.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Язык">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Русский" />
+                  <MenuItem mnemonicParsing="false" text="Английский" />
+                  <MenuItem mnemonicParsing="false" text="Болгарский" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Команда">
+            <items>
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#onHelpClicked" text="Справка по командам" />
+                  <MenuItem fx:id="infoMenuItem" mnemonicParsing="false" onAction="#onCollectionInfoClicked" text="Информация о коллекции" />
+                  <MenuItem mnemonicParsing="false" text="Обновить выбранный" />
+                  <MenuItem mnemonicParsing="false" text="Выполнить скрипт" />
+                  <Menu mnemonicParsing="false" text="Добавить">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Добавить элемент" />
+                        <MenuItem mnemonicParsing="false" text="Добавить, если меньше" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Удалить">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Удалить выбранный" />
+                        <MenuItem mnemonicParsing="false" text="Удалить, если меньше" />
+                        <MenuItem mnemonicParsing="false" text="Удалить, если больше" />
+                        <MenuItem mnemonicParsing="false" text="Удалить по ID" />
+                        <MenuItem mnemonicParsing="false" text="Очистить коллекцию" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Статистика">
+            <items>
+              <MenuItem fx:id="avgMetersMenuItem" mnemonicParsing="false" onAction="#onAverageMetersClick" text="Среднее значение абсолютной высоты" />
+                  <MenuItem fx:id="uniqueMetersMenuItem" mnemonicParsing="false" onAction="#onUniqueMetersClick" text="Уникальное значение абсолютной высоты" />
+                  <MenuItem fx:id="GroupByAreaMenuItem" mnemonicParsing="false" onAction="#onGroupByAreaClick" text="Группировка по площади" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Сортировка">
+              <items>
+                <MenuItem fx:id="sortByUpMenuItem" mnemonicParsing="false" onAction="#onSortAreaAscClick" text="По возрастанию" />
+                  <MenuItem fx:id="sortByDownMenuItem" mnemonicParsing="false" onAction="#onSortAreaDescClick" text="По убыванию" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutX="-1.0" layoutY="66.0" prefHeight="28.0" prefWidth="1394.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Табличный вид">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Визуализация">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="678.0" layoutY="42.0" prefHeight="28.0" prefWidth="90.0" text="Пользователь: " />
+      <Label fx:id="usernameLabel" layoutX="768.0" layoutY="42.0" prefHeight="28.0" prefWidth="154.0" text="Label" />
+      <Button fx:id="logoutButton" layoutX="1298.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="26.0" prefWidth="96.0" text="Выйти" />
+   </children>
+</AnchorPane>

@@ -15,7 +15,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="brandingImageView" fitHeight="400.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../../../imgs/IMG_0361.JPG" />
+                  <Image url="@main/resources/imgs/IMG_0361.JPG" />
             </ImageView>
          </children>
       </AnchorPane>
@@ -32,7 +32,7 @@
             <AnchorPane prefHeight="350.0" prefWidth="321.0" style="-fx-background-color: #36454F;">
                <children>
                   <ImageView fx:id="lockImageView" fitHeight="101.0" fitWidth="206.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../../../imgs/IMG_0362.jpg" />
+                        <Image url="@main/resources/imgs/IMG_0362.jpg" />
                   </ImageView>
                   <Label layoutX="20.0" layoutY="134.0" minHeight="25.0" prefHeight="28.0" prefWidth="108.0" style="-fx-background-color: WHITE;" text=" USERNAME" />
                   <TextField fx:id="usernameTextField" layoutX="139.0" layoutY="134.0" minHeight="25.0" prefWidth="150.0" promptText=" USERNAME" style="-fx-background-color: WHITE;" />
