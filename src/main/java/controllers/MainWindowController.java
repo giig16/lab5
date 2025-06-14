@@ -587,7 +587,8 @@ public class MainWindowController implements Initializable {
         }
 
     }
-    /*@FXML
+    @FXML
+    private void handleVisualizationButton() {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/VisualizationWindow.fxml"));
         Parent root = loader.load();
@@ -596,18 +597,14 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Visualization");
         stage.setScene(new Scene(root));
         stage.show();
-
+        LinkedHashSet<City> cityset = collectionManager.getCities();
         VisualizationWindowController controller = loader.getController();
-        controller.initData(cityCollection);
+        controller.initData(cityset);
 
     } catch (IOException e) {
         e.printStackTrace();
-    }**/
+    }
 
-
-
-
-
-
+    }
 
 }

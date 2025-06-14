@@ -94,6 +94,6 @@
       <Label fx:id="usernameLabel" layoutX="768.0" layoutY="42.0" prefHeight="28.0" prefWidth="154.0" text="Label" />
       <Button fx:id="logoutButton" layoutX="1298.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="26.0" prefWidth="96.0" text="Выйти" />
       <Button fx:id="updateButton" layoutX="1201.0" layoutY="43.0" mnemonicParsing="false" onAction="#updateTable" prefHeight="26.0" prefWidth="96.0" text="Обновить" />
-      <Button fx:id="visViewPane" layoutX="106.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Визуализация" />
+      <Button fx:id="visViewPane" layoutX="106.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleVisualizationButton" prefHeight="26.0" prefWidth="100.0" text="Визуализация" />
    </children>
 </AnchorPane>
