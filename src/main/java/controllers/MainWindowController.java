@@ -65,7 +65,7 @@ public class MainWindowController implements Initializable {
     @FXML private MenuItem sortByDownMenuItem;
 
     @FXML private Tab tableViewPane;
-    @FXML private Tab visViewPane;
+    @FXML private Button visViewPane;
 
     @FXML private Button logoutButton;
     @FXML private Button updateButton;
@@ -587,7 +587,19 @@ public class MainWindowController implements Initializable {
         }
 
     }
+    /*@FXML
+    private void handleVisualizationButton() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/VisualizationWindow.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Visualization");
+        stage.setScene(new Scene(root));
+        stage.show();
 
+
+        VisualizationWindowController controller = loader.getController();
+        controller.initData(cityCollection);
+    }**/
 
 
 
