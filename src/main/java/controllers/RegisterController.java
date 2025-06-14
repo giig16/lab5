@@ -6,23 +6,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import managers.AuthorisationManager;
 import managers.DBManager;
-import javafx.scene.control.Hyperlink;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -30,7 +28,7 @@ import static managers.AuthorisationManager.hashPassword;
 
 
 
-public class RegisterController {
+public class RegisterController  implements Initializable {
 
     @FXML
     private Hyperlink loginButton;
@@ -49,11 +47,28 @@ public class RegisterController {
 
     @FXML
     private Button signupButton;
+    @FXML private MenuButton languageMenu;
+    @FXML private MenuItem langRu;
+    @FXML private MenuItem langEn;
+    @FXML private MenuItem langIs;
+    @FXML private MenuItem langBg;
 
-    @FXML
-    public void initialize() {
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         failureImage.setVisible(false);
         failureLabel.setVisible(false);
+
+        signupButton.setText(resources.getString("register.button"));
+        loginButton.setText(resources.getString("register.login"));
+        failureLabel.setText(resources.getString("register.failure"));
+
+        langRu.setOnAction(e -> switchLanguage("ru", "RU"));
+        langEn.setOnAction(e -> switchLanguage("en", "CA"));
+        langIs.setOnAction(e -> switchLanguage("is", "IS"));
+        langBg.setOnAction(e -> switchLanguage("bg", "BG"));
     }
 
 
@@ -72,6 +87,7 @@ public class RegisterController {
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
+
                 stage.setTitle("Login");
                 stage.show();
 
@@ -104,6 +120,26 @@ public class RegisterController {
             e.printStackTrace();
         }
     }
+
+    private void switchLanguage(String lang, String country) {
+        try {
+            Locale locale = new Locale(lang, country);
+            ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", locale);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Register.fxml"), bundle);
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle(bundle.getString("register.title"));
+            stage.show();
+
+            Stage current = (Stage) languageMenu.getScene().getWindow();
+            current.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 
 

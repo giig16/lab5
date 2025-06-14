@@ -6,15 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import managers.DBManager;
+import managers.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.net.URL;
 
@@ -43,6 +41,16 @@ public class LoginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private PasswordField enterPasswordField;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label passwordLabel;
+    @FXML private MenuButton languageMenu;
+    @FXML private MenuItem langRu;
+    @FXML private MenuItem langEn;
+    @FXML private MenuItem langIs;
+    @FXML private MenuItem langBg;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,6 +61,41 @@ public class LoginController implements Initializable {
         File lockFile =  new File("/Users/marknorkin/Desktop/java/test_SB/imgs/IMG_0362.jpg");
         Image lockImage = new Image(lockFile.toURI().toString());
         lockImageView.setImage(lockImage);
+
+        ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+
+        usernameLabel.setText(bundle.getString("login.username"));
+        passwordLabel.setText(bundle.getString("login.password"));
+        loginButton.setText(bundle.getString("login.button"));
+        cancelButton.setText(bundle.getString("login.cancel"));
+        //loginMessageLabel.setText(bundle.getString("login.fail"));
+
+
+        langRu.setOnAction(e -> switchLanguage("ru", "RU"));
+        langEn.setOnAction(e -> switchLanguage("en", "CA"));
+        langIs.setOnAction(e -> switchLanguage("is", "IS"));
+        langBg.setOnAction(e -> switchLanguage("bg", "BG"));
+    }
+
+    private void switchLanguage(String lang, String country) {
+        try {
+            Locale locale = new Locale(lang, country);
+            Locale.setDefault(locale);
+            ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", locale);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"), bundle);
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle(bundle.getString("login.title")); // <-- изменено на login.title
+            stage.show();
+
+            Stage current = (Stage) languageMenu.getScene().getWindow();
+            current.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -61,7 +104,8 @@ public class LoginController implements Initializable {
         if(usernameTextField.getText().isBlank() == false && enterPasswordField.getText().isBlank() == false){
             validateLogin();
         }else{
-            loginMessageLabel.setText(" Enter your username and password!");
+            ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+            loginMessageLabel.setText(bundle.getString("login.prompt"));
         }
     }
 
@@ -74,7 +118,8 @@ public class LoginController implements Initializable {
         DBManager dbManager = new DBManager();
         Connection connectDB = dbManager.connect_to_db("lab5", "postgres", "12345");
         if (connectDB == null) {
-            loginMessageLabel.setText("Ошибка подключения к БД");
+            ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+            loginMessageLabel.setText(bundle.getString("login.db_error"));
             return;
         }
 
@@ -86,13 +131,20 @@ public class LoginController implements Initializable {
             ResultSet queryResult = stmt.executeQuery();
             //while(queryResult.next()){
                 if (queryResult.next()) {
-                    loginMessageLabel.setText(" You are logged in!");
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
+                    ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+                    loginMessageLabel.setText(bundle.getString("login.start"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"), bundle);
                     Parent root = loader.load();
 
                     MainWindowController controller = loader.getController();
                     controller.setUsername(usernameTextField.getText());
                     controller.setCurrentUser(usernameTextField.getText());
+
+
+                    CollectionManager collectionManager = new CollectionManager(dbManager);
+                    CSVManager fileManager = new CSVManager("");
+                    Invoker invoker = new Invoker(collectionManager,fileManager,dbManager,loginMessageLabel.getText());
+                    controller.setInvoker(invoker);
 
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     stage.setScene(new Scene(root));
@@ -101,7 +153,8 @@ public class LoginController implements Initializable {
                     stage.setResizable(false);
                     stage.show();
                 } else {
-                    loginMessageLabel.setText(" Login is invalid! Try again!");
+                    ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+                    loginMessageLabel.setText(bundle.getString("login.fail"));
                 }
             //}
 

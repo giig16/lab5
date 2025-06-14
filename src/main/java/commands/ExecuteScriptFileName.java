@@ -3,6 +3,8 @@ package commands;
 import managers.Invoker;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Команда "execute_script", позволяющая считать и выполнить команды из указанного файла.
@@ -21,7 +23,7 @@ public class ExecuteScriptFileName implements Command {
 
     /** Пустой конструктор */
     public ExecuteScriptFileName() {}
-
+    private static final Set<String> executedScripts = new HashSet<>();
     /** Выполнение команды */
     @Override
     public void execute(String argument) {
@@ -30,13 +32,19 @@ public class ExecuteScriptFileName implements Command {
             return;
         }
 
+        if (executedScripts.contains(argument)) {
+            System.out.println("Скрипт уже выполняется: " + argument + " — рекурсивный вызов предотвращён.");
+            return;
+        }
+
+        executedScripts.add(argument); // защита от повторного запуска
+
         File file = new File(argument);
         if (!file.exists() || !file.isFile()) {
             System.out.println("Ошибка: файл не найден или указан неверный путь -> " + argument);
             return;
         }
 
-        invoker.setScriptExistion(true);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -45,7 +53,7 @@ public class ExecuteScriptFileName implements Command {
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла скрипта: " + e.getMessage());
         } finally {
-            invoker.setScriptExistion(false);
+            executedScripts.remove(argument); // чтобы можно было запустить снова потом
         }
     }
 

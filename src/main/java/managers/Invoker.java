@@ -32,13 +32,35 @@ public class Invoker {
     }
 
 
+    public void executeScript(String filename) {
+        ExecuteScriptFileName scriptCommand = new ExecuteScriptFileName(this);
+        scriptCommand.execute(filename);
+    }
 
     public boolean getScript() {
         return isScriptExist;
     }
+    private boolean isScriptExecution = false;
+    private String fixedScriptUser = null;
+
+
+    private String effectiveUser;
+    public void setFixedScriptUser(String user) {
+        this.fixedScriptUser = user;
+    }
+    public void setEffectiveUser(String user) {
+        this.effectiveUser = user;
+    }
+
+    public String getEffectiveUser() {
+        return isScriptExecution && fixedScriptUser != null ? fixedScriptUser : currentUser;
+    }
 
     public void setScriptExistion(boolean isScriptExist) {
         this.isScriptExist = isScriptExist;
+    }
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
 
     public void processRunner(String input) {

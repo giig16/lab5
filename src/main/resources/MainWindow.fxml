@@ -17,7 +17,7 @@
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="33.66666793823242" text="ID" />
           <TableColumn fx:id="nameColumn" prefWidth="106.16667175292969" text="Название" />
-            <TableColumn prefWidth="110.33332824707031" text="Координаты">
+            <TableColumn fx:id="coordColumn" prefWidth="110.33332824707031" text="Координаты">
                <columns>
                   <TableColumn prefWidth="46.0" text="X" fx:id="xCoordColumn" />
                   <TableColumn fx:id="yCoordColumn" prefWidth="51.0" text="Y" />
@@ -36,26 +36,26 @@
       </TableView>
       <MenuBar layoutY="43.0" prefHeight="28.0" prefWidth="1393.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Язык">
+          <Menu fx:id="menuLanguage" mnemonicParsing="false" text="Язык">
             <items>
-              <MenuItem mnemonicParsing="false" text="Русский" />
-                  <MenuItem mnemonicParsing="false" text="Английский" />
-                  <MenuItem mnemonicParsing="false" text="Болгарский" />
+              <MenuItem fx:id="russianMenuItem" mnemonicParsing="false" text="Русский" />
+                  <MenuItem fx:id="englishMenuItem" mnemonicParsing="false" text="Английский" />
+                  <MenuItem fx:id="bulgarianMenuItem" mnemonicParsing="false" text="Болгарский" />
+                  <MenuItem fx:id="icelandicMenuItem" mnemonicParsing="false" text="Исландский" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Команда">
+          <Menu fx:id="commandsMenu" mnemonicParsing="false" text="Команда">
             <items>
               <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#onHelpClicked" text="Справка по командам" />
                   <MenuItem fx:id="infoMenuItem" mnemonicParsing="false" onAction="#onCollectionInfoClicked" text="Информация о коллекции" />
-                  <MenuItem mnemonicParsing="false" text="Обновить выбранный" />
-                  <MenuItem mnemonicParsing="false" text="Выполнить скрипт" />
-                  <Menu mnemonicParsing="false" text="Добавить">
+                  <MenuItem fx:id="executeScriptItem" mnemonicParsing="false" onAction="#onExecuteScriptClicked" text="Выполнить скрипт" />
+                  <Menu fx:id="addMenu" mnemonicParsing="false" text="Добавить">
                     <items>
                       <MenuItem fx:id="addCityMenuItem" mnemonicParsing="false" onAction="#onAddCityClicked" text="Добавить элемент" />
                         <MenuItem fx:id="addIfMinMenuItem" mnemonicParsing="false" onAction="#onAddIfMinClicked" text="Добавить, если меньше" />
                     </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Удалить">
+                  <Menu fx:id="removeCityMenu" mnemonicParsing="false" text="Удалить">
                     <items>
                       <MenuItem fx:id="removeSelectedMenuItem" mnemonicParsing="false" onAction="#onRemoveSelected" text="Удалить выбранный" />
                         <MenuItem fx:id="removeIfMinMenuItem" mnemonicParsing="false" onAction="#onRemoveIfMinClicked" text="Удалить, если меньше" />
@@ -66,14 +66,14 @@
                   </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Статистика">
+          <Menu fx:id="statMenu" mnemonicParsing="false" text="Статистика">
             <items>
               <MenuItem fx:id="avgMetersMenuItem" mnemonicParsing="false" onAction="#onAverageMetersClick" text="Среднее значение абсолютной высоты" />
                   <MenuItem fx:id="uniqueMetersMenuItem" mnemonicParsing="false" onAction="#onUniqueMetersClick" text="Уникальное значение абсолютной высоты" />
                   <MenuItem fx:id="GroupByAreaMenuItem" mnemonicParsing="false" onAction="#onGroupByAreaClick" text="Группировка по площади" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Сортировка">
+            <Menu fx:id="sortMenu" mnemonicParsing="false" text="Сортировка">
               <items>
                 <MenuItem fx:id="sortByUpMenuItem" mnemonicParsing="false" onAction="#onSortAreaAscClick" text="По возрастанию" />
                   <MenuItem fx:id="sortByDownMenuItem" mnemonicParsing="false" onAction="#onSortAreaDescClick" text="По убыванию" />
@@ -83,21 +83,21 @@
       </MenuBar>
       <TabPane layoutX="-1.0" layoutY="66.0" prefHeight="28.0" prefWidth="1394.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Табличный вид">
+          <Tab fx:id="tableViewPane" text="Табличный вид">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-          <Tab text="Визуализация">
+          <Tab fx:id="visViewPane" text="Визуализация">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="678.0" layoutY="42.0" prefHeight="28.0" prefWidth="90.0" text="Пользователь: " />
+      <Label fx:id="userLabel" layoutX="678.0" layoutY="42.0" prefHeight="28.0" prefWidth="90.0" text="Пользователь: " />
       <Label fx:id="usernameLabel" layoutX="768.0" layoutY="42.0" prefHeight="28.0" prefWidth="154.0" text="Label" />
       <Button fx:id="logoutButton" layoutX="1298.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="26.0" prefWidth="96.0" text="Выйти" />
-      <Button fx:id="updateButton" layoutX="1202.0" layoutY="43.0" mnemonicParsing="false" onAction="#updateTable" prefHeight="26.0" prefWidth="96.0" text="Обновить" />
+      <Button fx:id="updateButton" layoutX="1201.0" layoutY="43.0" mnemonicParsing="false" onAction="#updateTable" prefHeight="26.0" prefWidth="96.0" text="Обновить" />
    </children>
 </AnchorPane>
